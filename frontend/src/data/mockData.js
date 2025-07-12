@@ -242,7 +242,7 @@ export const planetData = {
     section: "about",
     position: [0, 0, 0],
     scale: 3,
-    color: "#FDB813",
+    color: "#FFA500",
     description: "Central hub - Learn about me"
   },
   mercury: {
@@ -274,7 +274,7 @@ export const planetData = {
     section: "education",
     position: [20, 0, 0],
     scale: 0.5,
-    color: "#C1440E",
+    color: "#CD5C5C",
     description: "Academic background and learning"
   },
   jupiter: {
@@ -282,7 +282,7 @@ export const planetData = {
     section: "contact",
     position: [28, 0, 0],
     scale: 1.5,
-    color: "#D8CA9D",
+    color: "#D2691E",
     description: "Get in touch with me"
   }
 };
