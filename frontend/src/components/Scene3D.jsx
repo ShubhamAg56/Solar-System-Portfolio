@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Stars, Html } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import Planet from './Planet';
+import ParticleField from './ParticleField';
 import { planetData } from '../data/mockData';
 
 const AnimatedStars = () => {
@@ -10,12 +11,12 @@ const AnimatedStars = () => {
   
   useFrame((state) => {
     if (starsRef.current) {
-      starsRef.current.rotation.x = state.clock.elapsedTime * 0.0005;
-      starsRef.current.rotation.y = state.clock.elapsedTime * 0.0002;
+      starsRef.current.rotation.x = state.clock.elapsedTime * 0.0008;
+      starsRef.current.rotation.y = state.clock.elapsedTime * 0.0003;
     }
   });
   
-  return <Stars ref={starsRef} radius={300} depth={50} count={2000} factor={4} saturation={0} fade />;
+  return <Stars ref={starsRef} radius={400} depth={60} count={3000} factor={5} saturation={0} fade />;
 };
 
 const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
@@ -24,8 +25,8 @@ const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
   
   useFrame((state) => {
     if (groupRef.current) {
-      // Slow rotation of the entire solar system
-      groupRef.current.rotation.y += 0.0002;
+      // Faster rotation of the entire solar system
+      groupRef.current.rotation.y += 0.0005;
     }
   });
   
@@ -58,15 +59,17 @@ const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
           position: cameraPosition || [0, 10, 40],
           fov: 60,
           near: 0.1,
-          far: 1000
+          far: 2000
         }}
         style={{ background: 'linear-gradient(to bottom, #000428, #004e92)' }}
       >
-        <ambientLight intensity={0.3} />
-        <pointLight position={[0, 0, 0]} intensity={2} color="#FDB813" />
-        <pointLight position={[100, 100, 100]} intensity={0.5} color="#ffffff" />
+        <ambientLight intensity={0.4} />
+        <pointLight position={[0, 0, 0]} intensity={3} color="#FDB813" />
+        <pointLight position={[100, 100, 100]} intensity={0.8} color="#ffffff" />
+        <pointLight position={[-100, -100, -100]} intensity={0.3} color="#6B93D6" />
         
         <AnimatedStars />
+        <ParticleField />
         
         <SolarSystem
           activeSection={activeSection}
@@ -78,10 +81,12 @@ const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
           enablePan={true}
           enableZoom={true}
           enableRotate={true}
-          minDistance={10}
-          maxDistance={200}
+          minDistance={8}
+          maxDistance={300}
           autoRotate={false}
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={0.8}
+          dampingFactor={0.05}
+          enableDamping={true}
         />
       </Canvas>
     </div>
