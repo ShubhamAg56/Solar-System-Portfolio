@@ -8,68 +8,210 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
   
-  // Enhanced planet materials with better textures
+  // Realistic planet materials with life-like textures
   const planetMaterial = useMemo(() => {
     const materials = {
       sun: new THREE.MeshStandardMaterial({
-        color: planet.color,
-        emissive: planet.color,
-        emissiveIntensity: 0.4,
+        color: '#FFA500',
+        emissive: '#FF6B35',
+        emissiveIntensity: 0.8,
         roughness: 0.1,
-        metalness: 0.1,
+        metalness: 0.0,
         transparent: true,
         opacity: 0.95
       }),
       mercury: new THREE.MeshStandardMaterial({
-        color: planet.color,
-        roughness: 0.9,
-        metalness: 0.1,
-        bumpScale: 0.02,
+        color: '#8C7853',
+        roughness: 0.95,
+        metalness: 0.05,
+        bumpScale: 0.05,
         transparent: true,
         opacity: 0.9
       }),
       venus: new THREE.MeshStandardMaterial({
-        color: planet.color,
-        roughness: 0.7,
-        metalness: 0.2,
-        emissive: '#FFB649',
-        emissiveIntensity: 0.1,
+        color: '#FFC649',
+        roughness: 0.3,
+        metalness: 0.1,
+        emissive: '#FFB347',
+        emissiveIntensity: 0.2,
         transparent: true,
         opacity: 0.95
       }),
       earth: new THREE.MeshStandardMaterial({
-        color: planet.color,
-        roughness: 0.6,
-        metalness: 0.3,
+        color: '#6B93D6',
+        roughness: 0.4,
+        metalness: 0.2,
         emissive: '#4A90E2',
-        emissiveIntensity: 0.05,
-        bumpScale: 0.01,
+        emissiveIntensity: 0.1,
+        bumpScale: 0.02,
         transparent: true,
         opacity: 0.95
       }),
       mars: new THREE.MeshStandardMaterial({
-        color: planet.color,
-        roughness: 0.8,
-        metalness: 0.1,
-        emissive: '#C1440E',
+        color: '#CD5C5C',
+        roughness: 0.9,
+        metalness: 0.05,
+        emissive: '#A0522D',
         emissiveIntensity: 0.05,
-        bumpScale: 0.015,
+        bumpScale: 0.03,
         transparent: true,
         opacity: 0.9
       }),
       jupiter: new THREE.MeshStandardMaterial({
-        color: planet.color,
-        roughness: 0.5,
-        metalness: 0.4,
-        emissive: '#D8CA9D',
-        emissiveIntensity: 0.08,
+        color: '#D2691E',
+        roughness: 0.2,
+        metalness: 0.1,
+        emissive: '#B8860B',
+        emissiveIntensity: 0.1,
         transparent: true,
         opacity: 0.95
       })
     };
     
     return materials[planetKey] || materials.earth;
-  }, [planet.color, planetKey]);
+  }, [planetKey]);
+  
+  // Create realistic planet surface patterns
+  const surfaceTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+    
+    // Create base color
+    const baseColors = {
+      sun: { r: 255, g: 165, b: 0 },
+      mercury: { r: 140, g: 120, b: 83 },
+      venus: { r: 255, g: 198, b: 73 },
+      earth: { r: 107, g: 147, b: 214 },
+      mars: { r: 205, g: 92, b: 92 },
+      jupiter: { r: 210, g: 105, b: 30 }
+    };
+    
+    const baseColor = baseColors[planetKey] || baseColors.earth;
+    
+    // Fill base color
+    ctx.fillStyle = `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`;
+    ctx.fillRect(0, 0, 512, 512);
+    
+    // Add surface features based on planet type
+    switch(planetKey) {
+      case 'sun':
+        // Solar flares and surface activity
+        for (let i = 0; i < 50; i++) {
+          const x = Math.random() * 512;
+          const y = Math.random() * 512;
+          const size = Math.random() * 20 + 10;
+          const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          gradient.addColorStop(0, '#FFD700');
+          gradient.addColorStop(1, '#FF4500');
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+        
+      case 'mercury':
+        // Craters
+        for (let i = 0; i < 30; i++) {
+          const x = Math.random() * 512;
+          const y = Math.random() * 512;
+          const size = Math.random() * 15 + 5;
+          ctx.fillStyle = `rgb(${baseColor.r - 30}, ${baseColor.g - 30}, ${baseColor.b - 30})`;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+        
+      case 'venus':
+        // Cloudy atmosphere
+        for (let i = 0; i < 20; i++) {
+          const x = Math.random() * 512;
+          const y = Math.random() * 512;
+          const width = Math.random() * 100 + 50;
+          const height = Math.random() * 20 + 10;
+          ctx.fillStyle = `rgba(255, 255, 255, 0.3)`;
+          ctx.fillRect(x, y, width, height);
+        }
+        break;
+        
+      case 'earth':
+        // Continents (green/brown patches)
+        for (let i = 0; i < 15; i++) {
+          const x = Math.random() * 512;
+          const y = Math.random() * 512;
+          const width = Math.random() * 80 + 40;
+          const height = Math.random() * 60 + 30;
+          ctx.fillStyle = Math.random() > 0.5 ? '#228B22' : '#8B4513';
+          ctx.fillRect(x, y, width, height);
+        }
+        // Clouds
+        for (let i = 0; i < 25; i++) {
+          const x = Math.random() * 512;
+          const y = Math.random() * 512;
+          const size = Math.random() * 20 + 10;
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+        
+      case 'mars':
+        // Polar ice caps
+        ctx.fillStyle = '#F0F8FF';
+        ctx.beginPath();
+        ctx.arc(256, 50, 40, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(256, 462, 35, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Surface features
+        for (let i = 0; i < 20; i++) {
+          const x = Math.random() * 512;
+          const y = Math.random() * 512;
+          const size = Math.random() * 10 + 5;
+          ctx.fillStyle = `rgb(${baseColor.r - 20}, ${baseColor.g - 20}, ${baseColor.b - 20})`;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
+        
+      case 'jupiter':
+        // Gas giant bands
+        for (let i = 0; i < 10; i++) {
+          const y = (i / 10) * 512;
+          const colors = ['#D2691E', '#CD853F', '#DEB887', '#F4A460'];
+          ctx.fillStyle = colors[i % colors.length];
+          ctx.fillRect(0, y, 512, 51);
+        }
+        
+        // Great Red Spot
+        const gradient = ctx.createRadialGradient(350, 200, 0, 350, 200, 30);
+        gradient.addColorStop(0, '#FF6347');
+        gradient.addColorStop(1, '#8B0000');
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.ellipse(350, 200, 30, 20, 0, 0, Math.PI * 2);
+        ctx.fill();
+        break;
+    }
+    
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    return texture;
+  }, [planetKey]);
+  
+  // Apply texture to material
+  if (planetMaterial.map !== surfaceTexture) {
+    planetMaterial.map = surfaceTexture;
+    planetMaterial.needsUpdate = true;
+  }
   
   useFrame((state) => {
     if (meshRef.current) {
@@ -97,15 +239,15 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         meshRef.current.scale.setScalar(planet.scale * (isActive ? 1.4 : 1.2));
         // Add glow effect by increasing emissive intensity
         if (planetMaterial.emissive) {
-          planetMaterial.emissiveIntensity = planetKey === 'sun' ? 0.6 : 0.15;
+          planetMaterial.emissiveIntensity = planetKey === 'sun' ? 1.0 : 0.3;
         }
       } else {
         meshRef.current.scale.setScalar(planet.scale);
         // Reset emissive intensity
         if (planetMaterial.emissive) {
-          planetMaterial.emissiveIntensity = planetKey === 'sun' ? 0.4 : 
-                                            planetKey === 'venus' ? 0.1 :
-                                            planetKey === 'jupiter' ? 0.08 : 0.05;
+          planetMaterial.emissiveIntensity = planetKey === 'sun' ? 0.8 : 
+                                            planetKey === 'venus' ? 0.2 :
+                                            planetKey === 'jupiter' ? 0.1 : 0.1;
         }
       }
     }
@@ -124,12 +266,12 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         <sphereGeometry args={[1, 64, 64]} />
         <primitive object={planetMaterial} />
         
-        {/* Atmospheric glow effect for planets */}
-        {planetKey !== 'sun' && (
-          <mesh scale={1.1}>
+        {/* Realistic atmospheric effects */}
+        {planetKey === 'earth' && (
+          <mesh scale={1.05}>
             <sphereGeometry args={[1, 32, 32]} />
             <meshBasicMaterial
-              color={planet.color}
+              color="#87CEEB"
               transparent
               opacity={0.1}
               side={THREE.BackSide}
@@ -137,17 +279,52 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           </mesh>
         )}
         
-        {/* Enhanced sun corona effect */}
-        {planetKey === 'sun' && (
-          <mesh scale={1.2}>
+        {planetKey === 'venus' && (
+          <mesh scale={1.08}>
             <sphereGeometry args={[1, 32, 32]} />
             <meshBasicMaterial
-              color="#FFD700"
+              color="#FFF8DC"
               transparent
-              opacity={0.2}
+              opacity={0.15}
               side={THREE.BackSide}
             />
           </mesh>
+        )}
+        
+        {planetKey === 'mars' && (
+          <mesh scale={1.03}>
+            <sphereGeometry args={[1, 32, 32]} />
+            <meshBasicMaterial
+              color="#FFB6C1"
+              transparent
+              opacity={0.08}
+              side={THREE.BackSide}
+            />
+          </mesh>
+        )}
+        
+        {/* Enhanced sun corona effect */}
+        {planetKey === 'sun' && (
+          <>
+            <mesh scale={1.2}>
+              <sphereGeometry args={[1, 32, 32]} />
+              <meshBasicMaterial
+                color="#FFD700"
+                transparent
+                opacity={0.3}
+                side={THREE.BackSide}
+              />
+            </mesh>
+            <mesh scale={1.4}>
+              <sphereGeometry args={[1, 16, 16]} />
+              <meshBasicMaterial
+                color="#FF4500"
+                transparent
+                opacity={0.1}
+                side={THREE.BackSide}
+              />
+            </mesh>
+          </>
         )}
       </mesh>
       
