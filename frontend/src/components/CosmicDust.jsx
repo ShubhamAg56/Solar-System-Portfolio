@@ -1,10 +1,12 @@
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
+import { useTheme } from '../contexts/ThemeContext';
 import * as THREE from 'three';
 
 const CosmicDust = () => {
   const ref = useRef();
+  const { currentTheme } = useTheme();
   
   // Generate cosmic dust particles
   const dustPositions = useMemo(() => {
@@ -40,7 +42,7 @@ const CosmicDust = () => {
     <Points ref={ref} positions={dustPositions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#E6E6FA"
+        color={currentTheme.particleColor}
         size={0.3}
         sizeAttenuation={true}
         depthWrite={false}
