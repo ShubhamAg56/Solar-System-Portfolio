@@ -52,13 +52,7 @@ const AsteroidBelt = () => {
           size={1.5}
           sizeAttenuation={true}
           depthWrite={false}
-          vertexColors={true}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          array={asteroidColors}
-          count={600}
-          itemSize={3}
+          vertexColors={false}
         />
       </Points>
 
