@@ -5,7 +5,24 @@ const ThemeContext = createContext();
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    // Return default theme instead of throwing error
+    return {
+      theme: 'dark',
+      toggleTheme: () => {},
+      currentTheme: {
+        background: 'linear-gradient(to bottom, #000428, #004e92)',
+        cardBackground: 'rgba(0, 0, 0, 0.8)',
+        textPrimary: '#ffffff',
+        textSecondary: '#cccccc',
+        accent: '#4A90E2',
+        border: 'rgba(255, 255, 255, 0.2)',
+        starColor: '#ffffff',
+        sunColor: '#FFA500',
+        particleColor: '#E6E6FA',
+        navigationBg: 'rgba(0, 0, 0, 0.3)',
+        panelBg: 'rgba(0, 0, 0, 0.8)',
+      }
+    };
   }
   return context;
 };
