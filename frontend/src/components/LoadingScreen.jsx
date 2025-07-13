@@ -20,7 +20,7 @@ const LoadingScreen = ({ onLoadComplete }) => {
           setTimeout(() => onLoadComplete(), 500);
           return 100;
         }
-        return prev + Math.random() * 15;
+        return prev + Math.random() * 10 + 5;
       });
     }, 100);
     
