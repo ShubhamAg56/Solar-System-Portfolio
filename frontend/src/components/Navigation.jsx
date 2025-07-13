@@ -35,8 +35,8 @@ const Navigation = ({ activeSection, onNavigate }) => {
   };
 
   const getBackgroundStyles = () => {
-    const base = "rounded-2xl px-3 py-2 md:px-6 md:py-4 border shadow-lg";
-    const mobile = isMobile ? "mx-2" : "";
+    const base = "rounded-2xl px-4 py-3 md:px-8 md:py-4 border shadow-lg";
+    const mobile = isMobile ? "mx-auto" : "";
     return `${base} ${mobile}`;
   };
   
