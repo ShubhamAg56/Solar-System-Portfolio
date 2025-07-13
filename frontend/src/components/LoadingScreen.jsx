@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
 
 const LoadingScreen = ({ onLoadComplete }) => {
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const { currentTheme } = useTheme();
   
   useEffect(() => {
     const timer = setInterval(() => {
@@ -24,7 +26,8 @@ const LoadingScreen = ({ onLoadComplete }) => {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed inset-0 bg-black flex items-center justify-center z-50"
+      className="fixed inset-0 flex items-center justify-center z-50"
+      style={{ background: currentTheme.background }}
     >
       <div className="text-center">
         <motion.div
@@ -36,11 +39,15 @@ const LoadingScreen = ({ onLoadComplete }) => {
           <div className="w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mx-auto flex items-center justify-center text-6xl mb-4">
             🌟
           </div>
-          <h1 className="text-4xl font-bold text-white mb-2">Alex Cosmos</h1>
-          <p className="text-gray-400">Initializing Solar System...</p>
+          <h1 className="text-4xl font-bold mb-2" style={{ color: currentTheme.textPrimary }}>
+            Alex Cosmos
+          </h1>
+          <p style={{ color: currentTheme.textSecondary }}>
+            Initializing Solar System...
+          </p>
         </motion.div>
         
-        <div className="w-64 h-2 bg-gray-800 rounded-full overflow-hidden">
+        <div className="w-64 h-2 rounded-full overflow-hidden" style={{ backgroundColor: currentTheme.border }}>
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${loadingProgress}%` }}
@@ -49,7 +56,9 @@ const LoadingScreen = ({ onLoadComplete }) => {
           />
         </div>
         
-        <p className="text-gray-400 mt-4">{Math.round(loadingProgress)}%</p>
+        <p className="mt-4" style={{ color: currentTheme.textSecondary }}>
+          {Math.round(loadingProgress)}%
+        </p>
       </div>
     </motion.div>
   );
