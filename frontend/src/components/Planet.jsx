@@ -78,14 +78,14 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     return materials[planetKey] || materials.earth;
   }, [planetKey]);
   
-  // Create enhanced realistic planet surface textures
+  // Create enhanced realistic planet surface textures with much higher detail
   const surfaceTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 1024; // Increased resolution for better quality
-    canvas.height = 1024;
+    canvas.width = 2048; // Increased resolution for much better quality
+    canvas.height = 2048;
     const ctx = canvas.getContext('2d');
     
-    // Create base color with gradient
+    // Create base color with enhanced gradient
     const baseColors = {
       sun: { r: 255, g: 165, b: 0 },
       mercury: { r: 140, g: 120, b: 83 },
@@ -97,232 +97,463 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     
     const baseColor = baseColors[planetKey] || baseColors.earth;
     
-    // Create radial gradient for depth
-    const gradient = ctx.createRadialGradient(512, 512, 0, 512, 512, 512);
-    gradient.addColorStop(0, `rgb(${Math.min(baseColor.r + 30, 255)}, ${Math.min(baseColor.g + 30, 255)}, ${Math.min(baseColor.b + 30, 255)})`);
+    // Create sophisticated radial gradient for depth and lighting
+    const gradient = ctx.createRadialGradient(768, 512, 0, 1024, 1024, 1024);
+    gradient.addColorStop(0, `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`);
+    gradient.addColorStop(0.3, `rgb(${Math.min(baseColor.r + 20, 255)}, ${Math.min(baseColor.g + 20, 255)}, ${Math.min(baseColor.b + 20, 255)})`);
     gradient.addColorStop(0.7, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
-    gradient.addColorStop(1, `rgb(${Math.max(baseColor.r - 50, 0)}, ${Math.max(baseColor.g - 50, 0)}, ${Math.max(baseColor.b - 50, 0)})`);
+    gradient.addColorStop(1, `rgb(${Math.max(baseColor.r - 60, 0)}, ${Math.max(baseColor.g - 60, 0)}, ${Math.max(baseColor.b - 60, 0)})`);
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 1024, 1024);
+    ctx.fillRect(0, 0, 2048, 2048);
     
-    // Add surface features based on planet type
+    // Add advanced surface features based on planet type
     switch(planetKey) {
       case 'sun':
-        // Enhanced solar surface with multiple layers
-        // Solar granulation
-        for (let i = 0; i < 200; i++) {
-          const x = Math.random() * 1024;
-          const y = Math.random() * 1024;
-          const size = Math.random() * 15 + 5;
+        // Advanced solar surface with multiple realistic layers
+        // Solar granulation with enhanced detail
+        for (let i = 0; i < 400; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 25 + 10;
           const sunGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-          sunGradient.addColorStop(0, '#FFFF99');
-          sunGradient.addColorStop(0.5, '#FFD700');
+          sunGradient.addColorStop(0, '#FFFACD');
+          sunGradient.addColorStop(0.3, '#FFFF99');
+          sunGradient.addColorStop(0.6, '#FFD700');
           sunGradient.addColorStop(1, '#FF8C00');
           ctx.fillStyle = sunGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
         }
-        // Solar flares
-        for (let i = 0; i < 30; i++) {
-          const x = Math.random() * 1024;
-          const y = Math.random() * 1024;
-          const size = Math.random() * 40 + 20;
+        
+        // Enhanced solar flares with realistic patterns
+        for (let i = 0; i < 60; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 60 + 30;
           const flareGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
           flareGradient.addColorStop(0, '#FFFFFF');
-          flareGradient.addColorStop(0.3, '#FFD700');
+          flareGradient.addColorStop(0.2, '#FFF8DC');
+          flareGradient.addColorStop(0.5, '#FFD700');
           flareGradient.addColorStop(1, '#FF4500');
           ctx.fillStyle = flareGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
         }
+        
+        // Solar prominence effects
+        for (let i = 0; i < 20; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const width = Math.random() * 100 + 50;
+          const height = Math.random() * 200 + 100;
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(Math.random() * Math.PI * 2);
+          const prominenceGradient = ctx.createLinearGradient(-width/2, -height/2, width/2, height/2);
+          prominenceGradient.addColorStop(0, 'rgba(255, 69, 0, 0.8)');
+          prominenceGradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.6)');
+          prominenceGradient.addColorStop(1, 'rgba(255, 215, 0, 0.3)');
+          ctx.fillStyle = prominenceGradient;
+          ctx.fillRect(-width/2, -height/2, width, height);
+          ctx.restore();
+        }
         break;
         
       case 'mercury':
-        // Enhanced craters with shadows and highlights
-        for (let i = 0; i < 80; i++) {
-          const x = Math.random() * 1024;
-          const y = Math.random() * 1024;
-          const size = Math.random() * 30 + 5;
+        // Enhanced crater system with realistic impact features
+        for (let i = 0; i < 150; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 50 + 10;
           
-          // Crater shadow
-          const shadowGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-          shadowGradient.addColorStop(0, `rgb(${baseColor.r - 60}, ${baseColor.g - 60}, ${baseColor.b - 60})`);
-          shadowGradient.addColorStop(0.7, `rgb(${baseColor.r - 30}, ${baseColor.g - 30}, ${baseColor.b - 30})`);
-          shadowGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
-          ctx.fillStyle = shadowGradient;
+          // Main crater depression
+          const craterGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          craterGradient.addColorStop(0, `rgb(${baseColor.r - 80}, ${baseColor.g - 80}, ${baseColor.b - 80})`);
+          craterGradient.addColorStop(0.4, `rgb(${baseColor.r - 50}, ${baseColor.g - 50}, ${baseColor.b - 50})`);
+          craterGradient.addColorStop(0.8, `rgb(${baseColor.r - 20}, ${baseColor.g - 20}, ${baseColor.b - 20})`);
+          craterGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+          ctx.fillStyle = craterGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
           
-          // Crater rim highlight
-          ctx.strokeStyle = `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`;
-          ctx.lineWidth = 2;
+          // Crater rim with highlights
+          ctx.strokeStyle = `rgb(${Math.min(baseColor.r + 60, 255)}, ${Math.min(baseColor.g + 60, 255)}, ${Math.min(baseColor.b + 60, 255)})`;
+          ctx.lineWidth = 3;
           ctx.beginPath();
           ctx.arc(x, y, size * 0.9, 0, Math.PI * 2);
           ctx.stroke();
+          
+          // Central peak for larger craters
+          if (size > 30) {
+            ctx.fillStyle = `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`;
+            ctx.beginPath();
+            ctx.arc(x, y, size * 0.1, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        
+        // Surface texture with enhanced detail
+        for (let i = 0; i < 300; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 10 + 2;
+          ctx.fillStyle = `rgba(${baseColor.r + Math.random() * 40 - 20}, ${baseColor.g + Math.random() * 40 - 20}, ${baseColor.b + Math.random() * 40 - 20}, 0.6)`;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
         }
         break;
         
       case 'venus':
-        // Enhanced thick atmosphere with swirling clouds
-        for (let i = 0; i < 100; i++) {
-          const x = Math.random() * 1024;
-          const y = Math.random() * 1024;
-          const width = Math.random() * 200 + 100;
-          const height = Math.random() * 40 + 20;
-          const opacity = Math.random() * 0.4 + 0.2;
+        // Enhanced atmospheric layers with realistic cloud formations
+        for (let i = 0; i < 200; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const width = Math.random() * 400 + 200;
+          const height = Math.random() * 80 + 40;
+          const opacity = Math.random() * 0.6 + 0.3;
           
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(Math.random() * Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 220, ${opacity})`;
+          
+          // Create cloud gradient
+          const cloudGradient = ctx.createLinearGradient(-width/2, -height/2, width/2, height/2);
+          cloudGradient.addColorStop(0, `rgba(255, 255, 220, ${opacity})`);
+          cloudGradient.addColorStop(0.5, `rgba(255, 240, 200, ${opacity * 0.8})`);
+          cloudGradient.addColorStop(1, `rgba(255, 230, 180, ${opacity * 0.5})`);
+          ctx.fillStyle = cloudGradient;
           ctx.fillRect(-width/2, -height/2, width, height);
           ctx.restore();
         }
-        // Atmospheric layers
+        
+        // Atmospheric bands with enhanced realism
+        for (let i = 0; i < 80; i++) {
+          const y = Math.random() * 2048;
+          const opacity = Math.random() * 0.4 + 0.2;
+          const height = Math.random() * 15 + 5;
+          
+          const bandGradient = ctx.createLinearGradient(0, y, 2048, y);
+          bandGradient.addColorStop(0, `rgba(255, 245, 210, ${opacity})`);
+          bandGradient.addColorStop(0.5, `rgba(255, 240, 200, ${opacity * 1.2})`);
+          bandGradient.addColorStop(1, `rgba(255, 235, 190, ${opacity})`);
+          ctx.fillStyle = bandGradient;
+          ctx.fillRect(0, y, 2048, height);
+        }
+        
+        // Sulfuric acid cloud swirls
         for (let i = 0; i < 50; i++) {
-          const y = Math.random() * 1024;
-          const opacity = Math.random() * 0.3 + 0.1;
-          ctx.fillStyle = `rgba(255, 240, 200, ${opacity})`;
-          ctx.fillRect(0, y, 1024, 5);
+          const centerX = Math.random() * 2048;
+          const centerY = Math.random() * 2048;
+          const radius = Math.random() * 100 + 50;
+          
+          ctx.save();
+          ctx.translate(centerX, centerY);
+          ctx.beginPath();
+          
+          // Create spiral pattern
+          for (let angle = 0; angle < Math.PI * 4; angle += 0.1) {
+            const r = radius * (1 - angle / (Math.PI * 4));
+            const x = Math.cos(angle) * r;
+            const y = Math.sin(angle) * r;
+            if (angle === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          
+          ctx.strokeStyle = `rgba(255, 255, 200, 0.4)`;
+          ctx.lineWidth = 8;
+          ctx.stroke();
+          ctx.restore();
         }
         break;
         
       case 'earth':
-        // Enhanced continents with varied terrain
-        const continents = [
-          {x: 200, y: 300, w: 150, h: 200}, // North America
-          {x: 400, y: 250, w: 100, h: 150}, // Europe
-          {x: 500, y: 350, w: 180, h: 250}, // Asia
-          {x: 600, y: 600, w: 120, h: 100}, // Australia
-          {x: 350, y: 550, w: 80, h: 180}, // Africa
-          {x: 150, y: 600, w: 100, h: 150}, // South America
+        // Highly detailed continents with realistic geography
+        const continentDetails = [
+          {x: 400, y: 600, w: 300, h: 400, name: 'North America'}, 
+          {x: 800, y: 500, w: 200, h: 300, name: 'Europe'},
+          {x: 1000, y: 700, w: 360, h: 500, name: 'Asia'},
+          {x: 1200, y: 1200, w: 240, h: 200, name: 'Australia'},
+          {x: 700, y: 1100, w: 160, h: 360, name: 'Africa'},
+          {x: 300, y: 1200, w: 200, h: 300, name: 'South America'},
         ];
         
-        continents.forEach(continent => {
-          // Land mass with varied greens and browns
-          const landColors = ['#228B22', '#32CD32', '#8B4513', '#A0522D', '#654321'];
-          ctx.fillStyle = landColors[Math.floor(Math.random() * landColors.length)];
+        continentDetails.forEach(continent => {
+          // Diverse terrain with realistic colors
+          const terrainTypes = [
+            '#228B22', '#32CD32', '#8FBC8F', // Various greens for forests
+            '#8B4513', '#A0522D', '#D2B48C', // Browns for mountains/deserts
+            '#ADFF2F', '#9ACD32', '#7CFC00'  // Light greens for plains
+          ];
+          
+          // Create continent base
+          ctx.fillStyle = terrainTypes[Math.floor(Math.random() * terrainTypes.length)];
           ctx.fillRect(continent.x, continent.y, continent.w, continent.h);
           
-          // Add terrain details
-          for (let i = 0; i < 20; i++) {
+          // Add mountain ranges
+          for (let i = 0; i < 15; i++) {
             const x = continent.x + Math.random() * continent.w;
             const y = continent.y + Math.random() * continent.h;
-            const size = Math.random() * 15 + 5;
-            ctx.fillStyle = landColors[Math.floor(Math.random() * landColors.length)];
+            const size = Math.random() * 30 + 15;
+            
+            const mountainGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+            mountainGradient.addColorStop(0, '#8B4513');
+            mountainGradient.addColorStop(0.5, '#A0522D');
+            mountainGradient.addColorStop(1, '#654321');
+            ctx.fillStyle = mountainGradient;
             ctx.beginPath();
             ctx.arc(x, y, size, 0, Math.PI * 2);
             ctx.fill();
           }
+          
+          // Add forests and vegetation
+          for (let i = 0; i < 40; i++) {
+            const x = continent.x + Math.random() * continent.w;
+            const y = continent.y + Math.random() * continent.h;
+            const size = Math.random() * 20 + 8;
+            ctx.fillStyle = terrainTypes[Math.floor(Math.random() * 3)]; // Green colors only
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          
+          // Add rivers
+          for (let i = 0; i < 5; i++) {
+            const startX = continent.x + Math.random() * continent.w;
+            const startY = continent.y + Math.random() * continent.h;
+            
+            ctx.strokeStyle = '#4169E1';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(startX, startY);
+            
+            let currentX = startX;
+            let currentY = startY;
+            
+            for (let j = 0; j < 20; j++) {
+              currentX += (Math.random() - 0.5) * 20;
+              currentY += Math.random() * 10;
+              ctx.lineTo(currentX, currentY);
+            }
+            ctx.stroke();
+          }
         });
         
-        // Enhanced clouds with realistic formations
-        for (let i = 0; i < 80; i++) {
-          const x = Math.random() * 1024;
-          const y = Math.random() * 1024;
-          const size = Math.random() * 50 + 20;
+        // Enhanced realistic cloud formations
+        for (let i = 0; i < 150; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 80 + 30;
+          
           const cloudGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-          cloudGradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
-          cloudGradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.4)');
+          cloudGradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+          cloudGradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.7)');
+          cloudGradient.addColorStop(0.8, 'rgba(255, 255, 255, 0.4)');
           cloudGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
           ctx.fillStyle = cloudGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
         }
+        
+        // Weather systems - hurricanes and storm fronts
+        for (let i = 0; i < 8; i++) {
+          const centerX = Math.random() * 2048;
+          const centerY = Math.random() * 2048;
+          const radius = Math.random() * 120 + 80;
+          
+          ctx.save();
+          ctx.translate(centerX, centerY);
+          
+          // Create spiral storm pattern
+          for (let angle = 0; angle < Math.PI * 3; angle += 0.05) {
+            const r = radius * (1 - angle / (Math.PI * 3)) * 0.8;
+            const x = Math.cos(angle) * r;
+            const y = Math.sin(angle) * r;
+            
+            ctx.fillStyle = `rgba(255, 255, 255, ${0.6 * (1 - angle / (Math.PI * 3))})`;
+            ctx.beginPath();
+            ctx.arc(x, y, 8, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
         break;
         
       case 'mars':
-        // Enhanced polar ice caps
-        const northCap = ctx.createRadialGradient(512, 100, 0, 512, 100, 80);
-        northCap.addColorStop(0, '#FFFFFF');
-        northCap.addColorStop(0.7, '#F0F8FF');
-        northCap.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
-        ctx.fillStyle = northCap;
+        // Enhanced polar ice caps with seasonal variations
+        const northCapGradient = ctx.createRadialGradient(1024, 200, 0, 1024, 200, 160);
+        northCapGradient.addColorStop(0, '#FFFFFF');
+        northCapGradient.addColorStop(0.3, '#F8F8FF');
+        northCapGradient.addColorStop(0.7, '#F0F8FF');
+        northCapGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+        ctx.fillStyle = northCapGradient;
         ctx.beginPath();
-        ctx.arc(512, 100, 80, 0, Math.PI * 2);
+        ctx.arc(1024, 200, 160, 0, Math.PI * 2);
         ctx.fill();
         
-        const southCap = ctx.createRadialGradient(512, 924, 0, 512, 924, 70);
-        southCap.addColorStop(0, '#FFFFFF');
-        southCap.addColorStop(0.7, '#F0F8FF');
-        southCap.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
-        ctx.fillStyle = southCap;
+        const southCapGradient = ctx.createRadialGradient(1024, 1848, 0, 1024, 1848, 140);
+        southCapGradient.addColorStop(0, '#FFFFFF');
+        southCapGradient.addColorStop(0.3, '#F8F8FF');
+        southCapGradient.addColorStop(0.7, '#F0F8FF');
+        southCapGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+        ctx.fillStyle = southCapGradient;
         ctx.beginPath();
-        ctx.arc(512, 924, 70, 0, Math.PI * 2);
+        ctx.arc(1024, 1848, 140, 0, Math.PI * 2);
         ctx.fill();
         
-        // Valles Marineris (canyon system)
-        ctx.fillStyle = `rgb(${baseColor.r - 40}, ${baseColor.g - 40}, ${baseColor.b - 40})`;
-        ctx.fillRect(200, 400, 600, 30);
-        ctx.fillRect(250, 420, 500, 20);
+        // Enhanced Valles Marineris canyon system
+        ctx.fillStyle = `rgb(${baseColor.r - 60}, ${baseColor.g - 60}, ${baseColor.b - 60})`;
+        ctx.fillRect(400, 800, 1200, 60);
+        ctx.fillRect(500, 840, 1000, 40);
+        ctx.fillRect(600, 870, 800, 30);
         
-        // Surface features and craters
-        for (let i = 0; i < 60; i++) {
-          const x = Math.random() * 1024;
-          const y = Math.random() * 1024;
-          const size = Math.random() * 20 + 5;
+        // Add canyon shadows and highlights
+        const canyonGradient = ctx.createLinearGradient(400, 800, 400, 860);
+        canyonGradient.addColorStop(0, `rgb(${baseColor.r - 80}, ${baseColor.g - 80}, ${baseColor.b - 80})`);
+        canyonGradient.addColorStop(0.5, `rgb(${baseColor.r - 60}, ${baseColor.g - 60}, ${baseColor.b - 60})`);
+        canyonGradient.addColorStop(1, `rgb(${baseColor.r - 40}, ${baseColor.g - 40}, ${baseColor.b - 40})`);
+        ctx.fillStyle = canyonGradient;
+        ctx.fillRect(400, 800, 1200, 60);
+        
+        // Olympus Mons and other volcanoes
+        const volcanoGradient = ctx.createRadialGradient(600, 600, 0, 600, 600, 100);
+        volcanoGradient.addColorStop(0, `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`);
+        volcanoGradient.addColorStop(0.5, `rgb(${baseColor.r + 20}, ${baseColor.g + 20}, ${baseColor.b + 20})`);
+        volcanoGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+        ctx.fillStyle = volcanoGradient;
+        ctx.beginPath();
+        ctx.arc(600, 600, 100, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Surface features with enhanced realism
+        for (let i = 0; i < 120; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 40 + 10;
+          
           const featureGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-          featureGradient.addColorStop(0, `rgb(${baseColor.r - 30}, ${baseColor.g - 30}, ${baseColor.b - 30})`);
-          featureGradient.addColorStop(1, `rgb(${baseColor.r + 10}, ${baseColor.g + 10}, ${baseColor.b + 10})`);
+          featureGradient.addColorStop(0, `rgb(${baseColor.r - 40}, ${baseColor.g - 40}, ${baseColor.b - 40})`);
+          featureGradient.addColorStop(0.5, `rgb(${baseColor.r - 20}, ${baseColor.g - 20}, ${baseColor.b - 20})`);
+          featureGradient.addColorStop(1, `rgb(${baseColor.r + 15}, ${baseColor.g + 15}, ${baseColor.b + 15})`);
           ctx.fillStyle = featureGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
         }
+        
+        // Dust storms and atmospheric effects
+        for (let i = 0; i < 30; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const width = Math.random() * 300 + 150;
+          const height = Math.random() * 60 + 30;
+          
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(Math.random() * Math.PI * 2);
+          ctx.fillStyle = `rgba(${baseColor.r + 30}, ${baseColor.g + 20}, ${baseColor.b + 10}, 0.3)`;
+          ctx.fillRect(-width/2, -height/2, width, height);
+          ctx.restore();
+        }
         break;
         
       case 'jupiter':
-        // Enhanced gas giant bands with more detail
+        // Enhanced gas giant bands with incredible detail
         const bandColors = [
           '#D2691E', '#CD853F', '#DEB887', '#F4A460', 
-          '#D2B48C', '#BC8F8F', '#F5DEB3', '#DDBF94'
+          '#D2B48C', '#BC8F8F', '#F5DEB3', '#DDBF94',
+          '#DAA520', '#B8860B', '#FFE4B5', '#FFDEAD'
         ];
-        for (let i = 0; i < 20; i++) {
-          const y = (i / 20) * 1024;
-          const height = 1024 / 20;
-          const color = bandColors[i % bandColors.length];
+        
+        for (let i = 0; i < 30; i++) {
+          const y = (i / 30) * 2048;
+          const height = 2048 / 30;
+          const colorIndex = i % bandColors.length;
+          const color = bandColors[colorIndex];
           
-          // Create band gradient
+          // Create sophisticated band gradient
           const bandGradient = ctx.createLinearGradient(0, y, 0, y + height);
-          bandGradient.addColorStop(0, color);
-          bandGradient.addColorStop(0.5, `${color}DD`);
-          bandGradient.addColorStop(1, color);
+          bandGradient.addColorStop(0, `${color}DD`);
+          bandGradient.addColorStop(0.3, color);
+          bandGradient.addColorStop(0.7, color);
+          bandGradient.addColorStop(1, `${color}DD`);
           ctx.fillStyle = bandGradient;
-          ctx.fillRect(0, y, 1024, height);
+          ctx.fillRect(0, y, 2048, height);
           
-          // Add turbulence to bands
-          for (let j = 0; j < 30; j++) {
-            const x = Math.random() * 1024;
+          // Add enhanced turbulence and atmospheric dynamics
+          for (let j = 0; j < 50; j++) {
+            const x = Math.random() * 2048;
             const turbY = y + Math.random() * height;
-            const size = Math.random() * 20 + 10;
-            ctx.fillStyle = `${color}88`;
+            const size = Math.random() * 30 + 15;
+            const turbulenceColor = bandColors[(colorIndex + 1) % bandColors.length];
+            
+            const turbGradient = ctx.createRadialGradient(x, turbY, 0, x, turbY, size);
+            turbGradient.addColorStop(0, `${turbulenceColor}BB`);
+            turbGradient.addColorStop(0.5, `${turbulenceColor}88`);
+            turbGradient.addColorStop(1, `${turbulenceColor}33`);
+            ctx.fillStyle = turbGradient;
             ctx.beginPath();
             ctx.arc(x, turbY, size, 0, Math.PI * 2);
             ctx.fill();
           }
         }
         
-        // Enhanced Great Red Spot
-        const spotGradient = ctx.createRadialGradient(700, 400, 0, 700, 400, 60);
+        // Enhanced Great Red Spot with incredible detail
+        const spotCenterX = 1400;
+        const spotCenterY = 800;
+        const spotWidth = 120;
+        const spotHeight = 80;
+        
+        // Main spot body
+        const spotGradient = ctx.createRadialGradient(spotCenterX, spotCenterY, 0, spotCenterX, spotCenterY, spotWidth);
         spotGradient.addColorStop(0, '#FF6347');
-        spotGradient.addColorStop(0.3, '#FF4500');
-        spotGradient.addColorStop(0.7, '#8B0000');
+        spotGradient.addColorStop(0.2, '#FF4500');
+        spotGradient.addColorStop(0.5, '#DC143C');
+        spotGradient.addColorStop(0.8, '#8B0000');
         spotGradient.addColorStop(1, '#654321');
         ctx.fillStyle = spotGradient;
         ctx.beginPath();
-        ctx.ellipse(700, 400, 60, 40, 0, 0, Math.PI * 2);
+        ctx.ellipse(spotCenterX, spotCenterY, spotWidth, spotHeight, 0, 0, Math.PI * 2);
         ctx.fill();
         
-        // Add storm details
+        // Add swirling details inside the spot
+        for (let i = 0; i < 20; i++) {
+          const angle = (i / 20) * Math.PI * 2;
+          const x = spotCenterX + Math.cos(angle) * (spotWidth * 0.3);
+          const y = spotCenterY + Math.sin(angle) * (spotHeight * 0.3);
+          
+          ctx.fillStyle = '#FF8C00';
+          ctx.beginPath();
+          ctx.arc(x, y, 8, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Spot boundary effects
         ctx.strokeStyle = '#FF8C00';
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 6;
         ctx.beginPath();
-        ctx.ellipse(700, 400, 45, 30, 0, 0, Math.PI * 2);
+        ctx.ellipse(spotCenterX, spotCenterY, spotWidth * 0.8, spotHeight * 0.8, 0, 0, Math.PI * 2);
         ctx.stroke();
+        
+        // Smaller storm systems
+        for (let i = 0; i < 15; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 40 + 20;
+          
+          const stormGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          stormGradient.addColorStop(0, '#DAA520');
+          stormGradient.addColorStop(0.5, '#B8860B');
+          stormGradient.addColorStop(1, '#8B7355');
+          ctx.fillStyle = stormGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
         break;
     }
     
