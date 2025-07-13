@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { navigationData } from '../data/mockData';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Navigation = ({ activeSection, onNavigate }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const { currentTheme } = useTheme();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Animation variants for better organization
   const containerVariants = {
     initial: { opacity: 0, y: -20 },
@@ -15,21 +29,17 @@ const Navigation = ({ activeSection, onNavigate }) => {
     tap: { scale: 0.95 }
   };
 
-  // Style configurations
-  const containerStyles = {
-    position: 'fixed',
-    top: '2rem',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    zIndex: 9999
+  const getBackgroundStyles = () => {
+    const base = "rounded-2xl px-3 py-2 md:px-6 md:py-4 border shadow-lg";
+    const mobile = isMobile ? "mx-2" : "";
+    return `${base} ${mobile}`;
   };
-
-  const backgroundStyles = "bg-black bg-opacity-30 backdrop-blur-md rounded-2xl px-6 py-4 border border-white border-opacity-30 shadow-lg";
   
   const getButtonStyles = (isActive) => {
-    const baseStyles = "relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 text-center min-w-[80px]";
-    const activeStyles = "text-white bg-white bg-opacity-30";
-    const inactiveStyles = "text-gray-200 hover:text-white hover:bg-white hover:bg-opacity-20";
+    const baseStyles = "relative px-2 py-1 md:px-4 md:py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 text-center min-w-[60px] md:min-w-[80px]";
+    const textColor = currentTheme.textPrimary;
+    const activeStyles = `text-white bg-white bg-opacity-30`;
+    const inactiveStyles = `hover:text-white hover:bg-white hover:bg-opacity-20`;
     
     return `${baseStyles} ${isActive ? activeStyles : inactiveStyles}`;
   };
@@ -39,11 +49,18 @@ const Navigation = ({ activeSection, onNavigate }) => {
       initial={containerVariants.initial}
       animate={containerVariants.animate}
       transition={containerVariants.transition}
-      className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50"
-      style={containerStyles}
+      className={`fixed ${isMobile ? 'bottom-4 left-1/2 transform -translate-x-1/2' : 'top-8 left-1/2 transform -translate-x-1/2'} z-50`}
     >
-      <div className={backgroundStyles}>
-        <div className="flex flex-row items-center space-x-4">
+      <div 
+        className={getBackgroundStyles()}
+        style={{
+          backgroundColor: currentTheme.navigationBg,
+          backdropFilter: 'blur(16px)',
+          borderColor: currentTheme.border,
+          color: currentTheme.textPrimary,
+        }}
+      >
+        <div className={`flex ${isMobile ? 'flex-wrap justify-center' : 'flex-row'} items-center ${isMobile ? 'gap-2' : 'space-x-4'}`}>
           {navigationData.map((item) => (
             <motion.button
               key={item.section}
@@ -51,6 +68,9 @@ const Navigation = ({ activeSection, onNavigate }) => {
               className={getButtonStyles(activeSection === item.section)}
               whileHover={buttonVariants.hover}
               whileTap={buttonVariants.tap}
+              style={{
+                color: activeSection === item.section ? '#ffffff' : currentTheme.textSecondary,
+              }}
             >
               {item.name}
               {activeSection === item.section && (
