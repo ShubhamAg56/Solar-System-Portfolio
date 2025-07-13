@@ -70,10 +70,10 @@ const ContentPanel = ({ activeSection, onClose }) => {
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
           className={`fixed ${panelPosition} ${panelHeight} ${panelWidth} z-40 ${isMobile ? 'rounded-t-2xl' : 'border-l'}`}
           style={{
-            backgroundColor: currentTheme.panelBg,
+            backgroundColor: panelBg,
             backdropFilter: 'blur(24px)',
-            borderColor: currentTheme.border,
-            color: currentTheme.textPrimary,
+            borderColor: border,
+            color: textPrimary,
           }}
         >
           <div className="h-full overflow-y-auto">
