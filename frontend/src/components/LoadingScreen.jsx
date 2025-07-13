@@ -6,6 +6,12 @@ const LoadingScreen = ({ onLoadComplete }) => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const { currentTheme } = useTheme();
   
+  // Default color fallbacks
+  const background = currentTheme?.background || 'linear-gradient(to bottom, #000428, #004e92)';
+  const textPrimary = currentTheme?.textPrimary || '#ffffff';
+  const textSecondary = currentTheme?.textSecondary || '#cccccc';
+  const border = currentTheme?.border || 'rgba(255, 255, 255, 0.2)';
+  
   useEffect(() => {
     const timer = setInterval(() => {
       setLoadingProgress(prev => {
