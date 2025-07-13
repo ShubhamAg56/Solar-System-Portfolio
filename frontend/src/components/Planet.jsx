@@ -10,6 +10,11 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
   const [hovered, setHovered] = useState(false);
   const { currentTheme } = useTheme();
   
+  // Default color fallbacks
+  const cardBackground = currentTheme?.cardBackground || 'rgba(0, 0, 0, 0.8)';
+  const textPrimary = currentTheme?.textPrimary || '#ffffff';
+  const textSecondary = currentTheme?.textSecondary || '#cccccc';
+  
   // Realistic planet materials with life-like textures
   const planetMaterial = useMemo(() => {
     const materials = {
