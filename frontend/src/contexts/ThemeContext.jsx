@@ -31,20 +31,32 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'light');
+    try {
+      const savedTheme = localStorage.getItem('portfolio-theme');
+      if (savedTheme && (savedTheme === 'dark' || savedTheme === 'light')) {
+        setTheme(savedTheme);
+      } else {
+        // Check system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+      }
+    } catch (error) {
+      console.warn('Error accessing localStorage or matchMedia:', error);
+      setTheme('dark'); // fallback to dark theme
     }
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('portfolio-theme', newTheme);
+    try {
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+      localStorage.setItem('portfolio-theme', newTheme);
+    } catch (error) {
+      console.warn('Error saving theme to localStorage:', error);
+      // Still update the theme even if localStorage fails
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+    }
   };
 
   const themes = {
