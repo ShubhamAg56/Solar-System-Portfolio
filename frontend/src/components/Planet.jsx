@@ -566,10 +566,31 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         }
         break;
         
-      // case 'saturn':
-      //   // Enhanced Saturn with atmospheric bands and ring-like surface features
-      //   // ... (commented out for now)
-      //   break;
+      case 'saturn':
+        // Saturn with atmospheric bands
+        const saturnBandColors = ['#FAD5A5', '#F0E68C', '#DEB887', '#D2B48C'];
+        
+        for (let i = 0; i < 20; i++) {
+          const y = (i / 20) * 2048;
+          const height = 2048 / 20;
+          const color = saturnBandColors[i % saturnBandColors.length];
+          
+          ctx.fillStyle = color;
+          ctx.fillRect(0, y, 2048, height);
+        }
+        
+        // Add some atmospheric features
+        for (let i = 0; i < 15; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 40 + 15;
+          
+          ctx.fillStyle = '#F4A460';
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
     }
     
     const texture = new THREE.CanvasTexture(canvas);
