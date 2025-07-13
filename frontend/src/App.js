@@ -189,7 +189,7 @@ const AppContent = () => {
             className={`fixed ${isMobile ? 'top-4 left-4' : 'top-8 left-8'} z-30`}
           >
             <div 
-              className="rounded-lg p-4 text-sm backdrop-blur-md"
+              className="rounded-lg p-4 text-sm backdrop-blur-md h-[56px] flex items-center"
               style={{
                 backgroundColor: currentTheme.cardBackground,
                 color: currentTheme.textPrimary,
