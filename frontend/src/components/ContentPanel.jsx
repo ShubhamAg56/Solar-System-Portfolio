@@ -44,7 +44,7 @@ const ContentPanel = ({ activeSection, onClose }) => {
       case 'contact':
         return <ContactSection />;
       case 'playground':
-        return <div>Playground Section (placeholder)</div>;
+        return <PlaygroundSection />;
       default:
         return null;
     }
