@@ -11,6 +11,12 @@ import ContactSection from './sections/ContactSection';
 const ContentPanel = ({ activeSection, onClose }) => {
   const [isMobile, setIsMobile] = useState(false);
   const { currentTheme } = useTheme();
+  
+  // Default color fallbacks
+  const panelBg = currentTheme?.panelBg || 'rgba(0, 0, 0, 0.8)';
+  const border = currentTheme?.border || 'rgba(255, 255, 255, 0.2)';
+  const textPrimary = currentTheme?.textPrimary || '#ffffff';
+  const textSecondary = currentTheme?.textSecondary || '#cccccc';
 
   useEffect(() => {
     const checkMobile = () => {
