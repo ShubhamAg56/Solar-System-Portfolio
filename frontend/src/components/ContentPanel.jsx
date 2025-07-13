@@ -43,6 +43,8 @@ const ContentPanel = ({ activeSection, onClose }) => {
         return <EducationSection />;
       case 'contact':
         return <ContactSection />;
+      case 'playground':
+        return <PlaygroundSection />;
       default:
         return null;
     }
