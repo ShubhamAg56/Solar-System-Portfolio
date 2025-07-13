@@ -72,6 +72,15 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         emissiveIntensity: 0.1,
         transparent: false,
         opacity: 1.0
+      }),
+      saturn: new THREE.MeshStandardMaterial({
+        color: '#FAD5A5',
+        roughness: 0.3,
+        metalness: 0.15,
+        emissive: '#DEB887',
+        emissiveIntensity: 0.15,
+        transparent: false,
+        opacity: 1.0
       })
     };
     
