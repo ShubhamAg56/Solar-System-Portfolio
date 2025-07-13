@@ -2,6 +2,7 @@ import React, { useRef, useState, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import { motion } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
 import * as THREE from 'three';
 
 const Planet = ({ planet, planetKey, isActive, onClick }) => {
