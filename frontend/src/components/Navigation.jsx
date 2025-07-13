@@ -6,6 +6,11 @@ import { useTheme } from '../contexts/ThemeContext';
 const Navigation = ({ activeSection, onNavigate }) => {
   const [isMobile, setIsMobile] = useState(false);
   const { currentTheme } = useTheme();
+  
+  // Default color fallbacks
+  const navigationBg = currentTheme?.navigationBg || 'rgba(0, 0, 0, 0.3)';
+  const border = currentTheme?.border || 'rgba(255, 255, 255, 0.2)';
+  const textPrimary = currentTheme?.textPrimary || '#ffffff';
 
   useEffect(() => {
     const checkMobile = () => {
