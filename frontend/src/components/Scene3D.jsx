@@ -106,8 +106,8 @@ const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
         <pointLight position={[-100, -100, -100]} intensity={0.5} color="#6B93D6" />
         
         <AnimatedStars />
-        {/*<ParticleField />
-        <CosmicDust />
+        <ParticleField />
+        {/*<CosmicDust />
         <AsteroidBelt />*/}
         
         <SolarSystem
