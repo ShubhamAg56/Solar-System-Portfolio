@@ -8,6 +8,9 @@ const ParticleField = () => {
   const ref = useRef();
   const [particleCount, setParticleCount] = useState(1000);
   const { currentTheme } = useTheme();
+  
+  // Default color fallback
+  const particleColor = currentTheme?.particleColor || '#E6E6FA';
 
   useEffect(() => {
     const isMobile = window.innerWidth <= 768;
