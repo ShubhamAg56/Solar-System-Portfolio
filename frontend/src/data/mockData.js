@@ -389,15 +389,15 @@ export const planetData = {
     scale: 1.5,
     color: "#D2691E",
     description: "Get in touch with me"
-  },
-  saturn: {
-    name: "Playground",
-    section: "playground",
-    position: [36, 0, 0],
-    scale: 1.2,
-    color: "#FAD5A5",
-    description: "Interactive demos and experiments"
   }
+  // saturn: {
+  //   name: "Playground",
+  //   section: "playground",
+  //   position: [36, 0, 0],
+  //   scale: 1.2,
+  //   color: "#FAD5A5",
+  //   description: "Interactive demos and experiments"
+  // }
 };
 
 export const navigationData = [
