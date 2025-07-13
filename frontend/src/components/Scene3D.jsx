@@ -1,10 +1,13 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Stars, Html } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import Planet from './Planet';
 import ParticleField from './ParticleField';
+import AsteroidBelt from './AsteroidBelt';
+import CosmicDust from './CosmicDust';
 import { planetData } from '../data/mockData';
+import { useTheme } from '../contexts/ThemeContext';
 
 const AnimatedStars = () => {
   const starsRef = useRef();
