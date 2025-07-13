@@ -72,6 +72,10 @@ const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
 const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
   const [isMobile, setIsMobile] = useState(false);
   const { currentTheme } = useTheme();
+  
+  // Default color fallbacks
+  const sunColor = currentTheme?.sunColor || '#FFA500';
+  const background = currentTheme?.background || 'linear-gradient(to bottom, #000428, #004e92)';
 
   useEffect(() => {
     const checkMobile = () => {
