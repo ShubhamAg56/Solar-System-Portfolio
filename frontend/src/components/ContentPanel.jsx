@@ -7,7 +7,7 @@ import ExperienceSection from './sections/ExperienceSection';
 import ProjectsSection from './sections/ProjectsSection';
 import EducationSection from './sections/EducationSection';
 import ContactSection from './sections/ContactSection';
-import PlaygroundSection from './sections/PlaygroundSection';
+// import PlaygroundSection from './sections/PlaygroundSection';
 
 const ContentPanel = ({ activeSection, onClose }) => {
   const [isMobile, setIsMobile] = useState(false);
