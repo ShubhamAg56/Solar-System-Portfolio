@@ -214,6 +214,111 @@ export const portfolioData = {
     }
   ],
   
+  playground: [
+    {
+      id: "demo-1",
+      title: "Particle Galaxy Simulator",
+      description: "Interactive 3D galaxy formation with particle physics. Watch as thousands of particles form spiral arms and interact gravitationally.",
+      technologies: ["Three.js", "WebGL", "Particle Systems", "Physics"],
+      category: "Physics Simulation",
+      featured: true,
+      demo: "https://galaxy-sim.demo.com",
+      github: "https://github.com/alexcosmos/galaxy-simulator",
+      highlights: [
+        "Real-time particle physics",
+        "GPU-accelerated rendering",
+        "Interactive camera controls",
+        "Customizable parameters"
+      ],
+      type: "interactive"
+    },
+    {
+      id: "demo-2", 
+      title: "Procedural Planet Generator",
+      description: "Generate infinite unique planets with realistic terrain, atmospheres, and weather systems using noise functions and shaders.",
+      technologies: ["Three.js", "WebGL Shaders", "Noise Functions", "Procedural Generation"],
+      category: "Procedural Graphics",
+      featured: true,
+      demo: "https://planet-gen.demo.com",
+      github: "https://github.com/alexcosmos/planet-generator",
+      highlights: [
+        "Procedural terrain generation",
+        "Atmospheric scattering",
+        "Real-time weather effects",
+        "Custom shader materials"
+      ],
+      type: "interactive"
+    },
+    {
+      id: "demo-3",
+      title: "Crystal Cave Explorer",
+      description: "Navigate through a mystical crystal cave with dynamic lighting, reflections, and particle effects.",
+      technologies: ["Three.js", "WebGL", "HDR Lighting", "Post-processing"],
+      category: "Interactive Experience",
+      featured: true,
+      demo: "https://crystal-cave.demo.com",
+      github: "https://github.com/alexcosmos/crystal-cave",
+      highlights: [
+        "Dynamic lighting system",
+        "Real-time reflections",
+        "Particle effects",
+        "First-person controls"
+      ],
+      type: "experience"
+    },
+    {
+      id: "demo-4",
+      title: "Morphing Geometry Lab",
+      description: "Experiment with vertex shaders and geometry morphing. Watch as 3D shapes transform and animate in real-time.",
+      technologies: ["Three.js", "Vertex Shaders", "Geometry", "Animation"],
+      category: "Shader Art",
+      featured: false,
+      demo: "https://morph-lab.demo.com", 
+      github: "https://github.com/alexcosmos/morphing-lab",
+      highlights: [
+        "Vertex shader animations",
+        "Geometry morphing",
+        "Real-time parameter control",
+        "Mathematical visualizations"
+      ],
+      type: "experiment"
+    },
+    {
+      id: "demo-5",
+      title: "Audio Visualizer 3D",
+      description: "Music visualization with 3D graphics that react to audio frequency, amplitude, and beat detection.",
+      technologies: ["Three.js", "Web Audio API", "FFT Analysis", "Real-time Graphics"],
+      category: "Audio Visualization",
+      featured: false,
+      demo: "https://audio-viz.demo.com",
+      github: "https://github.com/alexcosmos/audio-visualizer",
+      highlights: [
+        "Real-time audio analysis",
+        "Frequency-based animations",
+        "Beat detection",
+        "Multiple visualization modes"
+      ],
+      type: "interactive"
+    },
+    {
+      id: "demo-6",
+      title: "Fluid Simulation",
+      description: "GPU-accelerated fluid dynamics simulation with particle-based rendering and realistic physics.",
+      technologies: ["Three.js", "WebGL Compute", "Fluid Dynamics", "Particle Systems"],
+      category: "Physics Simulation",
+      featured: false,
+      demo: "https://fluid-sim.demo.com",
+      github: "https://github.com/alexcosmos/fluid-simulation",
+      highlights: [
+        "GPU-accelerated physics",
+        "Particle-based rendering",
+        "Real-time interaction",
+        "Realistic fluid behavior"
+      ],
+      type: "simulation"
+    }
+  ],
+  
   certifications: [
     {
       name: "AWS Solutions Architect",
