@@ -42,7 +42,7 @@ const Navigation = ({ activeSection, onNavigate }) => {
   
   const getButtonStyles = (isActive) => {
     const baseStyles = "relative px-2 py-1 md:px-4 md:py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 text-center min-w-[60px] md:min-w-[80px]";
-    const textColor = currentTheme.textPrimary;
+    const textColor = textPrimary;
     const activeStyles = `text-white bg-white bg-opacity-30`;
     const inactiveStyles = `hover:text-white hover:bg-white hover:bg-opacity-20`;
     
