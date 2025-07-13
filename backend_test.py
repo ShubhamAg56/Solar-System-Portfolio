@@ -11,8 +11,21 @@ import time
 from datetime import datetime
 from typing import Dict, Any, List
 
-# Configuration
-BACKEND_URL = "http://localhost:8001"
+# Configuration - Read from frontend .env file
+import os
+from pathlib import Path
+
+# Load frontend .env to get the correct backend URL
+frontend_env_path = Path("/app/frontend/.env")
+if frontend_env_path.exists():
+    with open(frontend_env_path, 'r') as f:
+        for line in f:
+            if line.startswith('REACT_APP_BACKEND_URL='):
+                BACKEND_URL = line.split('=', 1)[1].strip()
+                break
+else:
+    BACKEND_URL = "http://localhost:8001"  # fallback
+
 API_BASE = f"{BACKEND_URL}/api"
 
 class BackendTester:
