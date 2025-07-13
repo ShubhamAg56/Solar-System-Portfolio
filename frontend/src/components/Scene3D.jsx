@@ -32,7 +32,7 @@ const AnimatedStars = () => {
       factor={5} 
       saturation={0} 
       fade 
-      color={currentTheme.starColor}
+      color={starColor}
     />
   );
 };
