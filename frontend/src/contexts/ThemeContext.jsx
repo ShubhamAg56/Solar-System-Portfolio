@@ -75,16 +75,16 @@ export const ThemeProvider = ({ children }) => {
       panelBg: 'rgba(0, 0, 0, 0.8)',
     },
     light: {
-      // Spectacular light theme with vibrant cosmic aesthetics
-      background: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 15%, #fecfef 35%, #a8edea 65%, #fed6e3 85%, #ffd1ff 100%)',
+      // Clean light theme with solid colors and high contrast
+      background: '#f8fafc',
       cardBackground: 'rgba(255, 255, 255, 0.98)',
-      textPrimary: '#2d3748',
+      textPrimary: '#1a1a1a',
       textSecondary: '#4a5568',
-      accent: '#667eea',
-      border: 'rgba(255, 255, 255, 0.95)',
-      starColor: '#FFD700',
-      sunColor: '#FFD700',
-      particleColor: '#FFFFFF',
+      accent: '#2563eb',
+      border: 'rgba(0, 0, 0, 0.1)',
+      starColor: '#fbbf24',
+      sunColor: '#fbbf24',
+      particleColor: '#1a1a1a',
       navigationBg: 'rgba(255, 255, 255, 0.98)',
       panelBg: 'rgba(255, 255, 255, 0.98)',
     }
