@@ -1,0 +1,81 @@
+{
+  "summary": {
+    "total_tests": 8,
+    "passed": 8,
+    "failed": 0,
+    "success_rate": "100.0%"
+  },
+  "results": [
+    {
+      "test": "Server Health Check",
+      "success": true,
+      "message": "Server responding correctly with: {'message': 'Hello World'}",
+      "timestamp": "2025-07-13T18:04:48.975628",
+      "details": {}
+    },
+    {
+      "test": "CORS Configuration",
+      "success": true,
+      "message": "CORS headers properly configured",
+      "timestamp": "2025-07-13T18:04:49.017812",
+      "details": {
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Credentials": "true"
+      }
+    },
+    {
+      "test": "Create Status Check",
+      "success": true,
+      "message": "Status check created successfully",
+      "timestamp": "2025-07-13T18:04:49.079922",
+      "details": {
+        "id": "63df33a5-bea1-4161-ac92-af85f5fa629e",
+        "client_name": "3D Solar System Test Client",
+        "timestamp": "2025-07-13T18:04:49.019455"
+      }
+    },
+    {
+      "test": "Get Status Checks",
+      "success": true,
+      "message": "Retrieved 1 status checks",
+      "timestamp": "2025-07-13T18:04:49.123870",
+      "details": {
+        "count": 1
+      }
+    },
+    {
+      "test": "Data Persistence",
+      "success": true,
+      "message": "Data persisted correctly in MongoDB",
+      "timestamp": "2025-07-13T18:04:50.171685",
+      "details": {
+        "created_id": "2141a64c-889c-4d40-9cef-d1f2537bea4d"
+      }
+    },
+    {
+      "test": "MongoDB Connection",
+      "success": true,
+      "message": "MongoDB connection and operations working",
+      "timestamp": "2025-07-13T18:04:50.258813",
+      "details": {}
+    },
+    {
+      "test": "Error Handling - Invalid JSON",
+      "success": true,
+      "message": "Properly handled invalid JSON with HTTP 422",
+      "timestamp": "2025-07-13T18:04:50.300795",
+      "details": {}
+    },
+    {
+      "test": "Error Handling - Missing Field",
+      "success": true,
+      "message": "Properly handled missing field with HTTP 422",
+      "timestamp": "2025-07-13T18:04:50.342814",
+      "details": {}
+    }
+  ],
+  "critical_issues": [],
+  "timestamp": "2025-07-13T18:04:50.342881"
+}
