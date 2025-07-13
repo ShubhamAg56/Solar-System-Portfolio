@@ -54,14 +54,8 @@ const CosmicDust = () => {
         size={0.3}
         sizeAttenuation={true}
         depthWrite={false}
-        vertexColors={true}
+        vertexColors={false}
         opacity={0.6}
-      />
-      <bufferAttribute
-        attach="attributes-color"
-        array={dustColors}
-        count={2000}
-        itemSize={3}
       />
     </Points>
   );
