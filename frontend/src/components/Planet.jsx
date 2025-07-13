@@ -351,14 +351,18 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            className="bg-black bg-opacity-80 text-white px-4 py-2 rounded-lg text-sm font-medium backdrop-blur-sm border border-white border-opacity-20 shadow-lg"
+            className="rounded-lg text-sm font-medium backdrop-blur-sm border shadow-lg px-4 py-2"
             style={{ 
+              backgroundColor: currentTheme.cardBackground,
+              color: currentTheme.textPrimary,
               boxShadow: `0 0 20px ${planet.color}40`,
-              borderColor: planet.color
+              borderColor: planet.color,
             }}
           >
             {planet.name}
-            <div className="text-xs text-gray-300 mt-1">{planet.description}</div>
+            <div className="text-xs mt-1" style={{ color: currentTheme.textSecondary }}>
+              {planet.description}
+            </div>
           </motion.div>
         </Html>
       )}
