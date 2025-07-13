@@ -59,10 +59,10 @@ const Navigation = ({ activeSection, onNavigate }) => {
       <div 
         className={getBackgroundStyles()}
         style={{
-          backgroundColor: currentTheme.navigationBg,
+          backgroundColor: navigationBg,
           backdropFilter: 'blur(16px)',
-          borderColor: currentTheme.border,
-          color: currentTheme.textPrimary,
+          borderColor: border,
+          color: textPrimary,
         }}
       >
         <div className={`flex ${isMobile ? 'flex-wrap justify-center' : 'flex-row'} items-center ${isMobile ? 'gap-2' : 'space-x-4'}`}>
