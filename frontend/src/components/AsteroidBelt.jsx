@@ -49,7 +49,7 @@ const AsteroidBelt = () => {
         <PointMaterial
           transparent
           color="#8B7355"
-          size={1.5}
+          size={0.8}
           sizeAttenuation={true}
           depthWrite={false}
           vertexColors={false}
