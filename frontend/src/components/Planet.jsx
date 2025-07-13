@@ -24,16 +24,16 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         emissiveIntensity: 0.8,
         roughness: 0.1,
         metalness: 0.0,
-        transparent: true,
-        opacity: 0.95
+        transparent: false,
+        opacity: 1.0
       }),
       mercury: new THREE.MeshStandardMaterial({
         color: '#8C7853',
         roughness: 0.95,
         metalness: 0.05,
         bumpScale: 0.05,
-        transparent: true,
-        opacity: 0.9
+        transparent: false,
+        opacity: 1.0
       }),
       venus: new THREE.MeshStandardMaterial({
         color: '#FFC649',
@@ -41,8 +41,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         metalness: 0.1,
         emissive: '#FFB347',
         emissiveIntensity: 0.2,
-        transparent: true,
-        opacity: 0.95
+        transparent: false,
+        opacity: 1.0
       }),
       earth: new THREE.MeshStandardMaterial({
         color: '#6B93D6',
@@ -51,8 +51,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         emissive: '#4A90E2',
         emissiveIntensity: 0.1,
         bumpScale: 0.02,
-        transparent: true,
-        opacity: 0.95
+        transparent: false,
+        opacity: 1.0
       }),
       mars: new THREE.MeshStandardMaterial({
         color: '#CD5C5C',
@@ -61,8 +61,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         emissive: '#A0522D',
         emissiveIntensity: 0.05,
         bumpScale: 0.03,
-        transparent: true,
-        opacity: 0.9
+        transparent: false,
+        opacity: 1.0
       }),
       jupiter: new THREE.MeshStandardMaterial({
         color: '#D2691E',
@@ -70,8 +70,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         metalness: 0.1,
         emissive: '#B8860B',
         emissiveIntensity: 0.1,
-        transparent: true,
-        opacity: 0.95
+        transparent: false,
+        opacity: 1.0
       })
     };
     
