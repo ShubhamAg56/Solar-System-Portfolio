@@ -358,14 +358,14 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             className="rounded-lg text-sm font-medium backdrop-blur-sm border shadow-lg px-4 py-2"
             style={{ 
-              backgroundColor: currentTheme.cardBackground,
-              color: currentTheme.textPrimary,
+              backgroundColor: cardBackground,
+              color: textPrimary,
               boxShadow: `0 0 20px ${planet.color}40`,
               borderColor: planet.color,
             }}
           >
             {planet.name}
-            <div className="text-xs mt-1" style={{ color: currentTheme.textSecondary }}>
+            <div className="text-xs mt-1" style={{ color: textSecondary }}>
               {planet.description}
             </div>
           </motion.div>
