@@ -705,7 +705,9 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         const speed = planetKey === 'mercury' ? 0.08 : 
                      planetKey === 'venus' ? 0.06 : 
                      planetKey === 'earth' ? 0.05 : 
-                     planetKey === 'mars' ? 0.04 : 0.03;
+                     planetKey === 'mars' ? 0.04 : 
+                     planetKey === 'jupiter' ? 0.03 : 
+                     planetKey === 'saturn' ? 0.025 : 0.02;
         
         const radius = Math.sqrt(planet.position[0] ** 2 + planet.position[2] ** 2);
         meshRef.current.position.x = Math.cos(time * speed) * radius;
