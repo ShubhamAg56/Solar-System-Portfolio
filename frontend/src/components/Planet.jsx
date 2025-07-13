@@ -565,6 +565,121 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           ctx.fill();
         }
         break;
+        
+      case 'saturn':
+        // Enhanced Saturn with atmospheric bands and ring-like surface features
+        const saturnBandColors = [
+          '#FAD5A5', '#F0E68C', '#DEB887', '#D2B48C', 
+          '#BC8F8F', '#F5DEB3', '#DDBF94', '#DAA520',
+          '#B8860B', '#FFE4B5', '#FFDEAD', '#F4A460'
+        ];
+        
+        // Create Saturn's characteristic bands
+        for (let i = 0; i < 25; i++) {
+          const y = (i / 25) * 2048;
+          const height = 2048 / 25;
+          const colorIndex = i % saturnBandColors.length;
+          const color = saturnBandColors[colorIndex];
+          
+          // Create sophisticated band gradient
+          const bandGradient = ctx.createLinearGradient(0, y, 0, y + height);
+          bandGradient.addColorStop(0, `${color}CC`);
+          bandGradient.addColorStop(0.4, color);
+          bandGradient.addColorStop(0.6, color);
+          bandGradient.addColorStop(1, `${color}CC`);
+          ctx.fillStyle = bandGradient;
+          ctx.fillRect(0, y, 2048, height);
+          
+          // Add atmospheric turbulence
+          for (let j = 0; j < 30; j++) {
+            const x = Math.random() * 2048;
+            const turbY = y + Math.random() * height;
+            const size = Math.random() * 15 + 5;
+            
+            const turbGradient = ctx.createRadialGradient(x, turbY, 0, x, turbY, size);
+            turbGradient.addColorStop(0, `rgba(255, 255, 255, 0.3)`);
+            turbGradient.addColorStop(0.5, `rgba(255, 215, 0, 0.2)`);
+            turbGradient.addColorStop(1, 'rgba(255, 255, 255, 0.1)');
+            ctx.fillStyle = turbGradient;
+            ctx.beginPath();
+            ctx.arc(x, turbY, size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        
+        // Add Saturn's hexagonal storm at north pole
+        const hexagonCenterX = 1024;
+        const hexagonCenterY = 300;
+        const hexagonRadius = 150;
+        
+        ctx.fillStyle = '#8B7355';
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const angle = (i / 6) * Math.PI * 2;
+          const x = hexagonCenterX + Math.cos(angle) * hexagonRadius;
+          const y = hexagonCenterY + Math.sin(angle) * hexagonRadius;
+          
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.closePath();
+        ctx.fill();
+        
+        // Add hexagon interior details
+        const hexGradient = ctx.createRadialGradient(hexagonCenterX, hexagonCenterY, 0, hexagonCenterX, hexagonCenterY, hexagonRadius);
+        hexGradient.addColorStop(0, '#DAA520');
+        hexGradient.addColorStop(0.5, '#B8860B');
+        hexGradient.addColorStop(1, '#8B7355');
+        ctx.fillStyle = hexGradient;
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const angle = (i / 6) * Math.PI * 2;
+          const x = hexagonCenterX + Math.cos(angle) * (hexagonRadius * 0.7);
+          const y = hexagonCenterY + Math.sin(angle) * (hexagonRadius * 0.7);
+          
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.closePath();
+        ctx.fill();
+        
+        // Add smaller storm systems across the surface
+        for (let i = 0; i < 20; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 60 + 20;
+          
+          const stormGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          stormGradient.addColorStop(0, '#F0E68C');
+          stormGradient.addColorStop(0.5, '#DEB887');
+          stormGradient.addColorStop(1, '#D2B48C');
+          ctx.fillStyle = stormGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Add atmospheric clouds and swirls
+        for (let i = 0; i < 40; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const width = Math.random() * 200 + 100;
+          const height = Math.random() * 40 + 20;
+          
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(Math.random() * Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.4 + 0.1})`;
+          ctx.fillRect(-width/2, -height/2, width, height);
+          ctx.restore();
+        }
+        break;
     }
     
     const texture = new THREE.CanvasTexture(canvas);
