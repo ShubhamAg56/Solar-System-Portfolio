@@ -67,24 +67,41 @@ const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
 };
 
 const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const { currentTheme } = useTheme();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="w-full h-full">
       <Canvas
         camera={{
           position: cameraPosition || [0, 10, 40],
-          fov: 60,
+          fov: isMobile ? 70 : 60,
           near: 0.1,
           far: 2000
         }}
-        style={{ background: 'linear-gradient(to bottom, #000428, #004e92)' }}
+        style={{ background: currentTheme.background }}
+        gl={{ antialias: true, alpha: false }}
+        performance={{ min: 0.8 }}
       >
-        <ambientLight intensity={0.4} />
-        <pointLight position={[0, 0, 0]} intensity={3} color="#FDB813" />
-        <pointLight position={[100, 100, 100]} intensity={0.8} color="#ffffff" />
-        <pointLight position={[-100, -100, -100]} intensity={0.3} color="#6B93D6" />
+        <ambientLight intensity={0.6} />
+        <pointLight position={[0, 0, 0]} intensity={4} color={currentTheme.sunColor} />
+        <pointLight position={[100, 100, 100]} intensity={1.2} color="#ffffff" />
+        <pointLight position={[-100, -100, -100]} intensity={0.5} color="#6B93D6" />
         
         <AnimatedStars />
         <ParticleField />
+        <CosmicDust />
+        <AsteroidBelt />
         
         <SolarSystem
           activeSection={activeSection}
@@ -96,12 +113,23 @@ const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
           enablePan={true}
           enableZoom={true}
           enableRotate={true}
-          minDistance={8}
-          maxDistance={300}
+          minDistance={isMobile ? 15 : 8}
+          maxDistance={isMobile ? 200 : 300}
           autoRotate={false}
           autoRotateSpeed={0.8}
           dampingFactor={0.05}
           enableDamping={true}
+          touches={{
+            ONE: isMobile ? 2 : 0, // Pan on mobile
+            TWO: isMobile ? 1 : 2, // Zoom on mobile
+          }}
+          mouseButtons={{
+            LEFT: 0,
+            MIDDLE: 1,
+            RIGHT: 2
+          }}
+          maxPolarAngle={Math.PI * 0.75}
+          minPolarAngle={Math.PI * 0.25}
         />
       </Canvas>
     </div>
