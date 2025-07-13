@@ -90,7 +90,7 @@ export const ThemeProvider = ({ children }) => {
     }
   };
 
-  const currentTheme = themes[theme];
+  const currentTheme = themes[theme] || themes.dark; // fallback to dark theme
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, currentTheme }}>
