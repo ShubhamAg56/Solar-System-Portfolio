@@ -7,19 +7,19 @@ const AsteroidBelt = () => {
   const ref = useRef();
   const ringRef = useRef();
   
-  // Generate asteroid belt between Mars and Jupiter
+  // Generate asteroid belt between Mars and Jupiter - more realistic and thinner
   const asteroidPositions = useMemo(() => {
-    const positions = new Float32Array(600 * 3);
-    const minRadius = 22;
-    const maxRadius = 26;
+    const positions = new Float32Array(300 * 3); // Reduced from 600 to 300
+    const minRadius = 23;
+    const maxRadius = 25; // Reduced from 26 to 25 for thinner belt
     
-    for (let i = 0; i < 600; i++) {
-      const angle = (i / 600) * Math.PI * 2;
+    for (let i = 0; i < 300; i++) {
+      const angle = (i / 300) * Math.PI * 2;
       const radius = minRadius + Math.random() * (maxRadius - minRadius);
-      const variation = (Math.random() - 0.5) * 2;
+      const variation = (Math.random() - 0.5) * 1; // Reduced variation from 2 to 1
       
       positions[i * 3] = Math.cos(angle) * radius + variation;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 2;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 1; // Reduced vertical spread from 2 to 1
       positions[i * 3 + 2] = Math.sin(angle) * radius + variation;
     }
     return positions;
