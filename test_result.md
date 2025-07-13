@@ -278,13 +278,22 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Backend API endpoints"
-    - "Theme system integration"
-    - "Mobile responsiveness"
-    - "3D graphics enhancements"
-  stuck_tasks: []
+    - "Dark/Light Mode Theme System"
+    - "Enhanced 3D Graphics - Asteroid Belt"
+    - "Enhanced 3D Graphics - Cosmic Dust"
+    - "Theme Toggle Component"
+  stuck_tasks:
+    - "Dark/Light Mode Theme System"
+    - "Enhanced 3D Graphics - Asteroid Belt"
+    - "Enhanced 3D Graphics - Cosmic Dust"
+    - "Theme Toggle Component"
+    - "Mobile Responsiveness - Navigation"
+    - "Mobile Responsiveness - Content Panel"
+    - "Mobile Responsiveness - 3D Scene"
+    - "Enhanced Planet Components"
+    - "Touch Gesture Support"
   test_all: false
-  test_priority: "high_first"
+  test_priority: "stuck_first"
 
 agent_communication:
   - agent: "main"
