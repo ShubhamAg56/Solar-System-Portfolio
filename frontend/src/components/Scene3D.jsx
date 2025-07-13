@@ -108,7 +108,7 @@ const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
         <AnimatedStars />
         <ParticleField />
         <CosmicDust />
-        {/*<AsteroidBelt />*/}
+        <AsteroidBelt />
         
         <SolarSystem
           activeSection={activeSection}
