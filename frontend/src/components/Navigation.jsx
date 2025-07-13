@@ -65,7 +65,7 @@ const Navigation = ({ activeSection, onNavigate }) => {
           color: textPrimary,
         }}
       >
-        <div className={`flex ${isMobile ? 'flex-wrap justify-center' : 'flex-row'} items-center ${isMobile ? 'gap-2' : 'space-x-4'}`}>
+        <div className={`flex ${isMobile ? 'flex-wrap justify-center' : 'flex-row justify-center'} items-center ${isMobile ? 'gap-2' : 'space-x-6'}`}>
           {navigationData.map((item) => (
             <motion.button
               key={item.section}
