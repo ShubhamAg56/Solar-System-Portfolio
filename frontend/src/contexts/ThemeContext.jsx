@@ -75,18 +75,18 @@ export const ThemeProvider = ({ children }) => {
       panelBg: 'rgba(0, 0, 0, 0.8)',
     },
     light: {
-      // Enhanced day/space theme with better aesthetics
-      background: 'linear-gradient(to bottom, #1e3c72, #2a5298, #87CEEB)',
-      cardBackground: 'rgba(255, 255, 255, 0.95)',
-      textPrimary: '#1a1a1a',
-      textSecondary: '#4a4a4a',
-      accent: '#2E86AB',
-      border: 'rgba(255, 255, 255, 0.8)',
+      // Stunning day/space theme with premium aesthetics
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)',
+      cardBackground: 'rgba(255, 255, 255, 0.98)',
+      textPrimary: '#2d3748',
+      textSecondary: '#4a5568',
+      accent: '#667eea',
+      border: 'rgba(255, 255, 255, 0.9)',
       starColor: '#FFD700',
       sunColor: '#FFD700',
       particleColor: '#FFFFFF',
-      navigationBg: 'rgba(255, 255, 255, 0.85)',
-      panelBg: 'rgba(255, 255, 255, 0.95)',
+      navigationBg: 'rgba(255, 255, 255, 0.95)',
+      panelBg: 'rgba(255, 255, 255, 0.98)',
     }
   };
 
