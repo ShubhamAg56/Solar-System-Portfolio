@@ -8,6 +8,7 @@ import * as THREE from 'three';
 const Planet = ({ planet, planetKey, isActive, onClick }) => {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
+  const { currentTheme } = useTheme();
   
   // Realistic planet materials with life-like textures
   const planetMaterial = useMemo(() => {
