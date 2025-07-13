@@ -166,17 +166,17 @@ const AppContent = () => {
             className={`fixed ${isMobile ? 'bottom-20 left-4 right-4' : 'bottom-8 left-8'} z-30`}
           >
             <div 
-              className="rounded-lg p-4 text-sm backdrop-blur-md"
+              className="rounded-lg p-6 text-base backdrop-blur-md"
               style={{
                 backgroundColor: currentTheme.cardBackground,
                 color: currentTheme.textPrimary,
                 border: `1px solid ${currentTheme.border}`,
               }}
             >
-              <p className="mb-2">🌌 <strong>Solar System Portfolio</strong></p>
-              <p>• {isMobile ? 'Tap' : 'Click'} planets to explore sections</p>
-              <p>• Use {isMobile ? 'touch' : 'mouse'} to orbit and zoom</p>
-              {isMobile && <p>• Swipe left/right to navigate sections</p>}
+              <p className="mb-3 text-lg">🌌 <strong>Solar System Portfolio</strong></p>
+              <p className="mb-2">• {isMobile ? 'Tap' : 'Click'} planets to explore sections</p>
+              <p className="mb-2">• Use {isMobile ? 'touch' : 'mouse'} to orbit and zoom</p>
+              {isMobile && <p className="mb-2">• Swipe left/right to navigate sections</p>}
               <p>• Press ESC to return to overview</p>
             </div>
           </motion.div>
