@@ -730,7 +730,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         if (planetMaterial.emissive) {
           planetMaterial.emissiveIntensity = planetKey === 'sun' ? 0.8 : 
                                             planetKey === 'venus' ? 0.2 :
-                                            planetKey === 'jupiter' ? 0.1 : 0.1;
+                                            planetKey === 'jupiter' ? 0.1 : 
+                                            planetKey === 'saturn' ? 0.15 : 0.1;
         }
       }
     }
