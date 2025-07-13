@@ -45,7 +45,7 @@ const CosmicDust = () => {
     <Points ref={ref} positions={dustPositions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color={currentTheme.particleColor}
+        color={particleColor}
         size={0.3}
         sizeAttenuation={true}
         depthWrite={false}
