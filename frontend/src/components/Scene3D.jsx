@@ -13,6 +13,9 @@ const AnimatedStars = () => {
   const starsRef = useRef();
   const { currentTheme } = useTheme();
   
+  // Default color fallback
+  const starColor = currentTheme?.starColor || '#ffffff';
+  
   useFrame((state) => {
     if (starsRef.current) {
       starsRef.current.rotation.x = state.clock.elapsedTime * 0.0008;
