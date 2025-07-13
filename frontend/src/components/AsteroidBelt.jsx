@@ -26,8 +26,8 @@ const AsteroidBelt = () => {
   }, []);
 
   const asteroidColors = useMemo(() => {
-    const colors = new Float32Array(600 * 3);
-    for (let i = 0; i < 600; i++) {
+    const colors = new Float32Array(300 * 3); // Reduced from 600 to 300
+    for (let i = 0; i < 300; i++) {
       const gray = 0.4 + Math.random() * 0.3;
       colors[i * 3] = gray;
       colors[i * 3 + 1] = gray * 0.8;
