@@ -8,6 +8,9 @@ const CosmicDust = () => {
   const ref = useRef();
   const { currentTheme } = useTheme();
   
+  // Default color fallback
+  const particleColor = currentTheme?.particleColor || '#E6E6FA';
+  
   // Generate cosmic dust particles
   const dustPositions = useMemo(() => {
     const positions = new Float32Array(2000 * 3);
