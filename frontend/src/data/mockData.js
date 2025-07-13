@@ -406,6 +406,6 @@ export const navigationData = [
   { name: "Experience", section: "experience", planet: "venus" },
   { name: "Projects", section: "projects", planet: "earth" },
   { name: "Education", section: "education", planet: "mars" },
-  { name: "Contact", section: "contact", planet: "jupiter" },
-  { name: "Playground", section: "playground", planet: "saturn" }
+  { name: "Contact", section: "contact", planet: "jupiter" }
+  // { name: "Playground", section: "playground", planet: "saturn" }
 ];
