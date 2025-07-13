@@ -101,8 +101,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
       venus: { r: 255, g: 198, b: 73 },
       earth: { r: 107, g: 147, b: 214 },
       mars: { r: 205, g: 92, b: 92 },
-      jupiter: { r: 210, g: 105, b: 30 },
-      saturn: { r: 250, g: 213, b: 165 }
+      jupiter: { r: 210, g: 105, b: 30 }
+      // saturn: { r: 250, g: 213, b: 165 }
     };
     
     const baseColor = baseColors[planetKey] || baseColors.earth;
