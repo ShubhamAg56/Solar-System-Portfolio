@@ -41,6 +41,11 @@ const CosmicDust = () => {
     }
   });
   
+  // Only render if we have valid colors array
+  if (!dustColors || dustColors.length === 0) {
+    return null;
+  }
+  
   return (
     <Points ref={ref} positions={dustPositions} stride={3} frustumCulled={false}>
       <PointMaterial
