@@ -96,12 +96,12 @@ const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
           near: 0.1,
           far: 2000
         }}
-        style={{ background: currentTheme.background }}
+        style={{ background: background }}
         gl={{ antialias: true, alpha: false }}
         performance={{ min: 0.8 }}
       >
         <ambientLight intensity={0.6} />
-        <pointLight position={[0, 0, 0]} intensity={4} color={currentTheme.sunColor} />
+        <pointLight position={[0, 0, 0]} intensity={4} color={sunColor} />
         <pointLight position={[100, 100, 100]} intensity={1.2} color="#ffffff" />
         <pointLight position={[-100, -100, -100]} intensity={0.5} color="#6B93D6" />
         
