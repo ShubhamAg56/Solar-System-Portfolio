@@ -11,6 +11,7 @@ import { useTheme } from '../contexts/ThemeContext';
 
 const AnimatedStars = () => {
   const starsRef = useRef();
+  const { currentTheme } = useTheme();
   
   useFrame((state) => {
     if (starsRef.current) {
@@ -19,7 +20,18 @@ const AnimatedStars = () => {
     }
   });
   
-  return <Stars ref={starsRef} radius={400} depth={60} count={3000} factor={5} saturation={0} fade />;
+  return (
+    <Stars 
+      ref={starsRef} 
+      radius={400} 
+      depth={60} 
+      count={3000} 
+      factor={5} 
+      saturation={0} 
+      fade 
+      color={currentTheme.starColor}
+    />
+  );
 };
 
 const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
