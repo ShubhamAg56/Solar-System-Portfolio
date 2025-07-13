@@ -56,13 +56,13 @@ const AsteroidBelt = () => {
         />
       </Points>
 
-      {/* Asteroid Ring Visual Guide */}
+      {/* Asteroid Ring Visual Guide - adjusted for thinner belt */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <ringGeometry args={[22, 26, 64]} />
+        <ringGeometry args={[23, 25, 64]} />
         <meshBasicMaterial 
           color="#8B7355" 
           transparent 
-          opacity={0.05}
+          opacity={0.03} // Reduced opacity for subtlety
           side={THREE.DoubleSide}
         />
       </mesh>
