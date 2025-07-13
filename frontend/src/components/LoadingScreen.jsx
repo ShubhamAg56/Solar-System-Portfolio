@@ -45,15 +45,15 @@ const LoadingScreen = ({ onLoadComplete }) => {
           <div className="w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mx-auto flex items-center justify-center text-6xl mb-4">
             🌟
           </div>
-          <h1 className="text-4xl font-bold mb-2" style={{ color: currentTheme.textPrimary }}>
+          <h1 className="text-4xl font-bold mb-2" style={{ color: textPrimary }}>
             Alex Cosmos
           </h1>
-          <p style={{ color: currentTheme.textSecondary }}>
+          <p style={{ color: textSecondary }}>
             Initializing Solar System...
           </p>
         </motion.div>
         
-        <div className="w-64 h-2 rounded-full overflow-hidden" style={{ backgroundColor: currentTheme.border }}>
+        <div className="w-64 h-2 rounded-full overflow-hidden" style={{ backgroundColor: border }}>
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${loadingProgress}%` }}
@@ -62,7 +62,7 @@ const LoadingScreen = ({ onLoadComplete }) => {
           />
         </div>
         
-        <p className="mt-4" style={{ color: currentTheme.textSecondary }}>
+        <p className="mt-4" style={{ color: textSecondary }}>
           {Math.round(loadingProgress)}%
         </p>
       </div>
