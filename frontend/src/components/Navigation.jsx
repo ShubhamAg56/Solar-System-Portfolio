@@ -54,7 +54,7 @@ const Navigation = ({ activeSection, onNavigate }) => {
       initial={containerVariants.initial}
       animate={containerVariants.animate}
       transition={containerVariants.transition}
-      className={`fixed ${isMobile ? 'bottom-4 left-1/2 transform -translate-x-1/2' : 'top-8 left-1/2 transform -translate-x-1/2'} z-50`}
+      className={`fixed ${isMobile ? 'bottom-4 left-1/2 transform -translate-x-1/2' : 'top-8 left-8'} z-50`}
     >
       <div 
         className={getBackgroundStyles()}
