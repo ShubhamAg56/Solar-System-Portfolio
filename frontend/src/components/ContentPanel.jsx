@@ -93,7 +93,7 @@ const ContentPanel = ({ activeSection, onClose }) => {
                 <div className="flex justify-center mb-4">
                   <div 
                     className="w-12 h-1 rounded-full"
-                    style={{ backgroundColor: currentTheme.border }}
+                    style={{ backgroundColor: border }}
                   />
                 </div>
               )}
