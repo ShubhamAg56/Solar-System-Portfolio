@@ -525,10 +525,11 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Fix Asteroid Positioning & Enhance Texture Quality"
   stuck_tasks: []
   test_all: false
-  test_priority: "completed"
+  test_priority: "critical_fix"
 
 agent_communication:
   - agent: "main"
