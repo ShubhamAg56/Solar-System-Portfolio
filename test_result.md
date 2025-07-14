@@ -241,7 +241,7 @@ frontend:
     status_history:
       - working: true
         agent: "main"
-        comment: "COMPLETED: Completely overhauled asteroid system with realistic 3D textures and enhanced rendering. Replaced simple point particles with individual 3D mesh objects featuring procedural texture generation with surface details (craters, scratches, mineral deposits), varied colors (8 different realistic asteroid colors), normal maps for surface bump mapping, irregular deformed geometry, individual rotation patterns, proper StandardMaterial with roughness/metalness/bump mapping, and environment mapping. Reduced count to 80 high-quality asteroids for better performance while dramatically improving visual quality. Asteroids now look like realistic space rocks with proper lighting and surface details."
+        comment: "COMPLETED: Completely overhauled asteroid system with realistic 3D textures and enhanced rendering. Replaced simple point particles with individual 3D mesh objects featuring procedural texture generation with surface details (craters, scratches, mineral deposits), varied colors (8 different realistic asteroid colors), normal maps for surface bump mapping, irregular deformed geometry, individual rotation patterns, proper StandardMaterial with roughness/metalness/bump mapping, and environment mapping. Reduced count to 80 high-quality asteroids for better performance while dramatically improving visual quality. Adjusted asteroid sizes to be more realistic (reduced from 0.2-0.6 to 0.05-0.2 units) for better proportions relative to planets. Asteroids now look like realistic space rocks with proper lighting and surface details at appropriate scale."
 
   - task: "Enhanced Skills Section Design"
     implemented: true
