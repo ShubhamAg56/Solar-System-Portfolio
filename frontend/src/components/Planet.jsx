@@ -9,6 +9,7 @@ import * as THREE from 'three';
 const Planet = ({ planet, planetKey, isActive, onClick }) => {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
+  const [planetRotation, setPlanetRotation] = useState(0);
   const { currentTheme } = useTheme();
   
   // Default color fallbacks
