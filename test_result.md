@@ -496,9 +496,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Remove Moon System Component"
-    - "Remove Orbit Traces Component"
-    - "Remove Time Controls Component"
+    - "Optimize Asteroid Belt for Increased Count"
   stuck_tasks: []
   test_all: false
   test_priority: "new_features"
