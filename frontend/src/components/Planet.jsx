@@ -771,6 +771,9 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
       // Enhanced planet rotation - faster spin
       meshRef.current.rotation.y += planetKey === 'sun' ? 0.015 : 0.02;
       
+      // Update planet rotation state for rings synchronization
+      setPlanetRotation(meshRef.current.rotation.y);
+      
       // Orbital motion for planets (not the sun) - increased speed
       if (planetKey !== 'sun') {
         const time = state.clock.elapsedTime;
