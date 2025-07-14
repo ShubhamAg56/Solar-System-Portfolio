@@ -20,9 +20,9 @@ const LoadingScreen = ({ onLoadComplete }) => {
           setTimeout(() => onLoadComplete(), 500);
           return 100;
         }
-        return prev + Math.random() * 10 + 5;
+        return prev + Math.random() * 20 + 10; // Faster loading
       });
-    }, 100);
+    }, 50); // Faster interval
     
     return () => clearInterval(timer);
   }, [onLoadComplete]);
