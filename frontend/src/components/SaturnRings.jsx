@@ -2,10 +2,11 @@ import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const SaturnRings = ({ position, scale }) => {
+const SaturnRings = ({ position, scale, planetRotation = 0 }) => {
   const ringRef = useRef();
   const innerRingRef = useRef();
   const outerRingRef = useRef();
+  const groupRef = useRef();
 
   // Create ring geometry and materials
   const ringMaterial = useMemo(() => {
@@ -76,8 +77,16 @@ const SaturnRings = ({ position, scale }) => {
   }, []);
 
   useFrame((state) => {
+    if (groupRef.current) {
+      // Update the group position to follow Saturn's orbital motion
+      groupRef.current.position.set(position[0], position[1], position[2]);
+      
+      // Rotate the entire ring system with Saturn's rotation
+      groupRef.current.rotation.y = planetRotation;
+    }
+    
     if (ringRef.current) {
-      // Slow rotation for the main rings
+      // Slow rotation for the main rings relative to Saturn
       ringRef.current.rotation.z += 0.002;
     }
     if (innerRingRef.current) {
@@ -91,7 +100,7 @@ const SaturnRings = ({ position, scale }) => {
   });
 
   return (
-    <group position={position}>
+    <group ref={groupRef}>
       {/* Main ring system (A and B rings) */}
       <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
         <ringGeometry args={[scale * 1.8, scale * 2.8, 64]} />
@@ -123,6 +132,7 @@ const SaturnRings = ({ position, scale }) => {
       </mesh>
     </group>
   );
+};
 };
 
 export default SaturnRings;
