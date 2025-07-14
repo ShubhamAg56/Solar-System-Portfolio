@@ -6,13 +6,141 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
   const cometRef = useRef();
   const tailRef = useRef();
   
-  // Create comet geometry and material
-  const cometGeometry = useMemo(() => new THREE.SphereGeometry(0.3, 16, 16), []);
-  const cometMaterial = useMemo(() => new THREE.MeshBasicMaterial({ 
-    color: color,
+  // Create enhanced comet texture
+  const cometTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256; // Increased texture resolution
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d');
+    
+    // Create radial gradient for comet core
+    const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+    gradient.addColorStop(0, '#FFFFFF');
+    gradient.addColorStop(0.3, color);
+    gradient.addColorStop(0.7, '#4169E1');
+    gradient.addColorStop(1, '#000080');
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 256, 256);
+    
+    // Add ice crystal patterns
+    for (let i = 0; i < 150; i++) {
+      const x = Math.random() * 256;
+      const y = Math.random() * 256;
+      const size = Math.random() * 8 + 2;
+      const brightness = Math.random() * 0.8 + 0.4;
+      
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${brightness})`;
+      ctx.fill();
+    }
+    
+    // Add surface cracks and details
+    for (let i = 0; i < 80; i++) {
+      const x1 = Math.random() * 256;
+      const y1 = Math.random() * 256;
+      const x2 = x1 + (Math.random() - 0.5) * 60;
+      const y2 = y1 + (Math.random() - 0.5) * 60;
+      
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.strokeStyle = `rgba(200, 200, 255, ${Math.random() * 0.6 + 0.3})`;
+      ctx.lineWidth = Math.random() * 3 + 1;
+      ctx.stroke();
+    }
+    
+    // Add sparkle effects
+    for (let i = 0; i < 100; i++) {
+      const x = Math.random() * 256;
+      const y = Math.random() * 256;
+      const size = Math.random() * 3 + 1;
+      
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.9 + 0.1})`;
+      ctx.fill();
+    }
+    
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearFilter;
+    
+    return texture;
+  }, [color]);
+  
+  // Create enhanced normal map for surface detail
+  const normalMap = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d');
+    
+    // Base normal (pointing up)
+    ctx.fillStyle = '#8080FF';
+    ctx.fillRect(0, 0, 256, 256);
+    
+    // Add surface normal variations for ice texture
+    for (let i = 0; i < 200; i++) {
+      const x = Math.random() * 256;
+      const y = Math.random() * 256;
+      const radius = Math.random() * 20 + 5;
+      
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      gradient.addColorStop(0, '#FF8080');
+      gradient.addColorStop(1, '#8080FF');
+      
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+    }
+    
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearFilter;
+    
+    return texture;
+  }, []);
+  
+  // Create enhanced comet geometry with more detail
+  const cometGeometry = useMemo(() => {
+    const geometry = new THREE.SphereGeometry(0.3, 32, 32); // Increased from 16,16 to 32,32
+    const positionAttribute = geometry.attributes.position;
+    
+    // Add surface irregularities for realistic comet shape
+    for (let i = 0; i < positionAttribute.count; i++) {
+      const vertex = new THREE.Vector3();
+      vertex.fromBufferAttribute(positionAttribute, i);
+      
+      // Add noise for irregular comet surface
+      const noise = (Math.random() - 0.5) * 0.15;
+      vertex.multiplyScalar(1 + noise);
+      
+      positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
+    }
+    
+    geometry.computeVertexNormals();
+    return geometry;
+  }, []);
+  
+  // Create enhanced material with better visual properties
+  const cometMaterial = useMemo(() => new THREE.MeshStandardMaterial({ 
+    map: cometTexture,
+    normalMap: normalMap,
+    emissive: new THREE.Color(color),
+    emissiveIntensity: 0.3,
     transparent: true,
-    opacity: 0.9
-  }), [color]);
+    opacity: 0.95,
+    roughness: 0.3,
+    metalness: 0.1,
+    envMapIntensity: 0.8
+  }), [color, cometTexture, normalMap]);
   
   // Create tail geometry
   const tailGeometry = useMemo(() => {
