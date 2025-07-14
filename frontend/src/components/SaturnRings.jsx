@@ -81,7 +81,8 @@ const SaturnRings = ({ position, scale, planetRotation = 0 }) => {
       // Update the group position to follow Saturn's orbital motion
       groupRef.current.position.set(position[0], position[1], position[2]);
       
-      // Rotate the entire ring system with Saturn's rotation
+      // Rotate the entire ring system with Saturn's axial tilt and rotation
+      groupRef.current.rotation.x = 26.7 * Math.PI / 180; // Saturn's axial tilt
       groupRef.current.rotation.y = planetRotation;
     }
     
