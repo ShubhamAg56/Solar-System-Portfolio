@@ -202,13 +202,13 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         break;
         
       case 'mercury':
-        // Ultra-enhanced crater system with hyper-realistic impact features
-        // Large primary impact basins
+        // Ultra-enhanced crater system with hyper-realistic impact features (optimized)
+        // Large primary impact basins (adaptive positioning)
         const majorCraters = [
-          {x: 1200, y: 800, size: 200, name: 'Caloris Basin'},
-          {x: 2800, y: 1500, size: 150, name: 'Beethoven Basin'},
-          {x: 800, y: 2200, size: 120, name: 'Tolstoj Basin'},
-          {x: 3200, y: 3000, size: 180, name: 'Rembrandt Basin'}
+          {x: resolution * 0.29, y: resolution * 0.20, size: resolution * 0.10, name: 'Caloris Basin'},
+          {x: resolution * 0.68, y: resolution * 0.37, size: resolution * 0.07, name: 'Beethoven Basin'},
+          {x: resolution * 0.20, y: resolution * 0.54, size: resolution * 0.06, name: 'Tolstoj Basin'},
+          {x: resolution * 0.78, y: resolution * 0.73, size: resolution * 0.09, name: 'Rembrandt Basin'}
         ];
         
         majorCraters.forEach(crater => {
@@ -227,7 +227,7 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           // Multi-ring structure
           for (let ring = 1; ring <= 3; ring++) {
             ctx.strokeStyle = `rgb(${Math.min(baseColor.r + 40 * ring, 255)}, ${Math.min(baseColor.g + 40 * ring, 255)}, ${Math.min(baseColor.b + 40 * ring, 255)})`;
-            ctx.lineWidth = 8 - ring * 2;
+            ctx.lineWidth = Math.max(1, (resolution / 512) * (8 - ring * 2));
             ctx.beginPath();
             ctx.arc(crater.x, crater.y, crater.size * (0.3 + ring * 0.2), 0, Math.PI * 2);
             ctx.stroke();
@@ -243,11 +243,12 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           ctx.fill();
         });
         
-        // Medium secondary craters (500+)
-        for (let i = 0; i < 500; i++) {
-          const x = Math.random() * 4096;
-          const y = Math.random() * 4096;
-          const size = Math.random() * 100 + 20;
+        // Medium secondary craters (adaptive count)
+        const mediumCraterCount = Math.floor(resolution / 4); // Adaptive count
+        for (let i = 0; i < mediumCraterCount; i++) {
+          const x = Math.random() * resolution;
+          const y = Math.random() * resolution;
+          const size = Math.random() * (resolution * 0.05) + (resolution * 0.01);
           
           const craterGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
           craterGradient.addColorStop(0, `rgb(${baseColor.r - 120}, ${baseColor.g - 120}, ${baseColor.b - 120})`);
@@ -261,7 +262,7 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           
           // Crater rim with detailed highlights
           ctx.strokeStyle = `rgb(${Math.min(baseColor.r + 100, 255)}, ${Math.min(baseColor.g + 100, 255)}, ${Math.min(baseColor.b + 100, 255)})`;
-          ctx.lineWidth = 6;
+          ctx.lineWidth = Math.max(1, (resolution / 512) * 6);
           ctx.beginPath();
           ctx.arc(x, y, size * 0.85, 0, Math.PI * 2);
           ctx.stroke();
@@ -279,7 +280,7 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           }
           
           // Central peak for larger craters
-          if (size > 50) {
+          if (size > resolution * 0.025) {
             ctx.fillStyle = `rgb(${Math.min(baseColor.r + 60, 255)}, ${Math.min(baseColor.g + 60, 255)}, ${Math.min(baseColor.b + 60, 255)})`;
             ctx.beginPath();
             ctx.arc(x, y, size * 0.12, 0, Math.PI * 2);
@@ -287,11 +288,12 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           }
         }
         
-        // Small microcraters and detailed surface texture (1000+)
-        for (let i = 0; i < 1000; i++) {
-          const x = Math.random() * 4096;
-          const y = Math.random() * 4096;
-          const size = Math.random() * 20 + 3;
+        // Small microcraters and detailed surface texture (adaptive count)
+        const microCraterCount = Math.floor(resolution / 2); // Adaptive count
+        for (let i = 0; i < microCraterCount; i++) {
+          const x = Math.random() * resolution;
+          const y = Math.random() * resolution;
+          const size = Math.random() * (resolution * 0.01) + (resolution * 0.0015);
           ctx.fillStyle = `rgba(${baseColor.r + Math.random() * 60 - 30}, ${baseColor.g + Math.random() * 60 - 30}, ${baseColor.b + Math.random() * 60 - 30}, 0.8)`;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
@@ -300,13 +302,13 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         
         // Scarps and ridges (Mercury's unique geological features)
         for (let i = 0; i < 20; i++) {
-          const startX = Math.random() * 4096;
-          const startY = Math.random() * 4096;
-          const length = Math.random() * 1000 + 500;
+          const startX = Math.random() * resolution;
+          const startY = Math.random() * resolution;
+          const length = Math.random() * (resolution * 0.25) + (resolution * 0.125);
           const angle = Math.random() * Math.PI * 2;
           
           ctx.strokeStyle = `rgb(${baseColor.r + 40}, ${baseColor.g + 40}, ${baseColor.b + 40})`;
-          ctx.lineWidth = 12;
+          ctx.lineWidth = Math.max(1, (resolution / 512) * 12);
           ctx.beginPath();
           ctx.moveTo(startX, startY);
           ctx.lineTo(startX + Math.cos(angle) * length, startY + Math.sin(angle) * length);
@@ -314,7 +316,7 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           
           // Shadow side of scarp
           ctx.strokeStyle = `rgb(${baseColor.r - 40}, ${baseColor.g - 40}, ${baseColor.b - 40})`;
-          ctx.lineWidth = 8;
+          ctx.lineWidth = Math.max(1, (resolution / 512) * 8);
           ctx.beginPath();
           ctx.moveTo(startX + Math.cos(angle + Math.PI/2) * 6, startY + Math.sin(angle + Math.PI/2) * 6);
           ctx.lineTo(startX + Math.cos(angle) * length + Math.cos(angle + Math.PI/2) * 6, startY + Math.sin(angle) * length + Math.sin(angle + Math.PI/2) * 6);
