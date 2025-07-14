@@ -218,104 +218,170 @@ export const portfolioData = {
     {
       id: "demo-1",
       title: "Particle Galaxy Simulator",
-      description: "Interactive 3D galaxy formation with particle physics. Watch as thousands of particles form spiral arms and interact gravitationally.",
-      technologies: ["Three.js", "WebGL", "Particle Systems", "Physics"],
+      description: "Interactive 3D galaxy formation with realistic particle physics. Watch as thousands of particles form spiral arms and interact gravitationally with N-body simulation.",
+      technologies: ["Three.js", "WebGL", "Particle Systems", "Physics", "N-body Simulation"],
       category: "Physics Simulation",
       featured: true,
       demo: "https://galaxy-sim.demo.com",
       github: "https://github.com/alexcosmos/galaxy-simulator",
       highlights: [
-        "Real-time particle physics",
-        "GPU-accelerated rendering",
-        "Interactive camera controls",
-        "Customizable parameters"
+        "Real-time N-body gravitational physics",
+        "GPU-accelerated particle rendering (100k+ particles)",
+        "Interactive camera controls with cinematic modes",
+        "Customizable galaxy parameters and initial conditions",
+        "Dark matter visualization and halos",
+        "Time-lapse evolution controls"
       ],
-      type: "interactive"
+      type: "interactive",
+      complexity: "Advanced",
+      performance: "GPU Required"
     },
     {
       id: "demo-2", 
       title: "Procedural Planet Generator",
-      description: "Generate infinite unique planets with realistic terrain, atmospheres, and weather systems using noise functions and shaders.",
-      technologies: ["Three.js", "WebGL Shaders", "Noise Functions", "Procedural Generation"],
+      description: "Generate infinite unique planets with realistic terrain, atmospheres, weather systems, and biomes using advanced noise functions and atmospheric scattering.",
+      technologies: ["Three.js", "WebGL Shaders", "Noise Functions", "Procedural Generation", "Atmospheric Scattering"],
       category: "Procedural Graphics",
       featured: true,
       demo: "https://planet-gen.demo.com",
       github: "https://github.com/alexcosmos/planet-generator",
       highlights: [
-        "Procedural terrain generation",
-        "Atmospheric scattering",
-        "Real-time weather effects",
-        "Custom shader materials"
+        "Multi-octave noise terrain generation",
+        "Realistic atmospheric scattering (Rayleigh & Mie)",
+        "Dynamic weather and cloud systems",
+        "Procedural biome distribution",
+        "Custom vertex and fragment shaders",
+        "Real-time LOD (Level of Detail) system"
       ],
-      type: "interactive"
+      type: "interactive",
+      complexity: "Expert",
+      performance: "High-end GPU"
     },
     {
       id: "demo-3",
       title: "Crystal Cave Explorer",
-      description: "Navigate through a mystical crystal cave with dynamic lighting, reflections, and particle effects.",
-      technologies: ["Three.js", "WebGL", "HDR Lighting", "Post-processing"],
+      description: "Navigate through a mystical crystal cave with dynamic lighting, real-time reflections, volumetric fog, and particle effects in a fully immersive 3D environment.",
+      technologies: ["Three.js", "WebGL", "HDR Lighting", "Post-processing", "Volumetric Rendering"],
       category: "Interactive Experience",
       featured: true,
       demo: "https://crystal-cave.demo.com",
       github: "https://github.com/alexcosmos/crystal-cave",
       highlights: [
-        "Dynamic lighting system",
-        "Real-time reflections",
-        "Particle effects",
-        "First-person controls"
+        "Dynamic HDR lighting with multiple light sources",
+        "Real-time reflections and refractions",
+        "Volumetric fog and god-ray effects",
+        "Procedural crystal growth animations",
+        "First-person exploration controls",
+        "Spatial audio integration"
       ],
-      type: "experience"
+      type: "experience",
+      complexity: "Advanced",
+      performance: "Modern GPU"
     },
     {
       id: "demo-4",
       title: "Morphing Geometry Lab",
-      description: "Experiment with vertex shaders and geometry morphing. Watch as 3D shapes transform and animate in real-time.",
-      technologies: ["Three.js", "Vertex Shaders", "Geometry", "Animation"],
+      description: "Experiment with advanced vertex shaders and geometry morphing. Watch as 3D shapes transform and animate using mathematical functions and noise algorithms.",
+      technologies: ["Three.js", "Vertex Shaders", "GLSL", "Geometry", "Mathematical Visualization"],
       category: "Shader Art",
-      featured: false,
+      featured: true,
       demo: "https://morph-lab.demo.com", 
       github: "https://github.com/alexcosmos/morphing-lab",
       highlights: [
-        "Vertex shader animations",
-        "Geometry morphing",
-        "Real-time parameter control",
-        "Mathematical visualizations"
+        "Real-time vertex shader transformations",
+        "Interactive parameter control panel",
+        "Mathematical function visualizations",
+        "Noise-based organic deformations",
+        "Multi-geometry morphing sequences",
+        "Export animations as video/GIF"
       ],
-      type: "experiment"
+      type: "experiment",
+      complexity: "Intermediate",
+      performance: "Standard GPU"
     },
     {
       id: "demo-5",
       title: "Audio Visualizer 3D",
-      description: "Music visualization with 3D graphics that react to audio frequency, amplitude, and beat detection.",
-      technologies: ["Three.js", "Web Audio API", "FFT Analysis", "Real-time Graphics"],
+      description: "Music visualization with 3D graphics that react to audio frequency, amplitude, and beat detection. Features multiple visualization modes and real-time audio analysis.",
+      technologies: ["Three.js", "Web Audio API", "FFT Analysis", "Real-time Graphics", "Beat Detection"],
       category: "Audio Visualization",
       featured: false,
       demo: "https://audio-viz.demo.com",
       github: "https://github.com/alexcosmos/audio-visualizer",
       highlights: [
-        "Real-time audio analysis",
-        "Frequency-based animations",
-        "Beat detection",
-        "Multiple visualization modes"
+        "Real-time FFT audio analysis (2048 bins)",
+        "Multiple visualization modes (waveform, spectrum, 3D)",
+        "Beat detection and rhythm synchronization",
+        "Particle systems reactive to music",
+        "Custom audio filters and effects",
+        "Microphone input and file upload support"
       ],
-      type: "interactive"
+      type: "interactive",
+      complexity: "Advanced",
+      performance: "Standard GPU"
     },
     {
       id: "demo-6",
       title: "Fluid Simulation",
-      description: "GPU-accelerated fluid dynamics simulation with particle-based rendering and realistic physics.",
-      technologies: ["Three.js", "WebGL Compute", "Fluid Dynamics", "Particle Systems"],
+      description: "GPU-accelerated fluid dynamics simulation with particle-based rendering, realistic physics, and interactive controls for creating beautiful fluid behaviors.",
+      technologies: ["Three.js", "WebGL Compute", "Fluid Dynamics", "Particle Systems", "Physics"],
       category: "Physics Simulation",
       featured: false,
       demo: "https://fluid-sim.demo.com",
       github: "https://github.com/alexcosmos/fluid-simulation",
       highlights: [
-        "GPU-accelerated physics",
-        "Particle-based rendering",
-        "Real-time interaction",
-        "Realistic fluid behavior"
+        "GPU-accelerated SPH (Smoothed Particle Hydrodynamics)",
+        "Real-time fluid-obstacle interactions",
+        "Viscosity and surface tension effects",
+        "Multiple fluid types (water, honey, mercury)",
+        "Interactive force application tools",
+        "High-resolution particle rendering (50k+ particles)"
       ],
-      type: "simulation"
+      type: "simulation",
+      complexity: "Expert",
+      performance: "High-end GPU"
+    },
+    {
+      id: "demo-7",
+      title: "Neural Network Visualizer",
+      description: "Educational 3D visualization of neural networks showing data flow, learning processes, and network topology changes in real-time during training.",
+      technologies: ["Three.js", "TensorFlow.js", "Machine Learning", "Data Visualization", "WebGL"],
+      category: "AI Visualization",
+      featured: false,
+      demo: "https://neural-viz.demo.com",
+      github: "https://github.com/alexcosmos/neural-visualizer",
+      highlights: [
+        "3D neural network topology visualization",
+        "Real-time training data flow animation",
+        "Interactive layer and neuron inspection",
+        "Multiple network architectures (CNN, RNN, Transformer)",
+        "Training metrics dashboard",
+        "Custom dataset upload and training"
+      ],
+      type: "educational",
+      complexity: "Advanced",
+      performance: "Standard GPU"
+    },
+    {
+      id: "demo-8",
+      title: "Quantum Physics Simulator",
+      description: "Visualize quantum mechanical phenomena including wave functions, particle interactions, and quantum field effects in an interactive 3D environment.",
+      technologies: ["Three.js", "WebGL Shaders", "Physics Simulation", "Mathematical Visualization", "Quantum Mechanics"],
+      category: "Scientific Simulation",
+      featured: false,
+      demo: "https://quantum-sim.demo.com",
+      github: "https://github.com/alexcosmos/quantum-simulator",
+      highlights: [
+        "Wave function probability density visualization",
+        "Quantum tunneling effect demonstrations",
+        "Particle-wave duality experiments",
+        "Interactive Schrödinger equation solver",
+        "Quantum entanglement visualizations",
+        "Educational quantum mechanics modules"
+      ],
+      type: "educational",
+      complexity: "Expert",
+      performance: "High-end GPU"
     }
   ],
   
