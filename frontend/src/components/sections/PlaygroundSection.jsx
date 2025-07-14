@@ -26,6 +26,18 @@ const PlaygroundSection = () => {
     }
   };
 
+  const getCategoryColor = (category) => {
+    const colors = {
+      'Physics Simulation': '#FF6B6B',
+      'Procedural Graphics': '#4ECDC4',
+      'Interactive Experience': '#45B7D1',
+      'Shader Art': '#F39C12',
+      'Audio Visualization': '#9B59B6',
+      'AI Visualization': '#1ABC9C'
+    };
+    return colors[category] || '#6C757D';
+  };
+
   const getComplexityColor = (complexity) => {
     const colors = {
       'Beginner': '#4CAF50',
