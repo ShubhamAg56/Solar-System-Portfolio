@@ -210,6 +210,42 @@ backend:
         comment: "COMPLETED: Dramatically improved Sun texture with spectacular realism. Added multi-layered solar granulation, enhanced solar flares with radial extensions, realistic sunspots with umbra/penumbra regions, solar prominences with magnetic loop effects, corona effects, surface convection cells with hexagonal patterns, and enhanced material properties with increased emissive intensity (1.2). Added 4-layer corona glow effect for stunning visual impact. Sun now looks truly spectacular and realistic."
 
 frontend:
+  - task: "Remove Moon System Component"
+    implemented: true
+    working: true
+    file: "components/Scene3D.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Successfully removed MoonSystem component and all moon-related functionality from the 3D Solar System. Removed MoonSystem imports, removed moon rendering from planet loop, and deleted MoonSystem.jsx file. Application now displays planets without moons."
+
+  - task: "Remove Orbit Traces Component"
+    implemented: true
+    working: true
+    file: "components/Scene3D.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Successfully removed OrbitTraces component and all orbit trace functionality from the 3D Solar System. Removed OrbitTraces imports, removed orbit traces rendering, removed showTraces state and toggle button, and deleted OrbitTraces.jsx file. Application now displays planets without visible orbit paths."
+
+  - task: "Remove Time Controls Component"
+    implemented: true
+    working: true
+    file: "components/Scene3D.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "COMPLETED: Successfully removed TimeControls component and all time/speed control functionality from the 3D Solar System. Removed TimeControls imports, removed all time-related state variables and functions, removed TimeAwareCanvas wrapper, removed TimeControls rendering, and deleted TimeControls.jsx file. Application now runs with default animation speeds without user controls."
+
   - task: "Planet Info Box Click-to-Remove Functionality"
     implemented: true
     working: true
