@@ -16,10 +16,11 @@ const ParticleField = () => {
     const isMobile = window.innerWidth <= 768;
     const isLowEnd = navigator.hardwareConcurrency <= 4;
     
+    // Optimized particle counts for faster initial loading
     if (isMobile || isLowEnd) {
-      setParticleCount(500);
+      setParticleCount(300); // Reduced from 500
     } else {
-      setParticleCount(1000);
+      setParticleCount(600); // Reduced from 1000
     }
   }, []);
   
