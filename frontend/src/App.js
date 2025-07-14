@@ -44,7 +44,7 @@ const AppContent = () => {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyPress = (e) => {
-      const sections = ['about', 'skills', 'experience', 'projects', 'education', 'contact'];
+      const sections = ['resume', 'about', 'skills', 'experience', 'projects', 'education', 'contact', 'playground'];
       const currentIndex = sections.indexOf(activeSection);
       
       if (e.key === 'ArrowRight' && currentIndex < sections.length - 1) {
