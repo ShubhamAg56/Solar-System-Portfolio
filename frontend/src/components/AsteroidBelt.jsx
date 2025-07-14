@@ -5,56 +5,84 @@ import * as THREE from 'three';
 const Asteroid = ({ position, size, rotationSpeed, color }) => {
   const meshRef = useRef();
   
-  // Create optimized procedural asteroid texture
+  // Create enhanced procedural asteroid texture with much better quality
   const asteroidTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 64; // Reduced from 128 for better performance
-    canvas.height = 64;
+    canvas.width = 128; // Increased back to 128 for better texture quality
+    canvas.height = 128;
     const ctx = canvas.getContext('2d');
     
-    // Base color
-    ctx.fillStyle = color;
-    ctx.fillRect(0, 0, 64, 64);
+    // Base color with subtle gradient
+    const baseGradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    baseGradient.addColorStop(0, color);
+    baseGradient.addColorStop(0.6, color);
+    baseGradient.addColorStop(1, '#000000');
     
-    // Add surface details (reduced count for performance)
-    for (let i = 0; i < 80; i++) { // Reduced from 200
-      const x = Math.random() * 64;
-      const y = Math.random() * 64;
-      const radius = Math.random() * 4 + 1; // Reduced from 8 + 2
-      const darkness = Math.random() * 0.5 + 0.2;
+    ctx.fillStyle = baseGradient;
+    ctx.fillRect(0, 0, 128, 128);
+    
+    // Add realistic crater formations
+    for (let i = 0; i < 120; i++) { // Increased from 80
+      const x = Math.random() * 128;
+      const y = Math.random() * 128;
+      const radius = Math.random() * 12 + 3; // Increased from 4 + 1
+      const depth = Math.random() * 0.8 + 0.3;
+      
+      // Create crater with rim
+      const craterGradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      craterGradient.addColorStop(0, `rgba(0, 0, 0, ${depth})`);
+      craterGradient.addColorStop(0.7, `rgba(0, 0, 0, ${depth * 0.5})`);
+      craterGradient.addColorStop(0.9, `rgba(255, 255, 255, ${depth * 0.3})`);
+      craterGradient.addColorStop(1, `rgba(0, 0, 0, 0)`);
       
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0, 0, 0, ${darkness})`;
+      ctx.fillStyle = craterGradient;
       ctx.fill();
     }
     
-    // Add lighter spots (mineral deposits) - reduced count
-    for (let i = 0; i < 20; i++) { // Reduced from 50
-      const x = Math.random() * 64;
-      const y = Math.random() * 64;
-      const radius = Math.random() * 2 + 1; // Reduced from 4 + 1
-      const brightness = Math.random() * 0.3 + 0.2;
+    // Add mineral deposits with varied colors
+    const mineralColors = ['#FFD700', '#C0C0C0', '#B87333', '#8B4513', '#FF4500'];
+    for (let i = 0; i < 40; i++) { // Increased from 20
+      const x = Math.random() * 128;
+      const y = Math.random() * 128;
+      const radius = Math.random() * 6 + 2; // Increased from 2 + 1
+      const brightness = Math.random() * 0.6 + 0.4;
+      const mineralColor = mineralColors[Math.floor(Math.random() * mineralColors.length)];
       
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${brightness})`;
+      ctx.fillStyle = `${mineralColor}${Math.floor(brightness * 255).toString(16).padStart(2, '0')}`;
       ctx.fill();
     }
     
-    // Add scratches and lines - reduced count
-    for (let i = 0; i < 10; i++) { // Reduced from 20
-      const x1 = Math.random() * 64;
-      const y1 = Math.random() * 64;
-      const x2 = x1 + (Math.random() - 0.5) * 20; // Reduced from 40
-      const y2 = y1 + (Math.random() - 0.5) * 20;
+    // Add realistic surface scratches and fractures
+    for (let i = 0; i < 25; i++) { // Increased from 10
+      const x1 = Math.random() * 128;
+      const y1 = Math.random() * 128;
+      const x2 = x1 + (Math.random() - 0.5) * 40; // Increased from 20
+      const y2 = y1 + (Math.random() - 0.5) * 40;
+      const intensity = Math.random() * 0.7 + 0.3;
       
       ctx.beginPath();
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
-      ctx.strokeStyle = `rgba(0, 0, 0, ${Math.random() * 0.4 + 0.2})`;
-      ctx.lineWidth = Math.random() * 1.5 + 0.5; // Reduced from 2 + 1
+      ctx.strokeStyle = `rgba(0, 0, 0, ${intensity})`;
+      ctx.lineWidth = Math.random() * 2.5 + 0.5; // Increased from 1.5 + 0.5
       ctx.stroke();
+    }
+    
+    // Add surface dust and weathering effects
+    for (let i = 0; i < 200; i++) {
+      const x = Math.random() * 128;
+      const y = Math.random() * 128;
+      const size = Math.random() * 2 + 0.5;
+      const opacity = Math.random() * 0.4 + 0.1;
+      
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(100, 100, 100, ${opacity})`;
+      ctx.fill();
     }
     
     const texture = new THREE.CanvasTexture(canvas);
