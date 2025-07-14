@@ -1198,24 +1198,46 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           </mesh>
         )}
         
-        {/* Enhanced sun corona effect */}
+        {/* Enhanced sun corona effect with multiple layers */}
         {planetKey === 'sun' && (
           <>
-            <mesh scale={1.2}>
+            {/* Inner corona */}
+            <mesh scale={1.15}>
               <sphereGeometry args={[1, 32, 32]} />
               <meshBasicMaterial
                 color="#FFD700"
                 transparent
-                opacity={0.3}
+                opacity={0.4}
                 side={THREE.BackSide}
               />
             </mesh>
-            <mesh scale={1.4}>
+            {/* Middle corona */}
+            <mesh scale={1.3}>
+              <sphereGeometry args={[1, 24, 24]} />
+              <meshBasicMaterial
+                color="#FF8C00"
+                transparent
+                opacity={0.25}
+                side={THREE.BackSide}
+              />
+            </mesh>
+            {/* Outer corona */}
+            <mesh scale={1.5}>
               <sphereGeometry args={[1, 16, 16]} />
               <meshBasicMaterial
                 color="#FF4500"
                 transparent
-                opacity={0.1}
+                opacity={0.15}
+                side={THREE.BackSide}
+              />
+            </mesh>
+            {/* Far corona */}
+            <mesh scale={1.8}>
+              <sphereGeometry args={[1, 12, 12]} />
+              <meshBasicMaterial
+                color="#FF6347"
+                transparent
+                opacity={0.08}
                 side={THREE.BackSide}
               />
             </mesh>
