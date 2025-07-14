@@ -101,7 +101,7 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 
-user_problem_statement: "Make the asteroids closer to each other and increase the texture of comets in the 3D Solar System Portfolio application"
+user_problem_statement: "Fix asteroids passing through the sun and improve asteroid texture quality in the 3D Solar System Portfolio application"
 
 backend:
   - task: "Enhanced Asteroid Texture and Rendering"
