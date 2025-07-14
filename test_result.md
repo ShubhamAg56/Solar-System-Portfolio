@@ -101,7 +101,7 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 
-user_problem_statement: "Improvise the 3D Solar System Portfolio application with frontend enhancements including enhanced 3D graphics, interactive elements, mobile responsiveness, performance optimizations, and dark/light mode theme system."
+user_problem_statement: "Improve the planets texture and slow down the planets animations and make the loading of the site less heavy"
 
 backend:
   - task: "Basic API endpoints"
