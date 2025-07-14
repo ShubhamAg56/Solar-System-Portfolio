@@ -89,11 +89,14 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     return materials[planetKey] || materials.earth;
   }, [planetKey]);
   
-  // Create enhanced realistic planet surface textures with ultra-high detail
+  // Create enhanced realistic planet surface textures with optimized high quality
   const surfaceTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 4096; // Ultra high resolution for exceptional quality
-    canvas.height = 4096;
+    // Optimized resolution for better performance while maintaining quality
+    const isMobile = window.innerWidth <= 768;
+    const resolution = isMobile ? 1024 : 2048; // Adaptive resolution
+    canvas.width = resolution;
+    canvas.height = resolution;
     const ctx = canvas.getContext('2d');
     
     // Create base color with enhanced gradient
