@@ -1197,7 +1197,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
                            planetKey === 'earth' ? 0.006 :    // 30% of 0.02
                            planetKey === 'mars' ? 0.0057 :    // 30% of 0.019
                            planetKey === 'jupiter' ? 0.0135 : // 30% of 0.045, Jupiter rotates fast
-                           planetKey === 'saturn' ? 0.0114 : 0.006; // 30% of 0.038
+                           planetKey === 'saturn' ? 0.0114 : 
+                           planetKey === 'uranus' ? 0.0105 : 0.006; // 30% of 0.035
       
       meshRef.current.rotation.y += rotationSpeed;
       
