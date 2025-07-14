@@ -888,14 +888,14 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
       meshRef.current.rotation.x = tilt.x;
       meshRef.current.rotation.z = tilt.z;
       
-      // Enhanced planet rotation with realistic speeds and directions
-      const rotationSpeed = planetKey === 'sun' ? 0.015 : 
-                           planetKey === 'venus' ? -0.008 : // Venus rotates backwards
-                           planetKey === 'mercury' ? 0.04 : // Mercury rotates slowly
-                           planetKey === 'earth' ? 0.02 :
-                           planetKey === 'mars' ? 0.019 :
-                           planetKey === 'jupiter' ? 0.045 : // Jupiter rotates fast
-                           planetKey === 'saturn' ? 0.038 : 0.02;
+      // Enhanced planet rotation with realistic speeds and directions (70% slower)
+      const rotationSpeed = planetKey === 'sun' ? 0.0045 : // 30% of 0.015
+                           planetKey === 'venus' ? -0.0024 : // 30% of -0.008, Venus rotates backwards
+                           planetKey === 'mercury' ? 0.012 : // 30% of 0.04, Mercury rotates slowly
+                           planetKey === 'earth' ? 0.006 :    // 30% of 0.02
+                           planetKey === 'mars' ? 0.0057 :    // 30% of 0.019
+                           planetKey === 'jupiter' ? 0.0135 : // 30% of 0.045, Jupiter rotates fast
+                           planetKey === 'saturn' ? 0.0114 : 0.006; // 30% of 0.038
       
       meshRef.current.rotation.y += rotationSpeed;
       
