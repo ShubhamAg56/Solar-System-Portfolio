@@ -123,7 +123,6 @@ const AppContent = () => {
             <Scene3D
               activeSection={activeSection}
               onPlanetClick={handlePlanetClick}
-              cameraPosition={cameraPosition}
             />
           </div>
 
