@@ -1180,7 +1180,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         earth: { x: 23.4 * Math.PI / 180, z: 0 },      // 23.4° tilt
         mars: { x: 25.2 * Math.PI / 180, z: 0 },       // 25.2° tilt
         jupiter: { x: 3.1 * Math.PI / 180, z: 0 },     // 3.1° tilt
-        saturn: { x: 26.7 * Math.PI / 180, z: 0 }      // 26.7° tilt
+        saturn: { x: 26.7 * Math.PI / 180, z: 0 },    // 26.7° tilt
+        uranus: { x: 97.8 * Math.PI / 180, z: 0 }     // 97.8° extreme tilt (sideways)
       };
       
       const tilt = axialTilts[planetKey] || axialTilts.earth;
