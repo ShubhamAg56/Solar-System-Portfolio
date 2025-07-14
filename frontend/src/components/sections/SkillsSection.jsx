@@ -166,37 +166,24 @@ const SkillsSection = () => {
 
                       {/* Progress Bar */}
                       <div className="relative mb-4">
-                        <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: `${skill.level}%` }}
-                            transition={{ duration: 1.5, delay: (categoryIndex * 0.1) + (skillIndex * 0.08), ease: "easeOut" }}
-                            className={`h-3 rounded-full bg-gradient-to-r ${getSkillColor(skill.level)} shadow-lg relative`}
-                          >
-                            <div className="absolute inset-0 bg-white opacity-20 rounded-full"></div>
-                          </motion.div>
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="opacity-60" style={{ color: currentTheme.textSecondary }}>
+                            Proficiency Level
+                          </span>
+                          <div className="flex items-center space-x-1">
+                            {[...Array(5)].map((_, i) => (
+                              <div
+                                key={i}
+                                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                  i < Math.floor(skill.level / 20) 
+                                    ? `bg-gradient-to-r ${getSkillColor(skill.level)}` 
+                                    : 'bg-gray-300'
+                                }`}
+                              />
+                            ))}
+                          </div>
                         </div>
-                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full shadow-lg"></div>
-                      </div>
-
-                      {/* Skill Level Indicator */}
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="opacity-60" style={{ color: currentTheme.textSecondary }}>
-                          Proficiency Level
-                        </span>
-                        <div className="flex items-center space-x-1">
-                          {[...Array(5)].map((_, i) => (
-                            <div
-                              key={i}
-                              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                                i < Math.floor(skill.level / 20) 
-                                  ? `bg-gradient-to-r ${getSkillColor(skill.level)}` 
-                                  : 'bg-gray-300'
-                              }`}
-                            />
-                          ))}
-                        </div>
-                      </div>
+                      }
                     </div>
 
                     {/* Hover Effect */}
