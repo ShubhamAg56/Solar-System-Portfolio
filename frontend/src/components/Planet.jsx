@@ -6,6 +6,9 @@ import { useTheme } from '../contexts/ThemeContext';
 import SaturnRings from './SaturnRings';
 import * as THREE from 'three';
 
+// Texture cache for improved performance
+const textureCache = new Map();
+
 const Planet = ({ planet, planetKey, isActive, onClick }) => {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
