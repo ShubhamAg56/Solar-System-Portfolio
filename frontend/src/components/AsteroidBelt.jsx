@@ -187,7 +187,7 @@ const AsteroidBelt = () => {
       
       asteroidData.push({
         position: [x, y, z],
-        size: Math.random() * 0.4 + 0.2,
+        size: Math.random() * 0.15 + 0.05, // Reduced from 0.4 + 0.2 to 0.15 + 0.05 (now 0.05 to 0.2)
         rotationSpeed: (Math.random() - 0.5) * 0.02,
         color: asteroidColors[Math.floor(Math.random() * asteroidColors.length)],
         key: i
