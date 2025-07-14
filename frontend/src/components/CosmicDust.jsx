@@ -11,10 +11,12 @@ const CosmicDust = () => {
   // Default color fallback
   const particleColor = currentTheme?.particleColor || '#E6E6FA';
   
-  // Generate cosmic dust particles
+  // Generate cosmic dust particles (optimized for faster loading)
   const dustPositions = useMemo(() => {
-    const positions = new Float32Array(2000 * 3);
-    for (let i = 0; i < 2000; i++) {
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 800 : 1200; // Reduced from 2000
+    const positions = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 600;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 200;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 600;
@@ -23,8 +25,10 @@ const CosmicDust = () => {
   }, []);
 
   const dustColors = useMemo(() => {
-    const colors = new Float32Array(2000 * 3);
-    for (let i = 0; i < 2000; i++) {
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 800 : 1200; // Reduced from 2000
+    const colors = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i++) {
       const brightness = Math.random() * 0.5 + 0.3;
       colors[i * 3] = brightness;
       colors[i * 3 + 1] = brightness * 0.9;
