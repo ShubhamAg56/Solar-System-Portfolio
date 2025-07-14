@@ -166,57 +166,147 @@ const SolarSystem = ({ activeSection, onPlanetClick }) => {
   );
 };
 
-const Scene3D = ({ activeSection, onPlanetClick }) => {
-  const [isMobile, setIsMobile] = useState(false);
+const Scene3D = ({ activeSection, onPlanetClick, isMobile }) => {
   const { currentTheme } = useTheme();
   
+  // Time controls state
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [timeSpeed, setTimeSpeed] = useState(1);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [showTraces, setShowTraces] = useState(true);
+  
   // Default color fallbacks
-  const sunColor = currentTheme?.sunColor || '#FFA500';
-  const background = currentTheme?.background || 'linear-gradient(to bottom, #000428, #004e92)';
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
+  const backgroundColor = currentTheme?.backgroundColor || '#000011';
+  const ambientColor = currentTheme?.ambientLight || '#404040';
+  const directionalColor = currentTheme?.directionalLight || '#ffffff';
+  
+  const handleReset = () => {
+    setElapsedTime(0);
+    setIsPlaying(true);
+    setTimeSpeed(1);
+  };
+  
+  const TimeAwareCanvas = ({ children }) => {
+    useFrame((state, delta) => {
+      if (isPlaying) {
+        // Update elapsed time based on speed
+        setElapsedTime(prev => prev + delta * timeSpeed);
+        
+        // Override the clock time for consistent speed control
+        state.clock.elapsedTime = elapsedTime;
+      }
+    });
+    return <>{children}</>;
+  };
+  
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-screen bg-black relative">
       <Canvas
-        camera={{
-          position: [0, 10, 40],
-          fov: isMobile ? 70 : 60,
-          near: 0.1,
-          far: 2000
+        camera={{ position: [0, 10, 40], fov: 60 }}
+        gl={{ 
+          antialias: true, 
+          alpha: true,
+          powerPreference: "high-performance"
         }}
-        style={{ background: background }}
-        gl={{ antialias: true, alpha: false }}
-        performance={{ min: 0.8 }}
+        style={{ background: backgroundColor }}
       >
-        <ambientLight intensity={0.6} />
-        <pointLight position={[0, 0, 0]} intensity={4} color={sunColor} />
-        <pointLight position={[100, 100, 100]} intensity={1.2} color="#ffffff" />
-        <pointLight position={[-100, -100, -100]} intensity={0.5} color="#6B93D6" />
-        
-        <AnimatedStars />
-        <ParticleField />
-        <CosmicDust />
-        <AsteroidBelt />
-        
-        <SolarSystem
-          activeSection={activeSection}
-          onPlanetClick={onPlanetClick}
-        />
-        
-        <CameraController 
-          activeSection={activeSection}
-          isMobile={isMobile}
-        />
+        <TimeAwareCanvas>
+          {/* Enhanced Lighting */}
+          <ambientLight intensity={0.4} color={ambientColor} />
+          <directionalLight position={[10, 10, 5]} intensity={1} color={directionalColor} />
+          <pointLight position={[0, 0, 0]} intensity={2} color="#FFA500" />
+          
+          {/* Camera Controls */}
+          <CameraController activeSection={activeSection} isMobile={isMobile} />
+          
+          {/* Nebula Background */}
+          <NebulaBackground />
+          
+          {/* Animated Stars */}
+          <AnimatedStars />
+          
+          {/* Particle Field */}
+          <ParticleField />
+          
+          {/* Cosmic Dust */}
+          <CosmicDust />
+          
+          {/* Comet System */}
+          <CometSystem />
+          
+          {/* Orbit Traces */}
+          <OrbitTraces planets={planetData} showTraces={showTraces} />
+          
+          {/* Solar System */}
+          <group>
+            {/* Planets */}
+            {Object.entries(planetData).map(([key, planet]) => (
+              <group key={key}>
+                <Planet
+                  planet={planet}
+                  planetKey={key}
+                  isActive={activeSection === planet.section}
+                  onClick={() => onPlanetClick(planet.section)}
+                />
+                {/* Moons */}
+                <MoonSystem 
+                  planetKey={key}
+                  planetPosition={planet.position}
+                  planetScale={planet.scale}
+                />
+              </group>
+            ))}
+            
+            {/* Asteroid Belt */}
+            <AsteroidBelt />
+          </group>
+          
+          {/* Orbit Controls */}
+          <OrbitControls
+            enablePan={true}
+            enableZoom={true}
+            enableRotate={true}
+            zoomSpeed={0.6}
+            panSpeed={0.8}
+            rotateSpeed={0.4}
+            minDistance={5}
+            maxDistance={200}
+            minPolarAngle={0}
+            maxPolarAngle={Math.PI}
+          />
+        </TimeAwareCanvas>
       </Canvas>
+      
+      {/* Time Controls */}
+      <TimeControls
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        timeSpeed={timeSpeed}
+        setTimeSpeed={setTimeSpeed}
+        onReset={handleReset}
+        elapsedTime={elapsedTime}
+      />
+      
+      {/* Orbit Traces Toggle */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="fixed bottom-4 left-4 z-50"
+      >
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setShowTraces(!showTraces)}
+          className="px-4 py-2 rounded-lg backdrop-blur-sm border shadow-lg text-sm font-medium transition-all"
+          style={{ 
+            backgroundColor: currentTheme?.cardBackground,
+            borderColor: currentTheme?.cardBorder,
+            color: currentTheme?.textPrimary
+          }}
+        >
+          {showTraces ? 'Hide Orbits' : 'Show Orbits'}
+        </motion.button>
+      </motion.div>
     </div>
   );
 };
