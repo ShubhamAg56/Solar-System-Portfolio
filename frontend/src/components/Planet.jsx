@@ -567,28 +567,187 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         break;
         
       case 'saturn':
-        // Saturn with atmospheric bands
-        const saturnBandColors = ['#FAD5A5', '#F0E68C', '#DEB887', '#D2B48C'];
+        // Enhanced Saturn with spectacular atmospheric bands and realistic features
+        const saturnBandColors = [
+          '#FAD5A5', '#F0E68C', '#DEB887', '#D2B48C', 
+          '#BC8F8F', '#F5DEB3', '#DDBF94', '#DAA520',
+          '#B8860B', '#FFE4B5', '#FFDEAD', '#F4A460',
+          '#CD853F', '#D2691E', '#F5F5DC', '#FFFACD'
+        ];
         
-        for (let i = 0; i < 20; i++) {
-          const y = (i / 20) * 2048;
-          const height = 2048 / 20;
-          const color = saturnBandColors[i % saturnBandColors.length];
+        // Create Saturn's characteristic atmospheric bands with enhanced detail
+        for (let i = 0; i < 40; i++) {
+          const y = (i / 40) * 2048;
+          const height = 2048 / 40;
+          const colorIndex = i % saturnBandColors.length;
+          const color = saturnBandColors[colorIndex];
           
-          ctx.fillStyle = color;
+          // Create sophisticated band gradient with wind patterns
+          const bandGradient = ctx.createLinearGradient(0, y, 0, y + height);
+          bandGradient.addColorStop(0, `${color}AA`);
+          bandGradient.addColorStop(0.2, color);
+          bandGradient.addColorStop(0.5, `${color}DD`);
+          bandGradient.addColorStop(0.8, color);
+          bandGradient.addColorStop(1, `${color}AA`);
+          ctx.fillStyle = bandGradient;
           ctx.fillRect(0, y, 2048, height);
+          
+          // Add atmospheric turbulence and wind patterns
+          for (let j = 0; j < 25; j++) {
+            const x = Math.random() * 2048;
+            const turbY = y + Math.random() * height;
+            const size = Math.random() * 12 + 3;
+            
+            const turbGradient = ctx.createRadialGradient(x, turbY, 0, x, turbY, size);
+            turbGradient.addColorStop(0, `rgba(255, 255, 255, 0.4)`);
+            turbGradient.addColorStop(0.5, `rgba(255, 215, 0, 0.3)`);
+            turbGradient.addColorStop(1, 'rgba(255, 255, 255, 0.1)');
+            ctx.fillStyle = turbGradient;
+            ctx.beginPath();
+            ctx.arc(x, turbY, size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          
+          // Add horizontal wind streaks
+          if (Math.random() > 0.7) {
+            const streakY = y + height * 0.5;
+            const streakGradient = ctx.createLinearGradient(0, streakY, 2048, streakY);
+            streakGradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+            streakGradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.2)');
+            streakGradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.2)');
+            streakGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            ctx.fillStyle = streakGradient;
+            ctx.fillRect(0, streakY - 2, 2048, 4);
+          }
         }
         
-        // Add some atmospheric features
-        for (let i = 0; i < 15; i++) {
+        // Add Saturn's famous hexagonal storm at north pole
+        const hexagonCenterX = 1024;
+        const hexagonCenterY = 200;
+        const hexagonRadius = 180;
+        
+        // Outer hexagon with gradient
+        const hexOuterGradient = ctx.createRadialGradient(hexagonCenterX, hexagonCenterY, 0, hexagonCenterX, hexagonCenterY, hexagonRadius);
+        hexOuterGradient.addColorStop(0, '#FFD700');
+        hexOuterGradient.addColorStop(0.4, '#DAA520');
+        hexOuterGradient.addColorStop(0.8, '#B8860B');
+        hexOuterGradient.addColorStop(1, '#8B7355');
+        ctx.fillStyle = hexOuterGradient;
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const angle = (i / 6) * Math.PI * 2;
+          const x = hexagonCenterX + Math.cos(angle) * hexagonRadius;
+          const y = hexagonCenterY + Math.sin(angle) * hexagonRadius;
+          
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.closePath();
+        ctx.fill();
+        
+        // Inner hexagon with swirling pattern
+        const hexInnerGradient = ctx.createRadialGradient(hexagonCenterX, hexagonCenterY, 0, hexagonCenterX, hexagonCenterY, hexagonRadius * 0.6);
+        hexInnerGradient.addColorStop(0, '#FFFF99');
+        hexInnerGradient.addColorStop(0.3, '#FFD700');
+        hexInnerGradient.addColorStop(0.7, '#DAA520');
+        hexInnerGradient.addColorStop(1, '#B8860B');
+        ctx.fillStyle = hexInnerGradient;
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const angle = (i / 6) * Math.PI * 2;
+          const x = hexagonCenterX + Math.cos(angle) * (hexagonRadius * 0.6);
+          const y = hexagonCenterY + Math.sin(angle) * (hexagonRadius * 0.6);
+          
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.closePath();
+        ctx.fill();
+        
+        // Add swirling details inside hexagon
+        for (let i = 0; i < 12; i++) {
+          const angle = (i / 12) * Math.PI * 2;
+          const spiralRadius = (hexagonRadius * 0.4) * (1 - i / 12);
+          const x = hexagonCenterX + Math.cos(angle * 3) * spiralRadius;
+          const y = hexagonCenterY + Math.sin(angle * 3) * spiralRadius;
+          
+          ctx.fillStyle = '#FFF8DC';
+          ctx.beginPath();
+          ctx.arc(x, y, 6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Add large atmospheric storm systems across the surface
+        for (let i = 0; i < 30; i++) {
           const x = Math.random() * 2048;
           const y = Math.random() * 2048;
-          const size = Math.random() * 40 + 15;
+          const size = Math.random() * 80 + 30;
           
-          ctx.fillStyle = '#F4A460';
+          const stormGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          stormGradient.addColorStop(0, '#FFF8DC');
+          stormGradient.addColorStop(0.3, '#F0E68C');
+          stormGradient.addColorStop(0.6, '#DEB887');
+          stormGradient.addColorStop(1, '#D2B48C');
+          ctx.fillStyle = stormGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
+          
+          // Add storm eye
+          ctx.fillStyle = '#DAA520';
+          ctx.beginPath();
+          ctx.arc(x, y, size * 0.3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Add smaller vortices and atmospheric details
+        for (let i = 0; i < 60; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 25 + 8;
+          
+          const vortexGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          vortexGradient.addColorStop(0, 'rgba(255, 255, 255, 0.6)');
+          vortexGradient.addColorStop(0.5, 'rgba(240, 230, 140, 0.4)');
+          vortexGradient.addColorStop(1, 'rgba(255, 255, 255, 0.1)');
+          ctx.fillStyle = vortexGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Add atmospheric clouds and high-altitude features
+        for (let i = 0; i < 80; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const width = Math.random() * 150 + 50;
+          const height = Math.random() * 30 + 10;
+          
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(Math.random() * Math.PI * 2);
+          const cloudAlpha = Math.random() * 0.4 + 0.2;
+          ctx.fillStyle = `rgba(255, 255, 255, ${cloudAlpha})`;
+          ctx.fillRect(-width/2, -height/2, width, height);
+          ctx.restore();
+        }
+        
+        // Add equatorial features and ring shadows
+        for (let i = 0; i < 8; i++) {
+          const y = 800 + i * 60;
+          const shadowGradient = ctx.createLinearGradient(0, y, 2048, y);
+          shadowGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+          shadowGradient.addColorStop(0.2, 'rgba(0, 0, 0, 0.1)');
+          shadowGradient.addColorStop(0.8, 'rgba(0, 0, 0, 0.1)');
+          shadowGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          ctx.fillStyle = shadowGradient;
+          ctx.fillRect(0, y, 2048, 15);
         }
         break;
     }
