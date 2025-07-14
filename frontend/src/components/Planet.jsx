@@ -1213,7 +1213,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
                      planetKey === 'earth' ? 0.018 :     // 30% of 0.06
                      planetKey === 'mars' ? 0.015 :      // 30% of 0.05
                      planetKey === 'jupiter' ? 0.012 :   // 30% of 0.04
-                     planetKey === 'saturn' ? 0.009 : 0.006; // 30% of 0.03
+                     planetKey === 'saturn' ? 0.009 : 
+                     planetKey === 'uranus' ? 0.0075 : 0.006; // 30% of 0.025
         
         // Calculate orbital radius from initial position
         const radius = Math.sqrt(planet.position[0] ** 2 + planet.position[2] ** 2);
