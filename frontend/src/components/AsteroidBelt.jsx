@@ -5,23 +5,23 @@ import * as THREE from 'three';
 const Asteroid = ({ position, size, rotationSpeed, color }) => {
   const meshRef = useRef();
   
-  // Create procedural asteroid texture
+  // Create optimized procedural asteroid texture
   const asteroidTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 128;
-    canvas.height = 128;
+    canvas.width = 64; // Reduced from 128 for better performance
+    canvas.height = 64;
     const ctx = canvas.getContext('2d');
     
     // Base color
     ctx.fillStyle = color;
-    ctx.fillRect(0, 0, 128, 128);
+    ctx.fillRect(0, 0, 64, 64);
     
-    // Add surface details
-    for (let i = 0; i < 200; i++) {
-      const x = Math.random() * 128;
-      const y = Math.random() * 128;
-      const radius = Math.random() * 8 + 2;
-      const darkness = Math.random() * 0.6 + 0.2;
+    // Add surface details (reduced count for performance)
+    for (let i = 0; i < 80; i++) { // Reduced from 200
+      const x = Math.random() * 64;
+      const y = Math.random() * 64;
+      const radius = Math.random() * 4 + 1; // Reduced from 8 + 2
+      const darkness = Math.random() * 0.5 + 0.2;
       
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -29,12 +29,12 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
       ctx.fill();
     }
     
-    // Add lighter spots (mineral deposits)
-    for (let i = 0; i < 50; i++) {
-      const x = Math.random() * 128;
-      const y = Math.random() * 128;
-      const radius = Math.random() * 4 + 1;
-      const brightness = Math.random() * 0.4 + 0.3;
+    // Add lighter spots (mineral deposits) - reduced count
+    for (let i = 0; i < 20; i++) { // Reduced from 50
+      const x = Math.random() * 64;
+      const y = Math.random() * 64;
+      const radius = Math.random() * 2 + 1; // Reduced from 4 + 1
+      const brightness = Math.random() * 0.3 + 0.2;
       
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -42,18 +42,18 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
       ctx.fill();
     }
     
-    // Add scratches and lines
-    for (let i = 0; i < 20; i++) {
-      const x1 = Math.random() * 128;
-      const y1 = Math.random() * 128;
-      const x2 = x1 + (Math.random() - 0.5) * 40;
-      const y2 = y1 + (Math.random() - 0.5) * 40;
+    // Add scratches and lines - reduced count
+    for (let i = 0; i < 10; i++) { // Reduced from 20
+      const x1 = Math.random() * 64;
+      const y1 = Math.random() * 64;
+      const x2 = x1 + (Math.random() - 0.5) * 20; // Reduced from 40
+      const y2 = y1 + (Math.random() - 0.5) * 20;
       
       ctx.beginPath();
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
-      ctx.strokeStyle = `rgba(0, 0, 0, ${Math.random() * 0.5 + 0.2})`;
-      ctx.lineWidth = Math.random() * 2 + 1;
+      ctx.strokeStyle = `rgba(0, 0, 0, ${Math.random() * 0.4 + 0.2})`;
+      ctx.lineWidth = Math.random() * 1.5 + 0.5; // Reduced from 2 + 1
       ctx.stroke();
     }
     
