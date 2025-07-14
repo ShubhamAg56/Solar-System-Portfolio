@@ -475,11 +475,12 @@ export const planetData = {
 };
 
 export const navigationData = [
-  { name: "About", section: "about", planet: "sun" },
-  { name: "Skills", section: "skills", planet: "mercury" },
-  { name: "Experience", section: "experience", planet: "venus" },
-  { name: "Projects", section: "projects", planet: "earth" },
-  { name: "Education", section: "education", planet: "mars" },
-  { name: "Contact", section: "contact", planet: "jupiter" },
-  { name: "Playground", section: "playground", planet: "saturn" }
+  { name: "Resume", section: "resume", planet: "sun" },
+  { name: "About", section: "about", planet: "mercury" },
+  { name: "Skills", section: "skills", planet: "venus" },
+  { name: "Experience", section: "experience", planet: "earth" },
+  { name: "Projects", section: "projects", planet: "mars" },
+  { name: "Education", section: "education", planet: "jupiter" },
+  { name: "Contact", section: "contact", planet: "saturn" },
+  { name: "Playground", section: "playground", planet: "uranus" }
 ];
