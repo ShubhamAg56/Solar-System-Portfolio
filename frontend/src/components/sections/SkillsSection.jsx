@@ -175,7 +175,7 @@ const SkillsSection = () => {
             Skills Overview
           </h3>
         </div>
-        <div className="grid md:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="rounded-2xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
@@ -184,55 +184,15 @@ const SkillsSection = () => {
               borderColor: currentTheme.border,
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-emerald-600 opacity-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 opacity-10"></div>
             <div className="relative z-10">
-              <div className="text-5xl font-bold bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent mb-2">
-                {skills.filter(s => s.level >= 90).length}
+              <div className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                {skills.length}
               </div>
               <div className="text-sm font-medium mb-2" style={{ color: currentTheme.textSecondary }}>
-                Expert Level
+                Total Skills
               </div>
-              <div className="text-2xl">🌟</div>
-            </div>
-          </motion.div>
-          
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="rounded-2xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
-            style={{
-              backgroundColor: currentTheme.cardBackground,
-              borderColor: currentTheme.border,
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 opacity-10"></div>
-            <div className="relative z-10">
-              <div className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-2">
-                {skills.filter(s => s.level >= 80).length}
-              </div>
-              <div className="text-sm font-medium mb-2" style={{ color: currentTheme.textSecondary }}>
-                Advanced Level
-              </div>
-              <div className="text-2xl">💎</div>
-            </div>
-          </motion.div>
-          
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="rounded-2xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
-            style={{
-              backgroundColor: currentTheme.cardBackground,
-              borderColor: currentTheme.border,
-            }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-amber-600 opacity-10"></div>
-            <div className="relative z-10">
-              <div className="text-5xl font-bold bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent mb-2">
-                {skills.filter(s => s.level >= 70).length}
-              </div>
-              <div className="text-sm font-medium mb-2" style={{ color: currentTheme.textSecondary }}>
-                Intermediate+
-              </div>
-              <div className="text-2xl">🔥</div>
+              <div className="text-2xl">💻</div>
             </div>
           </motion.div>
           
