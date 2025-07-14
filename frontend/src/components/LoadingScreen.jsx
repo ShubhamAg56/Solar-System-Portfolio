@@ -4,6 +4,7 @@ import { useTheme } from '../contexts/ThemeContext';
 
 const LoadingScreen = ({ onLoadComplete }) => {
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingStage, setLoadingStage] = useState('Initializing Solar System...');
   const { currentTheme } = useTheme();
   
   // Default color fallbacks
@@ -13,16 +14,36 @@ const LoadingScreen = ({ onLoadComplete }) => {
   const border = currentTheme?.border || 'rgba(255, 255, 255, 0.2)';
   
   useEffect(() => {
+    const loadingStages = [
+      'Initializing Solar System...',
+      'Generating Planet Textures...',
+      'Loading 3D Components...',
+      'Optimizing Performance...',
+      'Preparing Orbital Mechanics...',
+      'Almost Ready!'
+    ];
+    
+    let currentStage = 0;
     const timer = setInterval(() => {
       setLoadingProgress(prev => {
-        if (prev >= 100) {
+        const newProgress = prev + Math.random() * 15 + 8; // Smoother progress
+        
+        // Update loading stage based on progress
+        const stageIndex = Math.floor((newProgress / 100) * loadingStages.length);
+        if (stageIndex !== currentStage && stageIndex < loadingStages.length) {
+          currentStage = stageIndex;
+          setLoadingStage(loadingStages[currentStage]);
+        }
+        
+        if (newProgress >= 100) {
           clearInterval(timer);
-          setTimeout(() => onLoadComplete(), 500);
+          setLoadingStage('Complete!');
+          setTimeout(() => onLoadComplete(), 300);
           return 100;
         }
-        return prev + Math.random() * 20 + 10; // Faster loading
+        return newProgress;
       });
-    }, 50); // Faster interval
+    }, 80); // Optimized interval
     
     return () => clearInterval(timer);
   }, [onLoadComplete]);
