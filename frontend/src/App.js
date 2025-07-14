@@ -35,7 +35,6 @@ const AppContent = () => {
   
   const handleClosePanel = () => {
     setActiveSection(null);
-    setCameraPosition([0, 10, 40]);
   };
   
   const handleLoadComplete = () => {
