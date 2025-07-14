@@ -18,8 +18,9 @@ const AnimatedStars = () => {
   
   useFrame((state) => {
     if (starsRef.current) {
-      starsRef.current.rotation.x = state.clock.elapsedTime * 0.0008;
-      starsRef.current.rotation.y = state.clock.elapsedTime * 0.0003;
+      // Slower star rotation (70% slower)
+      starsRef.current.rotation.x = state.clock.elapsedTime * 0.00024; // 30% of 0.0008
+      starsRef.current.rotation.y = state.clock.elapsedTime * 0.00009; // 30% of 0.0003
     }
   });
   
