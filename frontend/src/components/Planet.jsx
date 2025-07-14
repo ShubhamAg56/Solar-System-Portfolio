@@ -128,12 +128,13 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     // Add ultra-detailed surface features based on planet type
     switch(planetKey) {
       case 'sun':
-        // Ultra-realistic solar surface with multiple detailed layers
+        // Ultra-realistic solar surface with multiple detailed layers (optimized)
         // Solar granulation with enhanced detail and resolution
-        for (let i = 0; i < 1000; i++) {
-          const x = Math.random() * 4096;
-          const y = Math.random() * 4096;
-          const size = Math.random() * 50 + 20;
+        const granulationCount = Math.floor(resolution / 4); // Adaptive count
+        for (let i = 0; i < granulationCount; i++) {
+          const x = Math.random() * resolution;
+          const y = Math.random() * resolution;
+          const size = Math.random() * (resolution * 0.025) + (resolution * 0.01);
           const sunGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
           sunGradient.addColorStop(0, '#FFFACD');
           sunGradient.addColorStop(0.2, '#FFFF99');
@@ -146,11 +147,12 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           ctx.fill();
         }
         
-        // Enhanced solar flares with ultra-realistic patterns
-        for (let i = 0; i < 150; i++) {
-          const x = Math.random() * 4096;
-          const y = Math.random() * 4096;
-          const size = Math.random() * 120 + 60;
+        // Enhanced solar flares with ultra-realistic patterns (optimized)
+        const flareCount = Math.floor(resolution / 14); // Adaptive count
+        for (let i = 0; i < flareCount; i++) {
+          const x = Math.random() * resolution;
+          const y = Math.random() * resolution;
+          const size = Math.random() * (resolution * 0.06) + (resolution * 0.03);
           const flareGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
           flareGradient.addColorStop(0, '#FFFFFF');
           flareGradient.addColorStop(0.1, '#FFF8DC');
