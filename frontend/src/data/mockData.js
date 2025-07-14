@@ -15,6 +15,18 @@ export const portfolioData = {
     }
   },
   
+  resume: {
+    summary: "Passionate full-stack developer with 6+ years of experience in modern web technologies and 3D visualization. Specialized in creating immersive digital experiences using React, Three.js, and WebGL. Proven track record of building award-winning applications that increased user engagement by 300%.",
+    highlights: [
+      "Led development of 3D visualization platform serving 1M+ users",
+      "Expert in React, Three.js, WebGL, and modern JavaScript frameworks",
+      "Built interactive galaxy simulation for NASA research",
+      "Reduced application load times by 40% through optimization",
+      "Mentored 10+ junior developers and led cross-functional teams"
+    ],
+    downloadUrl: "/api/resume/download"
+  },
+  
   skills: [
     { name: "JavaScript", level: 95, category: "Frontend" },
     { name: "React", level: 92, category: "Frontend" },
@@ -94,7 +106,13 @@ export const portfolioData = {
         "Physics-based spacecraft controls",
         "Dynamic lighting and shadows",
         "Spatial audio system"
-      ]
+      ],
+      filters: {
+        technologies: ["Three.js", "React", "WebGL"],
+        category: "3D Game",
+        year: 2023,
+        featured: true
+      }
     },
     {
       id: "2",
@@ -111,7 +129,13 @@ export const portfolioData = {
         "Interactive 3D scatter plots",
         "Custom shader materials",
         "Export to various formats"
-      ]
+      ],
+      filters: {
+        technologies: ["D3.js", "Three.js", "Python"],
+        category: "Data Visualization",
+        year: 2022,
+        featured: true
+      }
     },
     {
       id: "3",
@@ -128,7 +152,13 @@ export const portfolioData = {
         "Particle effects and shaders",
         "Responsive 3D design",
         "Smooth performance optimization"
-      ]
+      ],
+      filters: {
+        technologies: ["React", "Three.js", "WebGL"],
+        category: "Portfolio",
+        year: 2023,
+        featured: true
+      }
     },
     {
       id: "4",
@@ -145,7 +175,13 @@ export const portfolioData = {
         "AR try-before-buy feature",
         "Real-time inventory sync",
         "Payment gateway integration"
-      ]
+      ],
+      filters: {
+        technologies: ["React", "Three.js", "Node.js"],
+        category: "E-commerce",
+        year: 2022,
+        featured: false
+      }
     },
     {
       id: "5",
@@ -162,7 +198,13 @@ export const portfolioData = {
         "Interactive network topology",
         "Educational animations",
         "Performance metrics dashboard"
-      ]
+      ],
+      filters: {
+        technologies: ["Three.js", "TensorFlow.js", "React"],
+        category: "Education",
+        year: 2021,
+        featured: false
+      }
     },
     {
       id: "6",
@@ -179,7 +221,13 @@ export const portfolioData = {
         "3D Earth with cloud layers",
         "Interactive climate visualization",
         "Responsive design"
-      ]
+      ],
+      filters: {
+        technologies: ["Three.js", "React", "WebGL"],
+        category: "Utility",
+        year: 2021,
+        featured: false
+      }
     }
   ],
   
@@ -340,48 +388,48 @@ export const portfolioData = {
       type: "simulation",
       complexity: "Expert",
       performance: "High-end GPU"
+    }
+  ],
+  
+  blog: [
+    {
+      id: "1",
+      title: "Building Interactive 3D Websites with Three.js",
+      excerpt: "A comprehensive guide to creating immersive 3D web experiences using Three.js and React. Learn about performance optimization, lighting, and interactive controls.",
+      content: "Full blog post content here...",
+      category: "Web Development",
+      tags: ["Three.js", "React", "WebGL", "3D Graphics"],
+      author: "Alex Cosmos",
+      featured_image: "/api/placeholder/800/400",
+      published: true,
+      created_at: "2023-12-01",
+      updated_at: "2023-12-01"
     },
     {
-      id: "demo-7",
-      title: "Neural Network Visualizer",
-      description: "Educational 3D visualization of neural networks showing data flow, learning processes, and network topology changes in real-time during training.",
-      technologies: ["Three.js", "TensorFlow.js", "Machine Learning", "Data Visualization", "WebGL"],
-      category: "AI Visualization",
-      featured: false,
-      demo: "https://neural-viz.demo.com",
-      github: "https://github.com/alexcosmos/neural-visualizer",
-      highlights: [
-        "3D neural network topology visualization",
-        "Real-time training data flow animation",
-        "Interactive layer and neuron inspection",
-        "Multiple network architectures (CNN, RNN, Transformer)",
-        "Training metrics dashboard",
-        "Custom dataset upload and training"
-      ],
-      type: "educational",
-      complexity: "Advanced",
-      performance: "Standard GPU"
+      id: "2",
+      title: "The Future of Web Graphics: WebGL and Beyond",
+      excerpt: "Exploring the cutting-edge technologies that are shaping the future of web graphics, from WebGL to WebGPU and real-time ray tracing.",
+      content: "Full blog post content here...",
+      category: "Technology",
+      tags: ["WebGL", "WebGPU", "Graphics", "Future Tech"],
+      author: "Alex Cosmos",
+      featured_image: "/api/placeholder/800/400",
+      published: true,
+      created_at: "2023-11-15",
+      updated_at: "2023-11-15"
     },
     {
-      id: "demo-8",
-      title: "Quantum Physics Simulator",
-      description: "Visualize quantum mechanical phenomena including wave functions, particle interactions, and quantum field effects in an interactive 3D environment.",
-      technologies: ["Three.js", "WebGL Shaders", "Physics Simulation", "Mathematical Visualization", "Quantum Mechanics"],
-      category: "Scientific Simulation",
-      featured: false,
-      demo: "https://quantum-sim.demo.com",
-      github: "https://github.com/alexcosmos/quantum-simulator",
-      highlights: [
-        "Wave function probability density visualization",
-        "Quantum tunneling effect demonstrations",
-        "Particle-wave duality experiments",
-        "Interactive Schrödinger equation solver",
-        "Quantum entanglement visualizations",
-        "Educational quantum mechanics modules"
-      ],
-      type: "educational",
-      complexity: "Expert",
-      performance: "High-end GPU"
+      id: "3",
+      title: "Optimizing 3D Performance in Web Applications",
+      excerpt: "Best practices for maintaining smooth 60fps performance in complex 3D web applications. From geometry optimization to shader efficiency.",
+      content: "Full blog post content here...",
+      category: "Performance",
+      tags: ["Performance", "Optimization", "3D Graphics", "WebGL"],
+      author: "Alex Cosmos",
+      featured_image: "/api/placeholder/800/400",
+      published: true,
+      created_at: "2023-11-01",
+      updated_at: "2023-11-01"
     }
   ],
   
