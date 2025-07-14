@@ -251,20 +251,45 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
   
   return (
     <group>
-      {/* Comet core */}
+      {/* Comet core with enhanced texture */}
       <mesh ref={cometRef} geometry={cometGeometry} material={cometMaterial} />
       
-      {/* Comet tail */}
+      {/* Enhanced comet tail with better particles */}
       <points ref={tailRef} geometry={tailGeometry} material={tailMaterial} />
       
-      {/* Comet glow */}
-      <mesh ref={cometRef} scale={2}>
-        <sphereGeometry args={[0.3, 16, 16]} />
+      {/* Multi-layer comet glow for better visual effect */}
+      <mesh ref={cometRef} scale={1.8}>
+        <sphereGeometry args={[0.3, 24, 24]} />
         <meshBasicMaterial 
           color={color} 
           transparent 
-          opacity={0.2} 
+          opacity={0.3} 
           side={THREE.BackSide}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
+      
+      {/* Outer glow layer */}
+      <mesh ref={cometRef} scale={2.5}>
+        <sphereGeometry args={[0.3, 16, 16]} />
+        <meshBasicMaterial 
+          color={new THREE.Color(color).multiplyScalar(0.8)} 
+          transparent 
+          opacity={0.15} 
+          side={THREE.BackSide}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
+      
+      {/* Coma effect - gaseous envelope around comet */}
+      <mesh ref={cometRef} scale={3.2}>
+        <sphereGeometry args={[0.3, 12, 12]} />
+        <meshBasicMaterial 
+          color={new THREE.Color(color).lerp(new THREE.Color('#FFFFFF'), 0.3)} 
+          transparent 
+          opacity={0.08} 
+          side={THREE.BackSide}
+          blending={THREE.AdditiveBlending}
         />
       </mesh>
     </group>
