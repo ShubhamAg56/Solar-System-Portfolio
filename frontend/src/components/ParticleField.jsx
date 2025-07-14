@@ -36,8 +36,9 @@ const ParticleField = () => {
   
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.x = state.clock.elapsedTime * 0.0001;
-      ref.current.rotation.y = state.clock.elapsedTime * 0.0002;
+      // Slower particle field rotation (70% slower)
+      ref.current.rotation.x = state.clock.elapsedTime * 0.00003; // 30% of 0.0001
+      ref.current.rotation.y = state.clock.elapsedTime * 0.00006; // 30% of 0.0002
     }
   });
   
