@@ -858,6 +858,19 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           </mesh>
         )}
         
+        {/* Saturn's atmospheric glow */}
+        {planetKey === 'saturn' && (
+          <mesh scale={1.06}>
+            <sphereGeometry args={[1, 32, 32]} />
+            <meshBasicMaterial
+              color="#F0E68C"
+              transparent
+              opacity={0.12}
+              side={THREE.BackSide}
+            />
+          </mesh>
+        )}
+        
         {/* Enhanced sun corona effect */}
         {planetKey === 'sun' && (
           <>
