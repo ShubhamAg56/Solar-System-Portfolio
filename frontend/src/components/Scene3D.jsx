@@ -29,7 +29,7 @@ const AnimatedStars = () => {
       ref={starsRef} 
       radius={400} 
       depth={60} 
-      count={3000} 
+      count={2000} // Reduced from 3000 for better initial performance
       factor={5} 
       saturation={0} 
       fade 
