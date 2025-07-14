@@ -1144,9 +1144,13 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         scale={planet.scale}
         onClick={(e) => {
           setHovered(false); // Remove info box when clicking
+          setHideInfoBox(true); // Hide info box even when active
           onClick(e);
         }}
-        onPointerOver={() => setHovered(true)}
+        onPointerOver={() => {
+          setHovered(true);
+          setHideInfoBox(false); // Show info box on hover
+        }}
         onPointerOut={() => setHovered(false)}
       >
         <sphereGeometry args={[1, 64, 64]} />
