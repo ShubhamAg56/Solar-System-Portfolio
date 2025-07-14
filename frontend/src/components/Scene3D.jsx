@@ -172,25 +172,6 @@ const Scene3D = ({ activeSection, onPlanetClick, isMobile }) => {
   const ambientColor = currentTheme?.ambientLight || '#404040';
   const directionalColor = currentTheme?.directionalLight || '#ffffff';
   
-  const handleReset = () => {
-    setElapsedTime(0);
-    setIsPlaying(true);
-    setTimeSpeed(1);
-  };
-  
-  const TimeAwareCanvas = ({ children }) => {
-    useFrame((state, delta) => {
-      if (isPlaying) {
-        // Update elapsed time based on speed
-        setElapsedTime(prev => prev + delta * timeSpeed);
-        
-        // Override the clock time for consistent speed control
-        state.clock.elapsedTime = elapsedTime;
-      }
-    });
-    return <>{children}</>;
-  };
-  
   return (
     <div className="w-full h-screen bg-black relative">
       <Canvas
@@ -202,7 +183,6 @@ const Scene3D = ({ activeSection, onPlanetClick, isMobile }) => {
         }}
         style={{ background: backgroundColor }}
       >
-        <TimeAwareCanvas>
           {/* Enhanced Lighting */}
           <ambientLight intensity={0.4} color={ambientColor} />
           <directionalLight position={[10, 10, 5]} intensity={1} color={directionalColor} />
