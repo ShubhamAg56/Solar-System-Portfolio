@@ -10,14 +10,14 @@
       "test": "Server Health Check",
       "success": true,
       "message": "Server responding correctly with: {'message': 'Hello World'}",
-      "timestamp": "2025-07-14T19:07:31.607103",
+      "timestamp": "2025-07-14T19:21:37.431635",
       "details": {}
     },
     {
       "test": "CORS Configuration",
       "success": true,
       "message": "CORS headers properly configured",
-      "timestamp": "2025-07-14T19:07:31.649896",
+      "timestamp": "2025-07-14T19:21:37.473908",
       "details": {
         "Access-Control-Allow-Origin": "http://localhost:3000",
         "Access-Control-Allow-Methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT",
@@ -29,53 +29,53 @@
       "test": "Create Status Check",
       "success": true,
       "message": "Status check created successfully",
-      "timestamp": "2025-07-14T19:07:31.693927",
+      "timestamp": "2025-07-14T19:21:37.517952",
       "details": {
-        "id": "30ac751a-71c3-493f-b202-b3075ae8c925",
+        "id": "8ba3c6e2-a0d3-4dfa-a32e-52ddaed41ebf",
         "client_name": "3D Solar System Test Client",
-        "timestamp": "2025-07-14T19:07:31.651502"
+        "timestamp": "2025-07-14T19:21:37.475683"
       }
     },
     {
       "test": "Get Status Checks",
       "success": true,
-      "message": "Retrieved 4 status checks",
-      "timestamp": "2025-07-14T19:07:31.737984",
+      "message": "Retrieved 7 status checks",
+      "timestamp": "2025-07-14T19:21:37.561988",
       "details": {
-        "count": 4
+        "count": 7
       }
     },
     {
       "test": "Data Persistence",
       "success": true,
       "message": "Data persisted correctly in MongoDB",
-      "timestamp": "2025-07-14T19:07:32.785974",
+      "timestamp": "2025-07-14T19:21:38.609500",
       "details": {
-        "created_id": "d31558f2-6476-4a83-a635-8718b2b6676a"
+        "created_id": "d7ea64dd-e088-42cc-b8ad-a41134377b7b"
       }
     },
     {
       "test": "MongoDB Connection",
       "success": true,
       "message": "MongoDB connection and operations working",
-      "timestamp": "2025-07-14T19:07:32.872887",
+      "timestamp": "2025-07-14T19:21:38.696915",
       "details": {}
     },
     {
       "test": "Error Handling - Invalid JSON",
       "success": true,
       "message": "Properly handled invalid JSON with HTTP 422",
-      "timestamp": "2025-07-14T19:07:32.914897",
+      "timestamp": "2025-07-14T19:21:38.738879",
       "details": {}
     },
     {
       "test": "Error Handling - Missing Field",
       "success": true,
       "message": "Properly handled missing field with HTTP 422",
-      "timestamp": "2025-07-14T19:07:32.956907",
+      "timestamp": "2025-07-14T19:21:38.780884",
       "details": {}
     }
   ],
   "critical_issues": [],
-  "timestamp": "2025-07-14T19:07:32.956975"
+  "timestamp": "2025-07-14T19:21:38.780945"
 }
