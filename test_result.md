@@ -356,10 +356,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Saturn Planet - Playground Section"
+    - "Planet Animation Speed Optimization"
+    - "Texture Quality Optimization"
+    - "Initial Loading Performance Optimization"
+    - "Mobile and Desktop Performance Balance"
   stuck_tasks: []
   test_all: false
-  test_priority: "new_feature"
+  test_priority: "new_optimizations"
 
 agent_communication:
   - agent: "main"
