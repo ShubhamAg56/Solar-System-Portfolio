@@ -7,6 +7,11 @@ import Planet from './Planet';
 import ParticleField from './ParticleField';
 import AsteroidBelt from './AsteroidBelt';
 import CosmicDust from './CosmicDust';
+import CometSystem from './CometSystem';
+import NebulaBackground from './NebulaBackground';
+import MoonSystem from './MoonSystem';
+import OrbitTraces from './OrbitTraces';
+import TimeControls from './TimeControls';
 import { planetData } from '../data/mockData';
 import { useTheme } from '../contexts/ThemeContext';
 
