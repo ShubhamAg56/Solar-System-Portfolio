@@ -87,6 +87,15 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         emissiveIntensity: 0.15,
         transparent: false,
         opacity: 1.0
+      }),
+      uranus: new THREE.MeshStandardMaterial({
+        color: '#4FD0E3',
+        roughness: 0.2,
+        metalness: 0.1,
+        emissive: '#40E0D0',
+        emissiveIntensity: 0.2,
+        transparent: false,
+        opacity: 1.0
       })
     };
     
