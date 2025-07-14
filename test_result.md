@@ -101,7 +101,7 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 
-user_problem_statement: "Remove the moons, orbit traces and speed controls from the 3D Solar System Portfolio application"
+user_problem_statement: "Increase the number of asteroids in the 3D Solar System Portfolio application"
 
 backend:
   - task: "Enhanced Asteroid Texture and Rendering"
