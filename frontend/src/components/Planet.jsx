@@ -138,42 +138,204 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     // Add ultra-detailed surface features based on planet type
     switch(planetKey) {
       case 'sun':
-        // Ultra-realistic solar surface with multiple detailed layers (optimized)
-        // Solar granulation with enhanced detail and resolution
-        const granulationCount = Math.floor(resolution / 4); // Adaptive count
+      case 'sun':
+        // Ultra-realistic enhanced solar surface with spectacular details
+        // Advanced solar granulation with multiple layers
+        const granulationCount = Math.floor(resolution / 3); // More granulation
         for (let i = 0; i < granulationCount; i++) {
           const x = Math.random() * resolution;
           const y = Math.random() * resolution;
-          const size = Math.random() * (resolution * 0.025) + (resolution * 0.01);
+          const size = Math.random() * (resolution * 0.04) + (resolution * 0.015);
+          
+          // Multi-layered granulation gradient
           const sunGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-          sunGradient.addColorStop(0, '#FFFACD');
-          sunGradient.addColorStop(0.2, '#FFFF99');
-          sunGradient.addColorStop(0.5, '#FFD700');
-          sunGradient.addColorStop(0.8, '#FF8C00');
-          sunGradient.addColorStop(1, '#FF6B35');
+          sunGradient.addColorStop(0, '#FFFFFF'); // Hottest center
+          sunGradient.addColorStop(0.1, '#FFFACD'); // Very hot
+          sunGradient.addColorStop(0.3, '#FFFF99'); // Hot
+          sunGradient.addColorStop(0.5, '#FFD700'); // Medium
+          sunGradient.addColorStop(0.7, '#FF8C00'); // Cooler
+          sunGradient.addColorStop(0.9, '#FF6B35'); // Edge
+          sunGradient.addColorStop(1, '#FF4500'); // Coolest
           ctx.fillStyle = sunGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Add bright core
+          const coreGradient = ctx.createRadialGradient(x, y, 0, x, y, size * 0.3);
+          coreGradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+          coreGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+          ctx.fillStyle = coreGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size * 0.3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Spectacular solar flares with enhanced realism
+        const flareCount = Math.floor(resolution / 10);
+        for (let i = 0; i < flareCount; i++) {
+          const x = Math.random() * resolution;
+          const y = Math.random() * resolution;
+          const size = Math.random() * (resolution * 0.08) + (resolution * 0.04);
+          
+          // Main flare body
+          const flareGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          flareGradient.addColorStop(0, '#FFFFFF'); // Brightest center
+          flareGradient.addColorStop(0.1, '#FFF8DC'); // Very bright
+          flareGradient.addColorStop(0.2, '#FFFF99'); // Bright yellow
+          flareGradient.addColorStop(0.4, '#FFD700'); // Golden
+          flareGradient.addColorStop(0.6, '#FF8C00'); // Orange
+          flareGradient.addColorStop(0.8, '#FF4500'); // Red-orange
+          flareGradient.addColorStop(1, '#8B0000'); // Dark red edge
+          ctx.fillStyle = flareGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Add flare extensions
+          for (let j = 0; j < 6; j++) {
+            const angle = (j / 6) * Math.PI * 2;
+            const extLength = size * (0.8 + Math.random() * 0.4);
+            const extX = x + Math.cos(angle) * extLength;
+            const extY = y + Math.sin(angle) * extLength;
+            
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            
+            const extGradient = ctx.createLinearGradient(0, 0, extLength, 0);
+            extGradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+            extGradient.addColorStop(0.3, 'rgba(255, 215, 0, 0.6)');
+            extGradient.addColorStop(0.7, 'rgba(255, 69, 0, 0.3)');
+            extGradient.addColorStop(1, 'rgba(255, 69, 0, 0)');
+            ctx.fillStyle = extGradient;
+            
+            const width = size * 0.15;
+            ctx.fillRect(0, -width/2, extLength, width);
+            ctx.restore();
+          }
+        }
+        
+        // Enhanced sunspots with realistic magnetic field effects
+        const sunspotCount = Math.floor(resolution / 50);
+        for (let i = 0; i < sunspotCount; i++) {
+          const x = Math.random() * resolution;
+          const y = Math.random() * resolution;
+          const size = Math.random() * (resolution * 0.06) + (resolution * 0.02);
+          
+          // Umbra (dark center)
+          const umbraGradient = ctx.createRadialGradient(x, y, 0, x, y, size * 0.4);
+          umbraGradient.addColorStop(0, '#1A0A00'); // Very dark
+          umbraGradient.addColorStop(0.5, '#2F1B14'); // Dark brown
+          umbraGradient.addColorStop(1, '#4A2C17'); // Medium brown
+          ctx.fillStyle = umbraGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Penumbra (lighter outer region)
+          const penumbraGradient = ctx.createRadialGradient(x, y, size * 0.4, x, y, size);
+          penumbraGradient.addColorStop(0, '#4A2C17'); // Medium brown
+          penumbraGradient.addColorStop(0.3, '#8B4513'); // Brown
+          penumbraGradient.addColorStop(0.6, '#CD853F'); // Light brown
+          penumbraGradient.addColorStop(0.9, '#DAA520'); // Golden
+          penumbraGradient.addColorStop(1, 'rgba(218, 165, 32, 0)'); // Fade out
+          ctx.fillStyle = penumbraGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
         }
         
-        // Enhanced solar flares with ultra-realistic patterns (optimized)
-        const flareCount = Math.floor(resolution / 14); // Adaptive count
-        for (let i = 0; i < flareCount; i++) {
+        // Solar prominences and magnetic loops
+        const prominenceCount = Math.floor(resolution / 25);
+        for (let i = 0; i < prominenceCount; i++) {
           const x = Math.random() * resolution;
           const y = Math.random() * resolution;
-          const size = Math.random() * (resolution * 0.06) + (resolution * 0.03);
-          const flareGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-          flareGradient.addColorStop(0, '#FFFFFF');
-          flareGradient.addColorStop(0.1, '#FFF8DC');
-          flareGradient.addColorStop(0.3, '#FFD700');
-          flareGradient.addColorStop(0.6, '#FF4500');
-          flareGradient.addColorStop(1, '#8B0000');
-          ctx.fillStyle = flareGradient;
+          const width = Math.random() * (resolution * 0.15) + (resolution * 0.05);
+          const height = Math.random() * (resolution * 0.25) + (resolution * 0.1);
+          
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(Math.random() * Math.PI * 2);
+          
+          // Create magnetic loop effect
+          const prominenceGradient = ctx.createLinearGradient(-width/2, -height/2, width/2, height/2);
+          prominenceGradient.addColorStop(0, 'rgba(255, 69, 0, 0.9)'); // Bright orange
+          prominenceGradient.addColorStop(0.2, 'rgba(255, 140, 0, 0.8)'); // Orange
+          prominenceGradient.addColorStop(0.5, 'rgba(255, 215, 0, 0.6)'); // Golden
+          prominenceGradient.addColorStop(0.8, 'rgba(255, 255, 0, 0.4)'); // Yellow
+          prominenceGradient.addColorStop(1, 'rgba(255, 255, 255, 0.2)'); // White fade
+          ctx.fillStyle = prominenceGradient;
+          
+          // Create loop shape
+          ctx.beginPath();
+          ctx.ellipse(0, 0, width/2, height/2, 0, 0, Math.PI * 2);
+          ctx.fill();
+          
+          // Add inner magnetic field lines
+          for (let j = 0; j < 3; j++) {
+            const lineOffset = (j - 1) * (width * 0.15);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 - j * 0.1})`;
+            ctx.lineWidth = Math.max(1, resolution / 512);
+            ctx.beginPath();
+            ctx.ellipse(lineOffset, 0, width/4, height/3, 0, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          
+          ctx.restore();
+        }
+        
+        // Corona effect and solar wind
+        const coronaCount = Math.floor(resolution / 15);
+        for (let i = 0; i < coronaCount; i++) {
+          const x = Math.random() * resolution;
+          const y = Math.random() * resolution;
+          const size = Math.random() * (resolution * 0.12) + (resolution * 0.06);
+          
+          const coronaGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          coronaGradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)'); // Bright center
+          coronaGradient.addColorStop(0.3, 'rgba(255, 255, 192, 0.3)'); // Light yellow
+          coronaGradient.addColorStop(0.6, 'rgba(255, 215, 0, 0.2)'); // Golden
+          coronaGradient.addColorStop(0.8, 'rgba(255, 140, 0, 0.1)'); // Orange
+          coronaGradient.addColorStop(1, 'rgba(255, 69, 0, 0)'); // Fade to transparent
+          ctx.fillStyle = coronaGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
         }
+        
+        // Add surface convection cells
+        const convectionCount = Math.floor(resolution / 8);
+        for (let i = 0; i < convectionCount; i++) {
+          const x = Math.random() * resolution;
+          const y = Math.random() * resolution;
+          const size = Math.random() * (resolution * 0.03) + (resolution * 0.01);
+          
+          // Hexagonal convection cell
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(Math.random() * Math.PI * 2);
+          
+          const convectionGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, size);
+          convectionGradient.addColorStop(0, 'rgba(255, 255, 255, 0.6)'); // Hot center
+          convectionGradient.addColorStop(0.7, 'rgba(255, 215, 0, 0.4)'); // Golden
+          convectionGradient.addColorStop(1, 'rgba(255, 140, 0, 0.2)'); // Orange edge
+          ctx.fillStyle = convectionGradient;
+          
+          // Draw hexagon
+          ctx.beginPath();
+          for (let j = 0; j < 6; j++) {
+            const angle = (j / 6) * Math.PI * 2;
+            const vertexX = Math.cos(angle) * size;
+            const vertexY = Math.sin(angle) * size;
+            if (j === 0) ctx.moveTo(vertexX, vertexY);
+            else ctx.lineTo(vertexX, vertexY);
+          }
+          ctx.closePath();
+          ctx.fill();
+          ctx.restore();
+        }
+        break;
         
         // Ultra-realistic sunspot formations
         for (let i = 0; i < 40; i++) {
