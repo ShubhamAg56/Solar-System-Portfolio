@@ -112,15 +112,18 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     
     const baseColor = baseColors[planetKey] || baseColors.earth;
     
-    // Create sophisticated radial gradient for depth and lighting
-    const gradient = ctx.createRadialGradient(1536, 1024, 0, 2048, 2048, 2048);
+    // Create sophisticated radial gradient for depth and lighting (optimized)
+    const centerX = resolution * 0.375;
+    const centerY = resolution * 0.25;
+    const maxRadius = resolution * 0.5;
+    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX + resolution * 0.125, centerY + resolution * 0.125, maxRadius);
     gradient.addColorStop(0, `rgb(${Math.min(baseColor.r + 60, 255)}, ${Math.min(baseColor.g + 60, 255)}, ${Math.min(baseColor.b + 60, 255)})`);
     gradient.addColorStop(0.2, `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`);
     gradient.addColorStop(0.5, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
     gradient.addColorStop(0.8, `rgb(${Math.max(baseColor.r - 40, 0)}, ${Math.max(baseColor.g - 40, 0)}, ${Math.max(baseColor.b - 40, 0)})`);
     gradient.addColorStop(1, `rgb(${Math.max(baseColor.r - 80, 0)}, ${Math.max(baseColor.g - 80, 0)}, ${Math.max(baseColor.b - 80, 0)})`);
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 4096, 4096);
+    ctx.fillRect(0, 0, resolution, resolution);
     
     // Add ultra-detailed surface features based on planet type
     switch(planetKey) {
