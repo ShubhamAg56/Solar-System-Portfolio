@@ -66,22 +66,22 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
     return texture;
   }, [color]);
   
-  // Create normal map for surface detail
+  // Create optimized normal map for surface detail
   const normalMap = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 128;
-    canvas.height = 128;
+    canvas.width = 64; // Reduced from 128 for better performance
+    canvas.height = 64;
     const ctx = canvas.getContext('2d');
     
     // Base normal (pointing up)
     ctx.fillStyle = '#8080FF';
-    ctx.fillRect(0, 0, 128, 128);
+    ctx.fillRect(0, 0, 64, 64);
     
-    // Add surface normal variations
-    for (let i = 0; i < 100; i++) {
-      const x = Math.random() * 128;
-      const y = Math.random() * 128;
-      const radius = Math.random() * 12 + 3;
+    // Add surface normal variations (reduced count)
+    for (let i = 0; i < 40; i++) { // Reduced from 100
+      const x = Math.random() * 64;
+      const y = Math.random() * 64;
+      const radius = Math.random() * 6 + 2; // Reduced from 12 + 3
       
       const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
       gradient.addColorStop(0, '#FF8080');
