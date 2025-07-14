@@ -53,13 +53,6 @@ const SkillsSection = () => {
     return icons[category] || '💻';
   };
   
-  const getSkillLevel = (level) => {
-    if (level >= 90) return { label: 'Expert', color: 'text-emerald-500', icon: '🌟' };
-    if (level >= 80) return { label: 'Advanced', color: 'text-blue-500', icon: '💎' };
-    if (level >= 70) return { label: 'Intermediate', color: 'text-amber-500', icon: '🔥' };
-    return { label: 'Learning', color: 'text-orange-500', icon: '🚀' };
-  };
-  
   return (
     <div style={{ color: currentTheme.textPrimary }}>
       {/* Header Section */}
