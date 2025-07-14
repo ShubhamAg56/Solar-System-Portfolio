@@ -102,18 +102,18 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
     return texture;
   }, []);
   
-  // Create irregular asteroid geometry
+  // Create optimized irregular asteroid geometry
   const asteroidGeometry = useMemo(() => {
-    const geometry = new THREE.SphereGeometry(size, 12, 8);
+    const geometry = new THREE.SphereGeometry(size, 8, 6); // Reduced from 12, 8 for better performance
     const positionAttribute = geometry.attributes.position;
     
-    // Deform vertices to create irregular shape
+    // Deform vertices to create irregular shape (reduced deformation for performance)
     for (let i = 0; i < positionAttribute.count; i++) {
       const vertex = new THREE.Vector3();
       vertex.fromBufferAttribute(positionAttribute, i);
       
-      // Add noise for irregular shape
-      const noise = (Math.random() - 0.5) * 0.4;
+      // Add noise for irregular shape (reduced noise amount)
+      const noise = (Math.random() - 0.5) * 0.3; // Reduced from 0.4
       vertex.multiplyScalar(1 + noise);
       
       positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
