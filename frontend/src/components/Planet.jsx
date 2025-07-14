@@ -1278,7 +1278,7 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
       )}
       
       {/* Planet label with enhanced styling */}
-      {(hovered || isActive) && (
+      {(hovered || isActive) && !hideInfoBox && (
         <Html position={[planet.position[0], planet.position[1] + planet.scale + 1.5, planet.position[2]]}>
           <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.8 }}
