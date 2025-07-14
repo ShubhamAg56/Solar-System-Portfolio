@@ -94,31 +94,47 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
     return texture;
   }, [color]);
   
-  // Create optimized normal map for surface detail
+  // Create enhanced normal map with better surface detail
   const normalMap = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 64; // Reduced from 128 for better performance
-    canvas.height = 64;
+    canvas.width = 128; // Increased back to 128 for better quality
+    canvas.height = 128;
     const ctx = canvas.getContext('2d');
     
     // Base normal (pointing up)
     ctx.fillStyle = '#8080FF';
-    ctx.fillRect(0, 0, 64, 64);
+    ctx.fillRect(0, 0, 128, 128);
     
-    // Add surface normal variations (reduced count)
-    for (let i = 0; i < 40; i++) { // Reduced from 100
-      const x = Math.random() * 64;
-      const y = Math.random() * 64;
-      const radius = Math.random() * 6 + 2; // Reduced from 12 + 3
+    // Add detailed surface normal variations
+    for (let i = 0; i < 80; i++) { // Increased from 40
+      const x = Math.random() * 128;
+      const y = Math.random() * 128;
+      const radius = Math.random() * 15 + 5; // Increased from 6 + 2
       
       const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
       gradient.addColorStop(0, '#FF8080');
+      gradient.addColorStop(0.5, '#8080FF');
       gradient.addColorStop(1, '#8080FF');
       
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
       ctx.fill();
+    }
+    
+    // Add surface ridge patterns
+    for (let i = 0; i < 30; i++) {
+      const x1 = Math.random() * 128;
+      const y1 = Math.random() * 128;
+      const x2 = x1 + (Math.random() - 0.5) * 50;
+      const y2 = y1 + (Math.random() - 0.5) * 50;
+      
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.strokeStyle = '#FF8080';
+      ctx.lineWidth = Math.random() * 4 + 2;
+      ctx.stroke();
     }
     
     const texture = new THREE.CanvasTexture(canvas);
