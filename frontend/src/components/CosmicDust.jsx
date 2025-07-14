@@ -35,9 +35,10 @@ const CosmicDust = () => {
 
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.x = state.clock.elapsedTime * 0.0003;
-      ref.current.rotation.y = state.clock.elapsedTime * 0.0005;
-      ref.current.rotation.z = state.clock.elapsedTime * 0.0001;
+      // Slower cosmic dust rotation (70% slower)
+      ref.current.rotation.x = state.clock.elapsedTime * 0.00009; // 30% of 0.0003
+      ref.current.rotation.y = state.clock.elapsedTime * 0.00015; // 30% of 0.0005
+      ref.current.rotation.z = state.clock.elapsedTime * 0.00003; // 30% of 0.0001
     }
   });
   
