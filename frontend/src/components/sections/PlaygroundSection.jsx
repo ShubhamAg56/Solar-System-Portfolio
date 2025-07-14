@@ -26,16 +26,24 @@ const PlaygroundSection = () => {
     }
   };
 
-  const getCategoryColor = (category) => {
+  const getComplexityColor = (complexity) => {
     const colors = {
-      'Physics Simulation': '#FF6B6B',
-      'Procedural Graphics': '#4ECDC4',
-      'Interactive Experience': '#45B7D1',
-      'Shader Art': '#96CEB4',
-      'Audio Visualization': '#FFEAA7',
-      'default': accent
+      'Beginner': '#4CAF50',
+      'Intermediate': '#FF9800',
+      'Advanced': '#FF5722',
+      'Expert': '#9C27B0'
     };
-    return colors[category] || colors.default;
+    return colors[complexity] || '#757575';
+  };
+
+  const getPerformanceIcon = (performance) => {
+    const icons = {
+      'Standard GPU': '🖥️',
+      'Modern GPU': '💻',
+      'GPU Required': '🎮',
+      'High-end GPU': '🚀'
+    };
+    return icons[performance] || '💻';
   };
 
   const getTypeIcon = (type) => {
