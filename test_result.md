@@ -231,17 +231,19 @@ backend:
         comment: "COMPLETED: Dramatically improved Sun texture with spectacular realism. Added multi-layered solar granulation, enhanced solar flares with radial extensions, realistic sunspots with umbra/penumbra regions, solar prominences with magnetic loop effects, corona effects, surface convection cells with hexagonal patterns, and enhanced material properties with increased emissive intensity (1.2). Added 4-layer corona glow effect for stunning visual impact. Sun now looks truly spectacular and realistic."
 
 frontend:
-  - task: "Enhanced Asteroid Texture and Rendering"
+  - task: "Optimize Asteroid Belt for Increased Count"
     implemented: true
     working: true
     file: "components/AsteroidBelt.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: true
         agent: "main"
-        comment: "COMPLETED: Completely overhauled asteroid system with realistic 3D textures and enhanced rendering. Replaced simple point particles with individual 3D mesh objects featuring procedural texture generation with surface details (craters, scratches, mineral deposits), varied colors (8 different realistic asteroid colors), normal maps for surface bump mapping, irregular deformed geometry, individual rotation patterns, proper StandardMaterial with roughness/metalness/bump mapping, and environment mapping. Reduced count to 80 high-quality asteroids for better performance while dramatically improving visual quality. Adjusted asteroid sizes to be more realistic (reduced from 0.2-0.6 to 0.05-0.2 units) for better proportions relative to planets. Asteroids now look like realistic space rocks with proper lighting and surface details at appropriate scale."
+        comment: "OPTIMIZATION COMPLETED: Successfully optimized asteroid belt system to support significantly more asteroids (increased from 80 to 250). Implemented multiple performance optimizations: 1) Reduced texture resolution from 128x128 to 64x64 for better performance, 2) Optimized procedural texture generation with reduced detail counts (surface details from 200 to 80, mineral deposits from 50 to 20, scratches from 20 to 10), 3) Simplified geometry from 12,8 sphere segments to 8,6 for better performance, 4) Reduced deformation noise from 0.4 to 0.3, 5) Optimized material properties with balanced quality settings, 6) Created 3-ring asteroid distribution system for better visual spread, 7) Implemented mixed asteroid size system (60% small, 30% medium, 10% large), 8) Expanded orbital range from 23-25 to 22-26 for better coverage, 9) Added 4 new asteroid colors for more variety. The asteroid belt now features 250 high-quality asteroids with optimized performance and excellent visual density."
+
+  - task: "Enhanced Asteroid Texture and Rendering"
 
   - task: "Enhanced Skills Section Design"
     implemented: true
