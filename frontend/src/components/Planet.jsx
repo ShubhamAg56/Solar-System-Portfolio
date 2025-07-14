@@ -1332,6 +1332,19 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           </mesh>
         )}
         
+        {/* Uranus's methane atmosphere glow */}
+        {planetKey === 'uranus' && (
+          <mesh scale={1.04}>
+            <sphereGeometry args={[1, 32, 32]} />
+            <meshBasicMaterial
+              color="#87CEEB"
+              transparent
+              opacity={0.15}
+              side={THREE.BackSide}
+            />
+          </mesh>
+        )}
+        
         {/* Enhanced sun corona effect with multiple layers */}
         {planetKey === 'sun' && (
           <>
