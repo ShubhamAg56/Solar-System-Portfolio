@@ -409,59 +409,67 @@ export const portfolioData = {
 
 export const planetData = {
   sun: {
-    name: "About",
-    section: "about",
+    name: "Resume",
+    section: "resume",
     position: [0, 0, 0],
     scale: 3,
     color: "#FFA500",
-    description: "Central hub - Learn about me"
+    description: "Download my professional resume"
   },
   mercury: {
-    name: "Skills",
-    section: "skills",
+    name: "About",
+    section: "about",
     position: [8, 0, 0],
     scale: 0.4,
     color: "#8C7853",
-    description: "Technical abilities and expertise"
+    description: "Central hub - Learn about me"
   },
   venus: {
-    name: "Experience",
-    section: "experience",
+    name: "Skills",
+    section: "skills",
     position: [12, 0, 0],
     scale: 0.6,
     color: "#FFC649",
-    description: "Professional journey and achievements"
+    description: "Technical abilities and expertise"
   },
   earth: {
-    name: "Projects",
-    section: "projects",
+    name: "Experience",
+    section: "experience",
     position: [16, 0, 0],
     scale: 0.8,
     color: "#6B93D6",
-    description: "Showcase of my work and creations"
+    description: "Professional journey and achievements"
   },
   mars: {
-    name: "Education",
-    section: "education",
+    name: "Projects",
+    section: "projects",
     position: [20, 0, 0],
     scale: 0.5,
     color: "#CD5C5C",
-    description: "Academic background and learning"
+    description: "Showcase of my work and creations"
   },
   jupiter: {
-    name: "Contact",
-    section: "contact",
+    name: "Education",
+    section: "education",
     position: [28, 0, 0],
     scale: 1.5,
     color: "#D2691E",
-    description: "Get in touch with me"
+    description: "Academic background and learning"
   },
   saturn: {
-    name: "Playground",
-    section: "playground",
+    name: "Contact",
+    section: "contact",
     position: [36, 0, 0],
     scale: 1.2,
     color: "#FAD5A5",
+    description: "Get in touch with me"
+  },
+  uranus: {
+    name: "Playground",
+    section: "playground",
+    position: [45, 0, 0],
+    scale: 1.0,
+    color: "#4FD0E3",
     description: "Interactive demos and experiments"
   }
 };
