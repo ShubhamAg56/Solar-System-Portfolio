@@ -869,22 +869,29 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
       // Update planet rotation state for rings synchronization
       setPlanetRotation(meshRef.current.rotation.y);
       
-      // Orbital motion for planets (not the sun) - increased speed
+      // Enhanced orbital motion for planets (not the sun) - ensure all planets orbit properly
       if (planetKey !== 'sun') {
         const time = state.clock.elapsedTime;
-        const speed = planetKey === 'mercury' ? 0.08 : 
-                     planetKey === 'venus' ? 0.06 : 
-                     planetKey === 'earth' ? 0.05 : 
-                     planetKey === 'mars' ? 0.04 : 
-                     planetKey === 'jupiter' ? 0.03 : 
-                     planetKey === 'saturn' ? 0.025 : 0.02;
+        const speed = planetKey === 'mercury' ? 0.12 :  // Increased Mercury's speed significantly
+                     planetKey === 'venus' ? 0.08 : 
+                     planetKey === 'earth' ? 0.06 : 
+                     planetKey === 'mars' ? 0.05 : 
+                     planetKey === 'jupiter' ? 0.04 : 
+                     planetKey === 'saturn' ? 0.03 : 0.02;
         
+        // Calculate orbital radius from initial position
         const radius = Math.sqrt(planet.position[0] ** 2 + planet.position[2] ** 2);
-        meshRef.current.position.x = Math.cos(time * speed) * radius;
-        meshRef.current.position.z = Math.sin(time * speed) * radius;
         
-        // Add slight vertical oscillation for more dynamic movement
-        meshRef.current.position.y = Math.sin(time * speed * 0.5) * 0.2;
+        // Ensure Mercury and all planets have proper orbital motion
+        const newX = Math.cos(time * speed) * radius;
+        const newZ = Math.sin(time * speed) * radius;
+        
+        meshRef.current.position.x = newX;
+        meshRef.current.position.z = newZ;
+        
+        // Add slight vertical oscillation for more dynamic movement (reduced for Mercury)
+        const verticalOscillation = planetKey === 'mercury' ? 0.1 : 0.2;
+        meshRef.current.position.y = planet.position[1] + Math.sin(time * speed * 0.5) * verticalOscillation;
       }
       
       // Enhanced hover and active effects
