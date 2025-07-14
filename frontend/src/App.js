@@ -12,7 +12,6 @@ import './App.css';
 const AppContent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState(null);
-  const [cameraPosition, setCameraPosition] = useState([0, 10, 40]);
   const [isMobile, setIsMobile] = useState(false);
   const { currentTheme } = useTheme();
 
@@ -28,24 +27,10 @@ const AppContent = () => {
   
   const handlePlanetClick = (section) => {
     setActiveSection(section);
-    
-    // Animate camera to planet
-    const planet = Object.values(planetData).find(p => p.section === section);
-    if (planet) {
-      const [x, y, z] = planet.position;
-      setCameraPosition([x + (isMobile ? 15 : 10), y + (isMobile ? 8 : 5), z + (isMobile ? 15 : 10)]);
-    }
   };
   
   const handleNavigate = (section) => {
     setActiveSection(section);
-    
-    // Animate camera to planet
-    const planet = Object.values(planetData).find(p => p.section === section);
-    if (planet) {
-      const [x, y, z] = planet.position;
-      setCameraPosition([x + (isMobile ? 15 : 10), y + (isMobile ? 8 : 5), z + (isMobile ? 15 : 10)]);
-    }
   };
   
   const handleClosePanel = () => {
