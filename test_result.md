@@ -231,6 +231,18 @@ backend:
         comment: "COMPLETED: Dramatically improved Sun texture with spectacular realism. Added multi-layered solar granulation, enhanced solar flares with radial extensions, realistic sunspots with umbra/penumbra regions, solar prominences with magnetic loop effects, corona effects, surface convection cells with hexagonal patterns, and enhanced material properties with increased emissive intensity (1.2). Added 4-layer corona glow effect for stunning visual impact. Sun now looks truly spectacular and realistic."
 
 frontend:
+  - task: "Asteroid Proximity Enhancement & Comet Texture Upgrade"
+    implemented: true
+    working: true
+    file: "components/AsteroidBelt.jsx, components/CometSystem.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "ASTEROID & COMET ENHANCEMENT COMPLETED: 1) ASTEROID PROXIMITY: Successfully brought asteroids much closer together by reducing orbital range from 22-26 to 23.5-24.5 units, reduced ring spacing from 0.8 to 0.3 units, decreased positional variation from 0.8 to 0.4, reduced angle randomness from 0.4 to 0.2, and flattened belt height from 0.8 to 0.4 for tighter clustering. 2) COMET TEXTURE UPGRADE: Dramatically enhanced comet visual quality with 256x256 texture resolution (4x increase), procedural ice crystal patterns with 150 surface details, realistic surface cracks and sparkle effects, enhanced normal mapping for surface detail, increased geometry detail from 16x16 to 32x32 segments, upgraded to PBR StandardMaterial with emissive properties, enhanced tail with 120 particles (vs 50), multi-layer particle system with 3 particles per segment, sparkle texture for tail particles, and multi-layer glow system with coma effect. Comets now feature realistic ice textures with proper surface irregularities and spectacular trail effects."
+
   - task: "Optimize Asteroid Belt for Increased Count"
     implemented: true
     working: true
