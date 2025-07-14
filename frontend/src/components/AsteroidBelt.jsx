@@ -123,17 +123,17 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
     return geometry;
   }, [size]);
   
-  // Create material with enhanced properties
+  // Create optimized material with balanced quality and performance
   const asteroidMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       map: asteroidTexture,
       normalMap: normalMap,
-      roughness: 0.9,
-      metalness: 0.1,
+      roughness: 0.8, // Slightly reduced from 0.9
+      metalness: 0.05, // Slightly reduced from 0.1
       bumpMap: asteroidTexture,
-      bumpScale: 0.3,
-      normalScale: new THREE.Vector2(0.5, 0.5),
-      envMapIntensity: 0.2
+      bumpScale: 0.2, // Reduced from 0.3
+      normalScale: new THREE.Vector2(0.4, 0.4), // Reduced from 0.5, 0.5
+      envMapIntensity: 0.1 // Reduced from 0.2
     });
   }, [asteroidTexture, normalMap]);
   
