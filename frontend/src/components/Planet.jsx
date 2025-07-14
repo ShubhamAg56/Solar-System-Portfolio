@@ -1141,7 +1141,10 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         ref={meshRef}
         position={planet.position}
         scale={planet.scale}
-        onClick={onClick}
+        onClick={(e) => {
+          setHovered(false); // Remove info box when clicking
+          onClick(e);
+        }}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
