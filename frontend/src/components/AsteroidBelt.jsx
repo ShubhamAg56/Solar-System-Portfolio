@@ -38,7 +38,8 @@ const AsteroidBelt = () => {
 
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.y += 0.001;
+      // Slower asteroid belt rotation (70% slower)
+      ref.current.rotation.y += 0.0003; // 30% of 0.001
     }
   });
 
