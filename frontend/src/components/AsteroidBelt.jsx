@@ -158,12 +158,12 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
 const AsteroidBelt = () => {
   const groupRef = useRef();
   
-  // Generate optimized asteroid data with increased count
+  // Generate optimized asteroid data with closer spacing
   const asteroids = useMemo(() => {
     const asteroidData = [];
     const count = 250; // Increased from 80 to 250 for much denser asteroid belt
-    const minRadius = 22; // Slightly expanded range
-    const maxRadius = 26;
+    const minRadius = 23.5; // Reduced range from 22-26 to 23.5-24.5 for closer clustering
+    const maxRadius = 24.5;
     
     const asteroidColors = [
       '#8B7355', // Brown
@@ -181,16 +181,16 @@ const AsteroidBelt = () => {
     ];
     
     for (let i = 0; i < count; i++) {
-      // Create multiple orbital rings for better distribution
+      // Create multiple orbital rings for better distribution with closer spacing
       const ringIndex = Math.floor(i / (count / 3)); // Divide into 3 rings
-      const ringOffset = ringIndex * 0.8; // Offset between rings
+      const ringOffset = ringIndex * 0.3; // Reduced from 0.8 to 0.3 for closer rings
       
-      const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4; // Reduced randomness
+      const angle = (i / count) * Math.PI * 2 + Math.random() * 0.2; // Reduced from 0.4 for tighter clustering
       const radius = minRadius + Math.random() * (maxRadius - minRadius) + ringOffset;
-      const variation = (Math.random() - 0.5) * 0.8; // Reduced variation
+      const variation = (Math.random() - 0.5) * 0.4; // Reduced from 0.8 to 0.4 for closer positioning
       
       const x = Math.cos(angle) * radius + variation;
-      const y = (Math.random() - 0.5) * 0.8; // Reduced y variation
+      const y = (Math.random() - 0.5) * 0.4; // Reduced from 0.8 to 0.4 for flatter belt
       const z = Math.sin(angle) * radius + variation;
       
       // Create mix of asteroid sizes for variety
