@@ -1233,7 +1233,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           earth: 0,                      // Reference plane
           mars: 1.9 * Math.PI / 180,     // 1.9° to ecliptic
           jupiter: 1.3 * Math.PI / 180,  // 1.3° to ecliptic
-          saturn: 2.5 * Math.PI / 180    // 2.5° to ecliptic
+          saturn: 2.5 * Math.PI / 180,   // 2.5° to ecliptic
+          uranus: 0.8 * Math.PI / 180    // 0.8° to ecliptic
         };
         
         const inclination = orbitalInclinations[planetKey] || 0;
