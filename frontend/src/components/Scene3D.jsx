@@ -161,7 +161,7 @@ const SolarSystem = ({ activeSection, onPlanetClick }) => {
   );
 };
 
-const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
+const Scene3D = ({ activeSection, onPlanetClick }) => {
   const [isMobile, setIsMobile] = useState(false);
   const { currentTheme } = useTheme();
   
@@ -183,7 +183,7 @@ const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
     <div className="w-full h-full">
       <Canvas
         camera={{
-          position: cameraPosition || [0, 10, 40],
+          position: [0, 10, 40],
           fov: isMobile ? 70 : 60,
           near: 0.1,
           far: 2000
@@ -205,30 +205,11 @@ const Scene3D = ({ activeSection, onPlanetClick, cameraPosition }) => {
         <SolarSystem
           activeSection={activeSection}
           onPlanetClick={onPlanetClick}
-          cameraPosition={cameraPosition}
         />
         
-        <OrbitControls
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-          minDistance={isMobile ? 15 : 8}
-          maxDistance={isMobile ? 200 : 300}
-          autoRotate={false}
-          autoRotateSpeed={0.8}
-          dampingFactor={0.05}
-          enableDamping={true}
-          touches={{
-            ONE: isMobile ? 2 : 0, // Pan on mobile
-            TWO: isMobile ? 1 : 2, // Zoom on mobile
-          }}
-          mouseButtons={{
-            LEFT: 0,
-            MIDDLE: 1,
-            RIGHT: 2
-          }}
-          maxPolarAngle={Math.PI * 0.75}
-          minPolarAngle={Math.PI * 0.25}
+        <CameraController 
+          activeSection={activeSection}
+          isMobile={isMobile}
         />
       </Canvas>
     </div>
