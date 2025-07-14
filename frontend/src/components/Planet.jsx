@@ -89,11 +89,11 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     return materials[planetKey] || materials.earth;
   }, [planetKey]);
   
-  // Create enhanced realistic planet surface textures with much higher detail
+  // Create enhanced realistic planet surface textures with ultra-high detail
   const surfaceTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 2048; // Increased resolution for much better quality
-    canvas.height = 2048;
+    canvas.width = 4096; // Ultra high resolution for exceptional quality
+    canvas.height = 4096;
     const ctx = canvas.getContext('2d');
     
     // Create base color with enhanced gradient
@@ -110,63 +110,83 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     const baseColor = baseColors[planetKey] || baseColors.earth;
     
     // Create sophisticated radial gradient for depth and lighting
-    const gradient = ctx.createRadialGradient(768, 512, 0, 1024, 1024, 1024);
-    gradient.addColorStop(0, `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`);
-    gradient.addColorStop(0.3, `rgb(${Math.min(baseColor.r + 20, 255)}, ${Math.min(baseColor.g + 20, 255)}, ${Math.min(baseColor.b + 20, 255)})`);
-    gradient.addColorStop(0.7, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
-    gradient.addColorStop(1, `rgb(${Math.max(baseColor.r - 60, 0)}, ${Math.max(baseColor.g - 60, 0)}, ${Math.max(baseColor.b - 60, 0)})`);
+    const gradient = ctx.createRadialGradient(1536, 1024, 0, 2048, 2048, 2048);
+    gradient.addColorStop(0, `rgb(${Math.min(baseColor.r + 60, 255)}, ${Math.min(baseColor.g + 60, 255)}, ${Math.min(baseColor.b + 60, 255)})`);
+    gradient.addColorStop(0.2, `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`);
+    gradient.addColorStop(0.5, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+    gradient.addColorStop(0.8, `rgb(${Math.max(baseColor.r - 40, 0)}, ${Math.max(baseColor.g - 40, 0)}, ${Math.max(baseColor.b - 40, 0)})`);
+    gradient.addColorStop(1, `rgb(${Math.max(baseColor.r - 80, 0)}, ${Math.max(baseColor.g - 80, 0)}, ${Math.max(baseColor.b - 80, 0)})`);
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 2048, 2048);
+    ctx.fillRect(0, 0, 4096, 4096);
     
-    // Add advanced surface features based on planet type
+    // Add ultra-detailed surface features based on planet type
     switch(planetKey) {
       case 'sun':
-        // Advanced solar surface with multiple realistic layers
-        // Solar granulation with enhanced detail
-        for (let i = 0; i < 400; i++) {
-          const x = Math.random() * 2048;
-          const y = Math.random() * 2048;
-          const size = Math.random() * 25 + 10;
+        // Ultra-realistic solar surface with multiple detailed layers
+        // Solar granulation with enhanced detail and resolution
+        for (let i = 0; i < 1000; i++) {
+          const x = Math.random() * 4096;
+          const y = Math.random() * 4096;
+          const size = Math.random() * 50 + 20;
           const sunGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
           sunGradient.addColorStop(0, '#FFFACD');
-          sunGradient.addColorStop(0.3, '#FFFF99');
-          sunGradient.addColorStop(0.6, '#FFD700');
-          sunGradient.addColorStop(1, '#FF8C00');
+          sunGradient.addColorStop(0.2, '#FFFF99');
+          sunGradient.addColorStop(0.5, '#FFD700');
+          sunGradient.addColorStop(0.8, '#FF8C00');
+          sunGradient.addColorStop(1, '#FF6B35');
           ctx.fillStyle = sunGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
         }
         
-        // Enhanced solar flares with realistic patterns
-        for (let i = 0; i < 60; i++) {
-          const x = Math.random() * 2048;
-          const y = Math.random() * 2048;
-          const size = Math.random() * 60 + 30;
+        // Enhanced solar flares with ultra-realistic patterns
+        for (let i = 0; i < 150; i++) {
+          const x = Math.random() * 4096;
+          const y = Math.random() * 4096;
+          const size = Math.random() * 120 + 60;
           const flareGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
           flareGradient.addColorStop(0, '#FFFFFF');
-          flareGradient.addColorStop(0.2, '#FFF8DC');
-          flareGradient.addColorStop(0.5, '#FFD700');
-          flareGradient.addColorStop(1, '#FF4500');
+          flareGradient.addColorStop(0.1, '#FFF8DC');
+          flareGradient.addColorStop(0.3, '#FFD700');
+          flareGradient.addColorStop(0.6, '#FF4500');
+          flareGradient.addColorStop(1, '#8B0000');
           ctx.fillStyle = flareGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
         }
         
-        // Solar prominence effects
-        for (let i = 0; i < 20; i++) {
-          const x = Math.random() * 2048;
-          const y = Math.random() * 2048;
-          const width = Math.random() * 100 + 50;
-          const height = Math.random() * 200 + 100;
+        // Ultra-realistic sunspot formations
+        for (let i = 0; i < 40; i++) {
+          const x = Math.random() * 4096;
+          const y = Math.random() * 4096;
+          const size = Math.random() * 80 + 40;
+          const spotGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          spotGradient.addColorStop(0, '#2F1B14');
+          spotGradient.addColorStop(0.3, '#8B4513');
+          spotGradient.addColorStop(0.7, '#CD853F');
+          spotGradient.addColorStop(1, '#DAA520');
+          ctx.fillStyle = spotGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Solar prominence effects with enhanced realism
+        for (let i = 0; i < 60; i++) {
+          const x = Math.random() * 4096;
+          const y = Math.random() * 4096;
+          const width = Math.random() * 200 + 100;
+          const height = Math.random() * 400 + 200;
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(Math.random() * Math.PI * 2);
           const prominenceGradient = ctx.createLinearGradient(-width/2, -height/2, width/2, height/2);
-          prominenceGradient.addColorStop(0, 'rgba(255, 69, 0, 0.8)');
-          prominenceGradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.6)');
-          prominenceGradient.addColorStop(1, 'rgba(255, 215, 0, 0.3)');
+          prominenceGradient.addColorStop(0, 'rgba(255, 69, 0, 0.9)');
+          prominenceGradient.addColorStop(0.3, 'rgba(255, 140, 0, 0.7)');
+          prominenceGradient.addColorStop(0.7, 'rgba(255, 215, 0, 0.5)');
+          prominenceGradient.addColorStop(1, 'rgba(255, 255, 0, 0.2)');
           ctx.fillStyle = prominenceGradient;
           ctx.fillRect(-width/2, -height/2, width, height);
           ctx.restore();
@@ -174,48 +194,123 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         break;
         
       case 'mercury':
-        // Enhanced crater system with realistic impact features
-        for (let i = 0; i < 150; i++) {
-          const x = Math.random() * 2048;
-          const y = Math.random() * 2048;
-          const size = Math.random() * 50 + 10;
+        // Ultra-enhanced crater system with hyper-realistic impact features
+        // Large primary impact basins
+        const majorCraters = [
+          {x: 1200, y: 800, size: 200, name: 'Caloris Basin'},
+          {x: 2800, y: 1500, size: 150, name: 'Beethoven Basin'},
+          {x: 800, y: 2200, size: 120, name: 'Tolstoj Basin'},
+          {x: 3200, y: 3000, size: 180, name: 'Rembrandt Basin'}
+        ];
+        
+        majorCraters.forEach(crater => {
+          // Main crater depression with multiple rings
+          const craterGradient = ctx.createRadialGradient(crater.x, crater.y, 0, crater.x, crater.y, crater.size);
+          craterGradient.addColorStop(0, `rgb(${baseColor.r - 100}, ${baseColor.g - 100}, ${baseColor.b - 100})`);
+          craterGradient.addColorStop(0.2, `rgb(${baseColor.r - 80}, ${baseColor.g - 80}, ${baseColor.b - 80})`);
+          craterGradient.addColorStop(0.5, `rgb(${baseColor.r - 60}, ${baseColor.g - 60}, ${baseColor.b - 60})`);
+          craterGradient.addColorStop(0.8, `rgb(${baseColor.r - 30}, ${baseColor.g - 30}, ${baseColor.b - 30})`);
+          craterGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+          ctx.fillStyle = craterGradient;
+          ctx.beginPath();
+          ctx.arc(crater.x, crater.y, crater.size, 0, Math.PI * 2);
+          ctx.fill();
           
-          // Main crater depression
+          // Multi-ring structure
+          for (let ring = 1; ring <= 3; ring++) {
+            ctx.strokeStyle = `rgb(${Math.min(baseColor.r + 40 * ring, 255)}, ${Math.min(baseColor.g + 40 * ring, 255)}, ${Math.min(baseColor.b + 40 * ring, 255)})`;
+            ctx.lineWidth = 8 - ring * 2;
+            ctx.beginPath();
+            ctx.arc(crater.x, crater.y, crater.size * (0.3 + ring * 0.2), 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          
+          // Central peak complex
+          const peakGradient = ctx.createRadialGradient(crater.x, crater.y, 0, crater.x, crater.y, crater.size * 0.2);
+          peakGradient.addColorStop(0, `rgb(${Math.min(baseColor.r + 80, 255)}, ${Math.min(baseColor.g + 80, 255)}, ${Math.min(baseColor.b + 80, 255)})`);
+          peakGradient.addColorStop(1, `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`);
+          ctx.fillStyle = peakGradient;
+          ctx.beginPath();
+          ctx.arc(crater.x, crater.y, crater.size * 0.15, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        
+        // Medium secondary craters (500+)
+        for (let i = 0; i < 500; i++) {
+          const x = Math.random() * 4096;
+          const y = Math.random() * 4096;
+          const size = Math.random() * 100 + 20;
+          
           const craterGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-          craterGradient.addColorStop(0, `rgb(${baseColor.r - 80}, ${baseColor.g - 80}, ${baseColor.b - 80})`);
-          craterGradient.addColorStop(0.4, `rgb(${baseColor.r - 50}, ${baseColor.g - 50}, ${baseColor.b - 50})`);
-          craterGradient.addColorStop(0.8, `rgb(${baseColor.r - 20}, ${baseColor.g - 20}, ${baseColor.b - 20})`);
+          craterGradient.addColorStop(0, `rgb(${baseColor.r - 120}, ${baseColor.g - 120}, ${baseColor.b - 120})`);
+          craterGradient.addColorStop(0.3, `rgb(${baseColor.r - 80}, ${baseColor.g - 80}, ${baseColor.b - 80})`);
+          craterGradient.addColorStop(0.7, `rgb(${baseColor.r - 40}, ${baseColor.g - 40}, ${baseColor.b - 40})`);
           craterGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
           ctx.fillStyle = craterGradient;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
           
-          // Crater rim with highlights
-          ctx.strokeStyle = `rgb(${Math.min(baseColor.r + 60, 255)}, ${Math.min(baseColor.g + 60, 255)}, ${Math.min(baseColor.b + 60, 255)})`;
-          ctx.lineWidth = 3;
+          // Crater rim with detailed highlights
+          ctx.strokeStyle = `rgb(${Math.min(baseColor.r + 100, 255)}, ${Math.min(baseColor.g + 100, 255)}, ${Math.min(baseColor.b + 100, 255)})`;
+          ctx.lineWidth = 6;
           ctx.beginPath();
-          ctx.arc(x, y, size * 0.9, 0, Math.PI * 2);
+          ctx.arc(x, y, size * 0.85, 0, Math.PI * 2);
           ctx.stroke();
           
-          // Central peak for larger craters
-          if (size > 30) {
-            ctx.fillStyle = `rgb(${Math.min(baseColor.r + 40, 255)}, ${Math.min(baseColor.g + 40, 255)}, ${Math.min(baseColor.b + 40, 255)})`;
+          // Ejecta blanket
+          for (let j = 0; j < 8; j++) {
+            const angle = (j / 8) * Math.PI * 2;
+            const ejX = x + Math.cos(angle) * size * 1.5;
+            const ejY = y + Math.sin(angle) * size * 1.5;
+            const ejSize = size * 0.3;
+            ctx.fillStyle = `rgba(${baseColor.r + 30}, ${baseColor.g + 30}, ${baseColor.b + 30}, 0.6)`;
             ctx.beginPath();
-            ctx.arc(x, y, size * 0.1, 0, Math.PI * 2);
+            ctx.arc(ejX, ejY, ejSize, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          
+          // Central peak for larger craters
+          if (size > 50) {
+            ctx.fillStyle = `rgb(${Math.min(baseColor.r + 60, 255)}, ${Math.min(baseColor.g + 60, 255)}, ${Math.min(baseColor.b + 60, 255)})`;
+            ctx.beginPath();
+            ctx.arc(x, y, size * 0.12, 0, Math.PI * 2);
             ctx.fill();
           }
         }
         
-        // Surface texture with enhanced detail
-        for (let i = 0; i < 300; i++) {
-          const x = Math.random() * 2048;
-          const y = Math.random() * 2048;
-          const size = Math.random() * 10 + 2;
-          ctx.fillStyle = `rgba(${baseColor.r + Math.random() * 40 - 20}, ${baseColor.g + Math.random() * 40 - 20}, ${baseColor.b + Math.random() * 40 - 20}, 0.6)`;
+        // Small microcraters and detailed surface texture (1000+)
+        for (let i = 0; i < 1000; i++) {
+          const x = Math.random() * 4096;
+          const y = Math.random() * 4096;
+          const size = Math.random() * 20 + 3;
+          ctx.fillStyle = `rgba(${baseColor.r + Math.random() * 60 - 30}, ${baseColor.g + Math.random() * 60 - 30}, ${baseColor.b + Math.random() * 60 - 30}, 0.8)`;
           ctx.beginPath();
           ctx.arc(x, y, size, 0, Math.PI * 2);
           ctx.fill();
+        }
+        
+        // Scarps and ridges (Mercury's unique geological features)
+        for (let i = 0; i < 20; i++) {
+          const startX = Math.random() * 4096;
+          const startY = Math.random() * 4096;
+          const length = Math.random() * 1000 + 500;
+          const angle = Math.random() * Math.PI * 2;
+          
+          ctx.strokeStyle = `rgb(${baseColor.r + 40}, ${baseColor.g + 40}, ${baseColor.b + 40})`;
+          ctx.lineWidth = 12;
+          ctx.beginPath();
+          ctx.moveTo(startX, startY);
+          ctx.lineTo(startX + Math.cos(angle) * length, startY + Math.sin(angle) * length);
+          ctx.stroke();
+          
+          // Shadow side of scarp
+          ctx.strokeStyle = `rgb(${baseColor.r - 40}, ${baseColor.g - 40}, ${baseColor.b - 40})`;
+          ctx.lineWidth = 8;
+          ctx.beginPath();
+          ctx.moveTo(startX + Math.cos(angle + Math.PI/2) * 6, startY + Math.sin(angle + Math.PI/2) * 6);
+          ctx.lineTo(startX + Math.cos(angle) * length + Math.cos(angle + Math.PI/2) * 6, startY + Math.sin(angle) * length + Math.sin(angle + Math.PI/2) * 6);
+          ctx.stroke();
         }
         break;
         
