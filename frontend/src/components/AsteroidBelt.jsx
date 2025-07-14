@@ -158,12 +158,12 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
 const AsteroidBelt = () => {
   const groupRef = useRef();
   
-  // Generate asteroid data with varied properties
+  // Generate optimized asteroid data with increased count
   const asteroids = useMemo(() => {
     const asteroidData = [];
-    const count = 80; // Reduced count for performance but higher quality
-    const minRadius = 23;
-    const maxRadius = 25;
+    const count = 250; // Increased from 80 to 250 for much denser asteroid belt
+    const minRadius = 22; // Slightly expanded range
+    const maxRadius = 26;
     
     const asteroidColors = [
       '#8B7355', // Brown
@@ -173,22 +173,41 @@ const AsteroidBelt = () => {
       '#556B2F', // Dark olive
       '#2F4F4F', // Dark slate gray
       '#8B4513', // Saddle brown
-      '#483D8B'  // Dark slate blue
+      '#483D8B', // Dark slate blue
+      '#654321', // Dark brown
+      '#778899', // Light slate gray
+      '#8B8680', // Warm gray
+      '#5F5F5F'  // Dark gray
     ];
     
     for (let i = 0; i < count; i++) {
-      const angle = (i / count) * Math.PI * 2 + Math.random() * 0.5;
-      const radius = minRadius + Math.random() * (maxRadius - minRadius);
-      const variation = (Math.random() - 0.5) * 1;
+      // Create multiple orbital rings for better distribution
+      const ringIndex = Math.floor(i / (count / 3)); // Divide into 3 rings
+      const ringOffset = ringIndex * 0.8; // Offset between rings
+      
+      const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4; // Reduced randomness
+      const radius = minRadius + Math.random() * (maxRadius - minRadius) + ringOffset;
+      const variation = (Math.random() - 0.5) * 0.8; // Reduced variation
       
       const x = Math.cos(angle) * radius + variation;
-      const y = (Math.random() - 0.5) * 1;
+      const y = (Math.random() - 0.5) * 0.8; // Reduced y variation
       const z = Math.sin(angle) * radius + variation;
+      
+      // Create mix of asteroid sizes for variety
+      const sizeVariation = Math.random();
+      let asteroidSize;
+      if (sizeVariation < 0.6) {
+        asteroidSize = Math.random() * 0.08 + 0.03; // Small asteroids (60%)
+      } else if (sizeVariation < 0.9) {
+        asteroidSize = Math.random() * 0.12 + 0.08; // Medium asteroids (30%)
+      } else {
+        asteroidSize = Math.random() * 0.16 + 0.12; // Large asteroids (10%)
+      }
       
       asteroidData.push({
         position: [x, y, z],
-        size: Math.random() * 0.15 + 0.05, // Reduced from 0.4 + 0.2 to 0.15 + 0.05 (now 0.05 to 0.2)
-        rotationSpeed: (Math.random() - 0.5) * 0.02,
+        size: asteroidSize,
+        rotationSpeed: (Math.random() - 0.5) * 0.015, // Slightly reduced rotation
         color: asteroidColors[Math.floor(Math.random() * asteroidColors.length)],
         key: i
       });
