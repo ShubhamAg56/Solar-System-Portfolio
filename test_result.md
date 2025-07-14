@@ -101,7 +101,7 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 
-user_problem_statement: "Improve the planets texture and slow down the planets animations and make the loading of the site less heavy"
+user_problem_statement: "Remove the moons, orbit traces and speed controls from the 3D Solar System Portfolio application"
 
 backend:
   - task: "Planet Animation Speed Optimization"
