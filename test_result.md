@@ -461,11 +461,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Planet Animation Speed Optimization"
-    - "Texture Quality Optimization"
-    - "Initial Loading Performance Optimization"
-    - "Animated Camera Zoom System"
-    - "Enhanced Sun Texture"
+    - "Remove Moon System Component"
+    - "Remove Orbit Traces Component"
+    - "Remove Time Controls Component"
   stuck_tasks: []
   test_all: false
   test_priority: "new_features"
