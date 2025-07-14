@@ -43,8 +43,8 @@ const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
   
   useFrame((state) => {
     if (groupRef.current) {
-      // Faster rotation of the entire solar system
-      groupRef.current.rotation.y += 0.0005;
+      // Slower rotation of the entire solar system (70% slower)
+      groupRef.current.rotation.y += 0.00015; // 30% of 0.0005
     }
   });
   
