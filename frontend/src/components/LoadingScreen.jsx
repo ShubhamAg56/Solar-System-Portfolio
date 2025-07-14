@@ -74,13 +74,15 @@ const LoadingScreen = ({ onLoadComplete }) => {
           </p>
         </motion.div>
         
-        <div className="w-64 h-2 rounded-full overflow-hidden" style={{ backgroundColor: border }}>
+        <div className="w-64 h-3 rounded-full overflow-hidden border" style={{ backgroundColor: border, borderColor: border }}>
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${loadingProgress}%` }}
-            transition={{ duration: 0.1 }}
-            className="h-full bg-gradient-to-r from-yellow-400 to-orange-500"
-          />
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="h-full bg-gradient-to-r from-yellow-400 via-orange-400 to-orange-500 relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
+          </motion.div>
         </div>
         
         <p className="mt-4" style={{ color: textSecondary }}>
