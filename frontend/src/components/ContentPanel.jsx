@@ -32,6 +32,8 @@ const ContentPanel = ({ activeSection, onClose }) => {
 
   const renderContent = () => {
     switch (activeSection) {
+      case 'resume':
+        return <ResumeSection />;
       case 'about':
         return <AboutSection />;
       case 'skills':
