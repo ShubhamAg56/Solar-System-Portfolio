@@ -70,7 +70,7 @@ const LoadingScreen = ({ onLoadComplete }) => {
             Alex Cosmos
           </h1>
           <p style={{ color: textSecondary }}>
-            Initializing Solar System...
+            {loadingStage}
           </p>
         </motion.div>
         
