@@ -863,16 +863,41 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
   
   useFrame((state) => {
     if (meshRef.current) {
-      // Enhanced planet rotation - faster spin
-      meshRef.current.rotation.y += planetKey === 'sun' ? 0.015 : 0.02;
+      // Realistic planet rotation with proper axial tilts
+      const axialTilts = {
+        sun: { x: 0, z: 0 },
+        mercury: { x: 0.034 * Math.PI / 180, z: 0 },  // 0.034° tilt
+        venus: { x: 177.4 * Math.PI / 180, z: 0 },     // 177.4° retrograde
+        earth: { x: 23.4 * Math.PI / 180, z: 0 },      // 23.4° tilt
+        mars: { x: 25.2 * Math.PI / 180, z: 0 },       // 25.2° tilt
+        jupiter: { x: 3.1 * Math.PI / 180, z: 0 },     // 3.1° tilt
+        saturn: { x: 26.7 * Math.PI / 180, z: 0 }      // 26.7° tilt
+      };
+      
+      const tilt = axialTilts[planetKey] || axialTilts.earth;
+      
+      // Apply axial tilt to the planet
+      meshRef.current.rotation.x = tilt.x;
+      meshRef.current.rotation.z = tilt.z;
+      
+      // Enhanced planet rotation with realistic speeds and directions
+      const rotationSpeed = planetKey === 'sun' ? 0.015 : 
+                           planetKey === 'venus' ? -0.008 : // Venus rotates backwards
+                           planetKey === 'mercury' ? 0.04 : // Mercury rotates slowly
+                           planetKey === 'earth' ? 0.02 :
+                           planetKey === 'mars' ? 0.019 :
+                           planetKey === 'jupiter' ? 0.045 : // Jupiter rotates fast
+                           planetKey === 'saturn' ? 0.038 : 0.02;
+      
+      meshRef.current.rotation.y += rotationSpeed;
       
       // Update planet rotation state for rings synchronization
       setPlanetRotation(meshRef.current.rotation.y);
       
-      // Enhanced orbital motion for planets (not the sun) - ensure all planets orbit properly
+      // CORRECTED orbital motion - all planets orbit COUNTERCLOCKWISE (like real solar system)
       if (planetKey !== 'sun') {
         const time = state.clock.elapsedTime;
-        const speed = planetKey === 'mercury' ? 0.12 :  // Increased Mercury's speed significantly
+        const speed = planetKey === 'mercury' ? 0.12 :  // Mercury fastest
                      planetKey === 'venus' ? 0.08 : 
                      planetKey === 'earth' ? 0.06 : 
                      planetKey === 'mars' ? 0.05 : 
@@ -882,16 +907,26 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
         // Calculate orbital radius from initial position
         const radius = Math.sqrt(planet.position[0] ** 2 + planet.position[2] ** 2);
         
-        // Ensure Mercury and all planets have proper orbital motion
-        const newX = Math.cos(time * speed) * radius;
-        const newZ = Math.sin(time * speed) * radius;
+        // FIXED: Counterclockwise orbital motion (negative time for correct direction)
+        const newX = Math.cos(-time * speed) * radius;  // Negative time for counterclockwise
+        const newZ = Math.sin(-time * speed) * radius;  // Negative time for counterclockwise
         
         meshRef.current.position.x = newX;
         meshRef.current.position.z = newZ;
         
-        // Add slight vertical oscillation for more dynamic movement (reduced for Mercury)
-        const verticalOscillation = planetKey === 'mercury' ? 0.1 : 0.2;
-        meshRef.current.position.y = planet.position[1] + Math.sin(time * speed * 0.5) * verticalOscillation;
+        // Add realistic orbital inclinations
+        const orbitalInclinations = {
+          mercury: 7.0 * Math.PI / 180,  // 7° to ecliptic
+          venus: 3.4 * Math.PI / 180,    // 3.4° to ecliptic
+          earth: 0,                      // Reference plane
+          mars: 1.9 * Math.PI / 180,     // 1.9° to ecliptic
+          jupiter: 1.3 * Math.PI / 180,  // 1.3° to ecliptic
+          saturn: 2.5 * Math.PI / 180    // 2.5° to ecliptic
+        };
+        
+        const inclination = orbitalInclinations[planetKey] || 0;
+        const verticalOscillation = Math.sin(time * speed * 2) * Math.sin(inclination) * 2;
+        meshRef.current.position.y = planet.position[1] + verticalOscillation;
       }
       
       // Enhanced hover and active effects
