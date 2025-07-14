@@ -142,43 +142,83 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     envMapIntensity: 0.8
   }), [color, cometTexture, normalMap]);
   
-  // Create tail geometry
+  // Create enhanced tail geometry with more particles and detail
   const tailGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
     const positions = [];
     const colors = [];
-    const tailLength = 50;
+    const sizes = [];
+    const tailLength = 120; // Increased from 50 for longer tail
     
     for (let i = 0; i < tailLength; i++) {
       const t = i / tailLength;
-      positions.push(
-        -direction.x * t * 8,
-        -direction.y * t * 8,
-        -direction.z * t * 8
-      );
+      const spread = t * 2; // Tail spreads out as it gets longer
       
-      // Fade color from bright to transparent
-      const alpha = 1 - t;
-      colors.push(
-        parseInt(color.slice(1, 3), 16) / 255,
-        parseInt(color.slice(3, 5), 16) / 255,
-        parseInt(color.slice(5, 7), 16) / 255,
-        alpha
-      );
+      // Create multiple particles per tail segment for denser effect
+      for (let j = 0; j < 3; j++) {
+        const offsetX = (Math.random() - 0.5) * spread;
+        const offsetY = (Math.random() - 0.5) * spread;
+        const offsetZ = (Math.random() - 0.5) * spread;
+        
+        positions.push(
+          -direction.x * t * 12 + offsetX,
+          -direction.y * t * 12 + offsetY,
+          -direction.z * t * 12 + offsetZ
+        );
+        
+        // Enhanced color fade with blue-to-white gradient
+        const alpha = Math.pow(1 - t, 1.5); // More dramatic fade
+        const brightness = 0.8 + Math.random() * 0.4; // Varying brightness
+        
+        colors.push(
+          (parseInt(color.slice(1, 3), 16) / 255) * brightness,
+          (parseInt(color.slice(3, 5), 16) / 255) * brightness,
+          Math.min(1, (parseInt(color.slice(5, 7), 16) / 255) * brightness + 0.3), // Add blue tint
+          alpha
+        );
+        
+        // Varying particle sizes
+        sizes.push(0.3 + Math.random() * 0.8 - t * 0.5);
+      }
     }
     
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 4));
+    geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
     
     return geometry;
   }, [direction, color]);
   
-  const tailMaterial = useMemo(() => new THREE.PointsMaterial({
-    size: 0.1,
-    transparent: true,
-    vertexColors: true,
-    blending: THREE.AdditiveBlending
-  }), []);
+  // Enhanced tail material with better blending
+  const tailMaterial = useMemo(() => {
+    // Create a sparkle texture for tail particles
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    
+    // Create radial gradient for sparkle effect
+    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    gradient.addColorStop(0.3, 'rgba(200, 220, 255, 0.8)');
+    gradient.addColorStop(0.7, 'rgba(150, 180, 255, 0.4)');
+    gradient.addColorStop(1, 'rgba(100, 150, 255, 0)');
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 64, 64);
+    
+    const texture = new THREE.CanvasTexture(canvas);
+    
+    return new THREE.PointsMaterial({
+      map: texture,
+      size: 0.8, // Increased from 0.1
+      transparent: true,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      sizeAttenuation: true
+    });
+  }, []);
   
   useFrame((state) => {
     if (cometRef.current && tailRef.current) {
