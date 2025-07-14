@@ -498,8 +498,7 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "Optimize Asteroid Belt for Increased Count"
+  current_focus: []
   stuck_tasks: []
   test_all: false
   test_priority: "new_features"
