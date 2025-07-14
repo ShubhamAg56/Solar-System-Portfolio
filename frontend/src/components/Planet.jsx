@@ -26,8 +26,8 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
       sun: new THREE.MeshStandardMaterial({
         color: '#FFA500',
         emissive: '#FF6B35',
-        emissiveIntensity: 0.8,
-        roughness: 0.1,
+        emissiveIntensity: 1.2, // Increased intensity
+        roughness: 0.05, // Very smooth for more glow
         metalness: 0.0,
         transparent: false,
         opacity: 1.0
