@@ -135,7 +135,5 @@ const SaturnRings = ({ position, scale, planetRotation = 0 }) => {
 };
 
 export default SaturnRings;
-};
-};
 
 export default SaturnRings;
