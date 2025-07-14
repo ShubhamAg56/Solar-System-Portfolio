@@ -902,15 +902,15 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
       // Update planet rotation state for rings synchronization
       setPlanetRotation(meshRef.current.rotation.y);
       
-      // CORRECTED orbital motion - all planets orbit COUNTERCLOCKWISE (like real solar system)
+      // CORRECTED orbital motion - all planets orbit COUNTERCLOCKWISE (70% slower)
       if (planetKey !== 'sun') {
         const time = state.clock.elapsedTime;
-        const speed = planetKey === 'mercury' ? 0.12 :  // Mercury fastest
-                     planetKey === 'venus' ? 0.08 : 
-                     planetKey === 'earth' ? 0.06 : 
-                     planetKey === 'mars' ? 0.05 : 
-                     planetKey === 'jupiter' ? 0.04 : 
-                     planetKey === 'saturn' ? 0.03 : 0.02;
+        const speed = planetKey === 'mercury' ? 0.036 :  // 30% of 0.12, Mercury fastest
+                     planetKey === 'venus' ? 0.024 :     // 30% of 0.08
+                     planetKey === 'earth' ? 0.018 :     // 30% of 0.06
+                     planetKey === 'mars' ? 0.015 :      // 30% of 0.05
+                     planetKey === 'jupiter' ? 0.012 :   // 30% of 0.04
+                     planetKey === 'saturn' ? 0.009 : 0.006; // 30% of 0.03
         
         // Calculate orbital radius from initial position
         const radius = Math.sqrt(planet.position[0] ** 2 + planet.position[2] ** 2);
