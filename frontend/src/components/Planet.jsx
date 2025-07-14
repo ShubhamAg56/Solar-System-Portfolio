@@ -12,6 +12,7 @@ const textureCache = new Map();
 const Planet = ({ planet, planetKey, isActive, onClick }) => {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
+  const [hideInfoBox, setHideInfoBox] = useState(false);
   const [planetRotation, setPlanetRotation] = useState(0);
   const { currentTheme } = useTheme();
   
