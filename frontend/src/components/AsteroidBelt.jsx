@@ -171,17 +171,20 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
     return geometry;
   }, [size]);
   
-  // Create optimized material with balanced quality and performance
+  // Create enhanced material with better visual properties
   const asteroidMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       map: asteroidTexture,
       normalMap: normalMap,
-      roughness: 0.8, // Slightly reduced from 0.9
-      metalness: 0.05, // Slightly reduced from 0.1
+      roughness: 0.9, // Increased back to 0.9 for more realistic rocky surface
+      metalness: 0.1, // Increased back to 0.1 for subtle metallic elements
       bumpMap: asteroidTexture,
-      bumpScale: 0.2, // Reduced from 0.3
-      normalScale: new THREE.Vector2(0.4, 0.4), // Reduced from 0.5, 0.5
-      envMapIntensity: 0.1 // Reduced from 0.2
+      bumpScale: 0.4, // Increased from 0.2 for more pronounced surface detail
+      normalScale: new THREE.Vector2(0.6, 0.6), // Increased from 0.4 for better surface relief
+      envMapIntensity: 0.2, // Increased from 0.1 for better lighting interaction
+      aoMapIntensity: 0.5, // Added ambient occlusion for depth
+      transparent: false,
+      side: THREE.FrontSide
     });
   }, [asteroidTexture, normalMap]);
   
