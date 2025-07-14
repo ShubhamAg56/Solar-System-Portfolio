@@ -136,9 +136,8 @@ const CameraController = ({ activeSection, isMobile }) => {
   );
 };
 
-const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
+const SolarSystem = ({ activeSection, onPlanetClick }) => {
   const groupRef = useRef();
-  const { camera } = useThree();
   
   useFrame((state) => {
     if (groupRef.current) {
@@ -146,12 +145,6 @@ const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
       groupRef.current.rotation.y += 0.00015; // 30% of 0.0005
     }
   });
-  
-  useEffect(() => {
-    if (cameraPosition) {
-      camera.position.set(...cameraPosition);
-    }
-  }, [cameraPosition, camera]);
   
   return (
     <group ref={groupRef}>
