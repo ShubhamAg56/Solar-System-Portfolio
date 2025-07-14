@@ -380,10 +380,11 @@ test_plan:
     - "Planet Animation Speed Optimization"
     - "Texture Quality Optimization"
     - "Initial Loading Performance Optimization"
-    - "Mobile and Desktop Performance Balance"
+    - "Animated Camera Zoom System"
+    - "Enhanced Sun Texture"
   stuck_tasks: []
   test_all: false
-  test_priority: "new_optimizations"
+  test_priority: "new_features"
 
 agent_communication:
   - agent: "main"
