@@ -206,9 +206,6 @@ const Scene3D = ({ activeSection, onPlanetClick, isMobile }) => {
           {/* Comet System */}
           <CometSystem />
           
-          {/* Orbit Traces */}
-          <OrbitTraces planets={planetData} showTraces={showTraces} />
-          
           {/* Solar System */}
           <group>
             {/* Planets */}
@@ -219,12 +216,6 @@ const Scene3D = ({ activeSection, onPlanetClick, isMobile }) => {
                   planetKey={key}
                   isActive={activeSection === planet.section}
                   onClick={() => onPlanetClick(planet.section)}
-                />
-                {/* Moons */}
-                <MoonSystem 
-                  planetKey={key}
-                  planetPosition={planet.position}
-                  planetScale={planet.scale}
                 />
               </group>
             ))}
@@ -246,39 +237,7 @@ const Scene3D = ({ activeSection, onPlanetClick, isMobile }) => {
             minPolarAngle={0}
             maxPolarAngle={Math.PI}
           />
-        </TimeAwareCanvas>
       </Canvas>
-      
-      {/* Time Controls */}
-      <TimeControls
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        timeSpeed={timeSpeed}
-        setTimeSpeed={setTimeSpeed}
-        onReset={handleReset}
-        elapsedTime={elapsedTime}
-      />
-      
-      {/* Orbit Traces Toggle */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="fixed bottom-4 left-4 z-50"
-      >
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setShowTraces(!showTraces)}
-          className="px-4 py-2 rounded-lg backdrop-blur-sm border shadow-lg text-sm font-medium transition-all"
-          style={{ 
-            backgroundColor: currentTheme?.cardBackground,
-            borderColor: currentTheme?.cardBorder,
-            color: currentTheme?.textPrimary
-          }}
-        >
-          {showTraces ? 'Hide Orbits' : 'Show Orbits'}
-        </motion.button>
-      </motion.div>
     </div>
   );
 };
