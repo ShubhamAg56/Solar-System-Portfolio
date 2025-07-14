@@ -1040,6 +1040,118 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
           ctx.fillRect(0, y, 2048, 15);
         }
         break;
+        
+      case 'uranus':
+        // Enhanced Uranus with ice giant characteristics and methane atmosphere
+        const uranusBandColors = [
+          '#4FD0E3', '#40E0D0', '#87CEEB', '#87CEFA', 
+          '#B0E0E6', '#AFEEEE', '#E0FFFF', '#F0FFFF',
+          '#7EC0EE', '#4682B4', '#5F9EA0', '#00CED1',
+          '#48D1CC', '#00BFFF', '#87CEEB', '#B0C4DE'
+        ];
+        
+        // Create Uranus's subtle atmospheric bands
+        for (let i = 0; i < 25; i++) {
+          const y = (i / 25) * 2048;
+          const height = 2048 / 25;
+          const colorIndex = i % uranusBandColors.length;
+          const color = uranusBandColors[colorIndex];
+          
+          // Very subtle band gradient for ice giant
+          const bandGradient = ctx.createLinearGradient(0, y, 0, y + height);
+          bandGradient.addColorStop(0, `${color}CC`);
+          bandGradient.addColorStop(0.5, color);
+          bandGradient.addColorStop(1, `${color}CC`);
+          ctx.fillStyle = bandGradient;
+          ctx.fillRect(0, y, 2048, height);
+          
+          // Add very subtle atmospheric features
+          for (let j = 0; j < 8; j++) {
+            const x = Math.random() * 2048;
+            const featureY = y + Math.random() * height;
+            const size = Math.random() * 15 + 5;
+            
+            const featureGradient = ctx.createRadialGradient(x, featureY, 0, x, featureY, size);
+            featureGradient.addColorStop(0, `rgba(255, 255, 255, 0.3)`);
+            featureGradient.addColorStop(0.5, `rgba(173, 216, 230, 0.2)`);
+            featureGradient.addColorStop(1, 'rgba(255, 255, 255, 0.1)');
+            ctx.fillStyle = featureGradient;
+            ctx.beginPath();
+            ctx.arc(x, featureY, size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        
+        // Add methane haze layers
+        for (let i = 0; i < 40; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const width = Math.random() * 200 + 100;
+          const height = Math.random() * 30 + 10;
+          
+          ctx.save();
+          ctx.translate(x, y);
+          ctx.rotate(Math.random() * Math.PI * 2);
+          const hazeAlpha = Math.random() * 0.2 + 0.1;
+          ctx.fillStyle = `rgba(173, 216, 230, ${hazeAlpha})`;
+          ctx.fillRect(-width/2, -height/2, width, height);
+          ctx.restore();
+        }
+        
+        // Add ice crystal formations
+        for (let i = 0; i < 60; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 20 + 8;
+          
+          const crystalGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          crystalGradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+          crystalGradient.addColorStop(0.3, 'rgba(224, 255, 255, 0.6)');
+          crystalGradient.addColorStop(0.7, 'rgba(175, 238, 238, 0.4)');
+          crystalGradient.addColorStop(1, 'rgba(135, 206, 235, 0.2)');
+          ctx.fillStyle = crystalGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Add polar regions with enhanced ice features
+        const northPolarGradient = ctx.createRadialGradient(1024, 200, 0, 1024, 200, 180);
+        northPolarGradient.addColorStop(0, '#F0FFFF');
+        northPolarGradient.addColorStop(0.3, '#E0FFFF');
+        northPolarGradient.addColorStop(0.7, '#AFEEEE');
+        northPolarGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+        ctx.fillStyle = northPolarGradient;
+        ctx.beginPath();
+        ctx.arc(1024, 200, 180, 0, Math.PI * 2);
+        ctx.fill();
+        
+        const southPolarGradient = ctx.createRadialGradient(1024, 1848, 0, 1024, 1848, 180);
+        southPolarGradient.addColorStop(0, '#F0FFFF');
+        southPolarGradient.addColorStop(0.3, '#E0FFFF');
+        southPolarGradient.addColorStop(0.7, '#AFEEEE');
+        southPolarGradient.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+        ctx.fillStyle = southPolarGradient;
+        ctx.beginPath();
+        ctx.arc(1024, 1848, 180, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Add atmospheric turbulence
+        for (let i = 0; i < 20; i++) {
+          const x = Math.random() * 2048;
+          const y = Math.random() * 2048;
+          const size = Math.random() * 50 + 25;
+          
+          const turbulenceGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+          turbulenceGradient.addColorStop(0, 'rgba(173, 216, 230, 0.5)');
+          turbulenceGradient.addColorStop(0.5, 'rgba(135, 206, 235, 0.3)');
+          turbulenceGradient.addColorStop(1, 'rgba(176, 224, 230, 0.1)');
+          ctx.fillStyle = turbulenceGradient;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        break;
     }
     
     const texture = new THREE.CanvasTexture(canvas);
