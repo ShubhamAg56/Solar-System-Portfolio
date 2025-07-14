@@ -39,6 +39,103 @@ const AnimatedStars = () => {
   );
 };
 
+// Camera animation component
+const CameraController = ({ activeSection, isMobile }) => {
+  const { camera, gl } = useThree();
+  const controlsRef = useRef();
+  
+  useEffect(() => {
+    if (!activeSection || activeSection === 'about') {
+      // Zoom out to default view
+      const defaultPosition = new THREE.Vector3(0, 10, 40);
+      const defaultTarget = new THREE.Vector3(0, 0, 0);
+      
+      // Smooth animation to default position
+      const startPosition = camera.position.clone();
+      const startTarget = controlsRef.current?.target?.clone() || new THREE.Vector3(0, 0, 0);
+      
+      let progress = 0;
+      const animateCamera = () => {
+        progress += 0.02; // Animation speed
+        
+        if (progress <= 1) {
+          // Interpolate camera position
+          camera.position.lerpVectors(startPosition, defaultPosition, progress);
+          
+          // Interpolate camera target
+          if (controlsRef.current) {
+            const currentTarget = new THREE.Vector3().lerpVectors(startTarget, defaultTarget, progress);
+            controlsRef.current.target.copy(currentTarget);
+            controlsRef.current.update();
+          }
+          
+          requestAnimationFrame(animateCamera);
+        }
+      };
+      animateCamera();
+    } else {
+      // Zoom into the active planet
+      const planet = Object.values(planetData).find(p => p.section === activeSection);
+      if (planet) {
+        const planetPosition = new THREE.Vector3(...planet.position);
+        const zoomDistance = isMobile ? 8 : 6;
+        const cameraOffset = new THREE.Vector3(zoomDistance, zoomDistance * 0.5, zoomDistance);
+        const targetPosition = planetPosition.clone().add(cameraOffset);
+        
+        // Smooth animation to planet
+        const startPosition = camera.position.clone();
+        const startTarget = controlsRef.current?.target?.clone() || new THREE.Vector3(0, 0, 0);
+        
+        let progress = 0;
+        const animateCamera = () => {
+          progress += 0.02; // Animation speed
+          
+          if (progress <= 1) {
+            // Interpolate camera position
+            camera.position.lerpVectors(startPosition, targetPosition, progress);
+            
+            // Interpolate camera target to planet
+            if (controlsRef.current) {
+              const currentTarget = new THREE.Vector3().lerpVectors(startTarget, planetPosition, progress);
+              controlsRef.current.target.copy(currentTarget);
+              controlsRef.current.update();
+            }
+            
+            requestAnimationFrame(animateCamera);
+          }
+        };
+        animateCamera();
+      }
+    }
+  }, [activeSection, camera, isMobile]);
+  
+  return (
+    <OrbitControls
+      ref={controlsRef}
+      enablePan={true}
+      enableZoom={true}
+      enableRotate={true}
+      minDistance={isMobile ? 3 : 2}
+      maxDistance={isMobile ? 200 : 300}
+      autoRotate={false}
+      autoRotateSpeed={0.8}
+      dampingFactor={0.05}
+      enableDamping={true}
+      touches={{
+        ONE: isMobile ? 2 : 0, // Pan on mobile
+        TWO: isMobile ? 1 : 2, // Zoom on mobile
+      }}
+      mouseButtons={{
+        LEFT: 0,
+        MIDDLE: 1,
+        RIGHT: 2
+      }}
+      maxPolarAngle={Math.PI * 0.75}
+      minPolarAngle={Math.PI * 0.25}
+    />
+  );
+};
+
 const SolarSystem = ({ activeSection, onPlanetClick, cameraPosition }) => {
   const groupRef = useRef();
   const { camera } = useThree();
