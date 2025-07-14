@@ -122,7 +122,6 @@ const SkillsSection = () => {
             {/* Skills Cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {categorySkills.map((skill, skillIndex) => {
-                const skillLevel = getSkillLevel(skill.level);
                 return (
                   <motion.div
                     key={skill.name}
@@ -142,44 +141,12 @@ const SkillsSection = () => {
                     {/* Card Content */}
                     <div className="relative z-10">
                       {/* Skill Header */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="text-2xl">{getSkillIcon(skill.name)}</div>
-                          <div>
-                            <h4 className="font-bold text-lg" style={{ color: currentTheme.textPrimary }}>
-                              {skill.name}
-                            </h4>
-                            <div className="flex items-center space-x-2">
-                              <span className={`text-xs font-medium ${skillLevel.color}`}>
-                                {skillLevel.label}
-                              </span>
-                              <span className="text-xs">{skillLevel.icon}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-2xl font-bold bg-gradient-to-r from-gray-600 to-gray-400 bg-clip-text text-transparent">
-                            {skill.level}%
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Skill Level Indicator */}
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="opacity-60" style={{ color: currentTheme.textSecondary }}>
-                          Proficiency Level
-                        </span>
-                        <div className="flex items-center space-x-1">
-                          {[...Array(5)].map((_, i) => (
-                            <div
-                              key={i}
-                              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                i < Math.floor(skill.level / 20) 
-                                  ? `bg-gradient-to-r ${getSkillColor(skill.level)}` 
-                                  : 'bg-gray-300'
-                              }`}
-                            />
-                          ))}
+                      <div className="flex items-center justify-center text-center">
+                        <div className="flex flex-col items-center space-y-3">
+                          <div className="text-4xl">{getSkillIcon(skill.name)}</div>
+                          <h4 className="font-bold text-xl" style={{ color: currentTheme.textPrimary }}>
+                            {skill.name}
+                          </h4>
                         </div>
                       </div>
                     </div>
