@@ -167,12 +167,6 @@ const SolarSystem = ({ activeSection, onPlanetClick }) => {
 const Scene3D = ({ activeSection, onPlanetClick, isMobile }) => {
   const { currentTheme } = useTheme();
   
-  // Time controls state
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [timeSpeed, setTimeSpeed] = useState(1);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [showTraces, setShowTraces] = useState(true);
-  
   // Default color fallbacks
   const backgroundColor = currentTheme?.backgroundColor || '#000011';
   const ambientColor = currentTheme?.ambientLight || '#404040';
