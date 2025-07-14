@@ -872,6 +872,10 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
     const texture = new THREE.CanvasTexture(canvas);
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
+    
+    // Cache the texture for future use
+    textureCache.set(cacheKey, texture);
+    
     return texture;
   }, [planetKey]);
   
