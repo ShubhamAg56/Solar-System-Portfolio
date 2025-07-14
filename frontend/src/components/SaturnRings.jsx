@@ -78,8 +78,22 @@ const SaturnRings = ({ position, scale, planetRotation = 0 }) => {
 
   useFrame((state) => {
     if (groupRef.current) {
+      // Calculate Saturn's current orbital position
+      const time = state.clock.elapsedTime;
+      const speed = 0.009; // Same as Saturn's orbital speed (70% slower)
+      const radius = Math.sqrt(position[0] ** 2 + position[2] ** 2);
+      
+      // FIXED: Counterclockwise orbital motion (negative time for correct direction)
+      const newX = Math.cos(-time * speed) * radius;
+      const newZ = Math.sin(-time * speed) * radius;
+      
+      // Add realistic orbital inclination for Saturn
+      const inclination = 2.5 * Math.PI / 180; // 2.5° to ecliptic
+      const verticalOscillation = Math.sin(time * speed * 2) * Math.sin(inclination) * 2;
+      const newY = position[1] + verticalOscillation;
+      
       // Update the group position to follow Saturn's orbital motion
-      groupRef.current.position.set(position[0], position[1], position[2]);
+      groupRef.current.position.set(newX, newY, newZ);
       
       // Rotate the entire ring system with Saturn's axial tilt and rotation
       groupRef.current.rotation.x = 26.7 * Math.PI / 180; // Saturn's axial tilt
@@ -87,16 +101,16 @@ const SaturnRings = ({ position, scale, planetRotation = 0 }) => {
     }
     
     if (ringRef.current) {
-      // Slow rotation for the main rings relative to Saturn
-      ringRef.current.rotation.z += 0.002;
+      // Slow rotation for the main rings relative to Saturn (70% slower)
+      ringRef.current.rotation.z += 0.0006; // 30% of 0.002
     }
     if (innerRingRef.current) {
-      // Slightly faster rotation for inner rings
-      innerRingRef.current.rotation.z += 0.003;
+      // Slightly faster rotation for inner rings (70% slower)
+      innerRingRef.current.rotation.z += 0.0009; // 30% of 0.003
     }
     if (outerRingRef.current) {
-      // Different rotation speed for outer rings
-      outerRingRef.current.rotation.z += 0.001;
+      // Different rotation speed for outer rings (70% slower)
+      outerRingRef.current.rotation.z += 0.0003; // 30% of 0.001
     }
   });
 
