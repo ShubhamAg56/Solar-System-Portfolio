@@ -94,10 +94,17 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
   
   // Create enhanced realistic planet surface textures with optimized high quality
   const surfaceTexture = useMemo(() => {
+    // Check cache first
+    const isMobile = window.innerWidth <= 768;
+    const resolution = isMobile ? 1024 : 2048;
+    const cacheKey = `${planetKey}-${resolution}`;
+    
+    if (textureCache.has(cacheKey)) {
+      return textureCache.get(cacheKey);
+    }
+    
     const canvas = document.createElement('canvas');
     // Optimized resolution for better performance while maintaining quality
-    const isMobile = window.innerWidth <= 768;
-    const resolution = isMobile ? 1024 : 2048; // Adaptive resolution
     canvas.width = resolution;
     canvas.height = resolution;
     const ctx = canvas.getContext('2d');
