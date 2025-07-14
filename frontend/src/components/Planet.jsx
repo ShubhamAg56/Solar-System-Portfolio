@@ -903,8 +903,9 @@ const Planet = ({ planet, planetKey, isActive, onClick }) => {
       {/* Saturn's iconic ring system */}
       {planetKey === 'saturn' && (
         <SaturnRings 
-          position={planet.position} 
+          position={meshRef.current ? [meshRef.current.position.x, meshRef.current.position.y, meshRef.current.position.z] : planet.position} 
           scale={planet.scale}
+          planetRotation={planetRotation}
         />
       )}
       
