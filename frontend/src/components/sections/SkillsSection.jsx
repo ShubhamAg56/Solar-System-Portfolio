@@ -16,34 +16,82 @@ const SkillsSection = () => {
   }, {});
   
   const getSkillColor = (level) => {
-    if (level >= 90) return 'from-emerald-400 to-emerald-600';
-    if (level >= 80) return 'from-blue-400 to-blue-600';
-    if (level >= 70) return 'from-amber-400 to-amber-600';
-    return 'from-orange-400 to-orange-600';
+    if (level >= 90) return 'from-emerald-400 via-emerald-500 to-emerald-600';
+    if (level >= 80) return 'from-blue-400 via-blue-500 to-blue-600';
+    if (level >= 70) return 'from-amber-400 via-amber-500 to-amber-600';
+    return 'from-orange-400 via-orange-500 to-orange-600';
   };
   
-  const getSkillBgColor = (level) => {
-    if (level >= 90) return 'bg-emerald-50 border-emerald-200';
-    if (level >= 80) return 'bg-blue-50 border-blue-200';
-    if (level >= 70) return 'bg-amber-50 border-amber-200';
-    return 'bg-orange-50 border-orange-200';
+  const getSkillIcon = (skillName) => {
+    const icons = {
+      'JavaScript': '⚡',
+      'React': '⚛️',
+      'Three.js': '🎮',
+      'Node.js': '🟢',
+      'Python': '🐍',
+      'WebGL': '🎨',
+      'MongoDB': '🍃',
+      'PostgreSQL': '🐘',
+      'Docker': '🐳',
+      'AWS': '☁️',
+      'Blender': '🎬',
+      'Unity': '🎯'
+    };
+    return icons[skillName] || '💻';
+  };
+  
+  const getCategoryIcon = (category) => {
+    const icons = {
+      'Frontend': '🎨',
+      'Backend': '⚙️',
+      '3D Graphics': '🎮',
+      'Database': '🗄️',
+      'DevOps': '🚀',
+      'Cloud': '☁️',
+      'Game Dev': '🎯'
+    };
+    return icons[category] || '💻';
+  };
+  
+  const getSkillLevel = (level) => {
+    if (level >= 90) return { label: 'Expert', color: 'text-emerald-500', icon: '🌟' };
+    if (level >= 80) return { label: 'Advanced', color: 'text-blue-500', icon: '💎' };
+    if (level >= 70) return { label: 'Intermediate', color: 'text-amber-500', icon: '🔥' };
+    return { label: 'Learning', color: 'text-orange-500', icon: '🚀' };
   };
   
   return (
     <div style={{ color: currentTheme.textPrimary }}>
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }}
+      {/* Header Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+        className="text-center mb-12"
       >
-        Technical Expertise
-      </motion.h2>
-      
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent"
+        >
+          Technical Expertise
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="text-lg opacity-80 max-w-2xl mx-auto"
+          style={{ color: currentTheme.textSecondary }}
+        >
+          A comprehensive overview of my technical skills and proficiency levels across different technologies and domains.
+        </motion.p>
+      </motion.div>
+
+      {/* Skills Grid */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="space-y-8"
+        transition={{ delay: 0.2 }}
+        className="space-y-10"
       >
         {Object.entries(skillsByCategory).map(([category, categorySkills], categoryIndex) => (
           <motion.div
@@ -51,119 +99,211 @@ const SkillsSection = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: categoryIndex * 0.1 }}
-            className="rounded-xl p-6 backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300"
-            style={{
-              backgroundColor: currentTheme.cardBackground,
-              borderColor: currentTheme.border,
-            }}
+            className="relative"
           >
-            <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
-              {category}
-            </h3>
-            <div className="grid gap-6">
-              {categorySkills.map((skill, skillIndex) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (categoryIndex * 0.1) + (skillIndex * 0.05) }}
-                  className="space-y-3"
-                >
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-3">
-                      <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${getSkillColor(skill.level)}`}></div>
-                      <span className="font-semibold text-lg" style={{ color: currentTheme.textPrimary }}>
-                        {skill.name}
-                      </span>
+            {/* Category Header */}
+            <div className="flex items-center mb-8">
+              <div className="flex items-center space-x-4">
+                <div className="text-4xl">{getCategoryIcon(category)}</div>
+                <div>
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                    {category}
+                  </h3>
+                  <p className="text-sm opacity-60" style={{ color: currentTheme.textSecondary }}>
+                    {categorySkills.length} skills
+                  </p>
+                </div>
+              </div>
+              <div className="flex-1 ml-6">
+                <div className="h-px bg-gradient-to-r from-purple-400 to-transparent opacity-30"></div>
+              </div>
+            </div>
+
+            {/* Skills Cards */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {categorySkills.map((skill, skillIndex) => {
+                const skillLevel = getSkillLevel(skill.level);
+                return (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ delay: (categoryIndex * 0.1) + (skillIndex * 0.08) }}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="group relative rounded-2xl p-6 backdrop-blur-md border shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+                    style={{
+                      backgroundColor: currentTheme.cardBackground,
+                      borderColor: currentTheme.border,
+                    }}
+                  >
+                    {/* Background Gradient */}
+                    <div className={`absolute inset-0 opacity-10 bg-gradient-to-br ${getSkillColor(skill.level)}`}></div>
+                    
+                    {/* Card Content */}
+                    <div className="relative z-10">
+                      {/* Skill Header */}
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-3">
+                          <div className="text-2xl">{getSkillIcon(skill.name)}</div>
+                          <div>
+                            <h4 className="font-bold text-lg" style={{ color: currentTheme.textPrimary }}>
+                              {skill.name}
+                            </h4>
+                            <div className="flex items-center space-x-2">
+                              <span className={`text-xs font-medium ${skillLevel.color}`}>
+                                {skillLevel.label}
+                              </span>
+                              <span className="text-xs">{skillLevel.icon}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold bg-gradient-to-r from-gray-600 to-gray-400 bg-clip-text text-transparent">
+                            {skill.level}%
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Progress Bar */}
+                      <div className="relative mb-4">
+                        <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${skill.level}%` }}
+                            transition={{ duration: 1.5, delay: (categoryIndex * 0.1) + (skillIndex * 0.08), ease: "easeOut" }}
+                            className={`h-3 rounded-full bg-gradient-to-r ${getSkillColor(skill.level)} shadow-lg relative`}
+                          >
+                            <div className="absolute inset-0 bg-white opacity-20 rounded-full"></div>
+                          </motion.div>
+                        </div>
+                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full shadow-lg"></div>
+                      </div>
+
+                      {/* Skill Level Indicator */}
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="opacity-60" style={{ color: currentTheme.textSecondary }}>
+                          Proficiency Level
+                        </span>
+                        <div className="flex items-center space-x-1">
+                          {[...Array(5)].map((_, i) => (
+                            <div
+                              key={i}
+                              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                                i < Math.floor(skill.level / 20) 
+                                  ? `bg-gradient-to-r ${getSkillColor(skill.level)}` 
+                                  : 'bg-gray-300'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm font-medium px-3 py-1 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700">
-                        {skill.level}%
-                      </span>
-                      {skill.level >= 90 && <span className="text-emerald-500">⭐</span>}
-                      {skill.level >= 85 && skill.level < 90 && <span className="text-blue-500">🔹</span>}
+
+                    {/* Hover Effect */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${getSkillColor(skill.level)} opacity-20`}></div>
                     </div>
-                  </div>
-                  <div className="relative">
-                    <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1.5, delay: (categoryIndex * 0.1) + (skillIndex * 0.05), ease: "easeOut" }}
-                        className={`h-3 rounded-full bg-gradient-to-r ${getSkillColor(skill.level)} shadow-lg`}
-                      />
-                    </div>
-                    <div 
-                      className="absolute top-0 left-0 h-3 rounded-full bg-white opacity-30"
-                      style={{ width: `${Math.min(skill.level, 100)}%` }}
-                    />
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         ))}
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="grid md:grid-cols-3 gap-6"
-        >
-          <div 
-            className="rounded-xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300"
+      </motion.div>
+
+      {/* Statistics Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+        className="mt-16"
+      >
+        <div className="text-center mb-8">
+          <h3 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            Skills Overview
+          </h3>
+        </div>
+        <div className="grid md:grid-cols-4 gap-6">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="rounded-2xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             style={{
               backgroundColor: currentTheme.cardBackground,
               borderColor: currentTheme.border,
             }}
           >
-            <div className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent mb-2">
-              {skills.filter(s => s.level >= 90).length}
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-emerald-600 opacity-10"></div>
+            <div className="relative z-10">
+              <div className="text-5xl font-bold bg-gradient-to-r from-emerald-400 to-emerald-600 bg-clip-text text-transparent mb-2">
+                {skills.filter(s => s.level >= 90).length}
+              </div>
+              <div className="text-sm font-medium mb-2" style={{ color: currentTheme.textSecondary }}>
+                Expert Level
+              </div>
+              <div className="text-2xl">🌟</div>
             </div>
-            <div className="text-sm font-medium" style={{ color: currentTheme.textSecondary }}>
-              Expert Level Skills
-            </div>
-            <div className="mt-2">
-              <span className="text-emerald-500 text-2xl">⭐</span>
-            </div>
-          </div>
+          </motion.div>
           
-          <div 
-            className="rounded-xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="rounded-2xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             style={{
               backgroundColor: currentTheme.cardBackground,
               borderColor: currentTheme.border,
             }}
           >
-            <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-2">
-              {skills.filter(s => s.level >= 80).length}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 opacity-10"></div>
+            <div className="relative z-10">
+              <div className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-2">
+                {skills.filter(s => s.level >= 80).length}
+              </div>
+              <div className="text-sm font-medium mb-2" style={{ color: currentTheme.textSecondary }}>
+                Advanced Level
+              </div>
+              <div className="text-2xl">💎</div>
             </div>
-            <div className="text-sm font-medium" style={{ color: currentTheme.textSecondary }}>
-              Advanced Level Skills
-            </div>
-            <div className="mt-2">
-              <span className="text-blue-500 text-2xl">🔹</span>
-            </div>
-          </div>
+          </motion.div>
           
-          <div 
-            className="rounded-xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="rounded-2xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             style={{
               backgroundColor: currentTheme.cardBackground,
               borderColor: currentTheme.border,
             }}
           >
-            <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
-              {Object.keys(skillsByCategory).length}
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-amber-600 opacity-10"></div>
+            <div className="relative z-10">
+              <div className="text-5xl font-bold bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent mb-2">
+                {skills.filter(s => s.level >= 70).length}
+              </div>
+              <div className="text-sm font-medium mb-2" style={{ color: currentTheme.textSecondary }}>
+                Intermediate+
+              </div>
+              <div className="text-2xl">🔥</div>
             </div>
-            <div className="text-sm font-medium" style={{ color: currentTheme.textSecondary }}>
-              Technology Categories
+          </motion.div>
+          
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="rounded-2xl p-6 text-center backdrop-blur-md border shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+            style={{
+              backgroundColor: currentTheme.cardBackground,
+              borderColor: currentTheme.border,
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-pink-400 opacity-10"></div>
+            <div className="relative z-10">
+              <div className="text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+                {Object.keys(skillsByCategory).length}
+              </div>
+              <div className="text-sm font-medium mb-2" style={{ color: currentTheme.textSecondary }}>
+                Categories
+              </div>
+              <div className="text-2xl">🎯</div>
             </div>
-            <div className="mt-2">
-              <span className="text-purple-500 text-2xl">💎</span>
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </motion.div>
     </div>
   );
