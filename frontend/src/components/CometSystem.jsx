@@ -500,49 +500,37 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
         visible={false}
       />
       
-      {/* Multi-layer comet glow for ultra-realistic effect */}
-      <mesh ref={cometRef} scale={1.9}>
-        <sphereGeometry args={[0.3, 32, 32]} />
+      // Multi-layer comet glow for realistic effect
+      <mesh ref={cometRef} scale={1.3}>
+        <sphereGeometry args={[0.15, 24, 24]} />
         <meshBasicMaterial 
           color={color} 
           transparent 
-          opacity={0.35} 
+          opacity={0.25} 
           side={THREE.BackSide}
           blending={THREE.AdditiveBlending}
         />
       </mesh>
       
-      {/* Enhanced outer glow layer */}
-      <mesh ref={cometRef} scale={2.8}>
-        <sphereGeometry args={[0.3, 24, 24]} />
+      {/* Outer glow layer */}
+      <mesh ref={cometRef} scale={1.8}>
+        <sphereGeometry args={[0.15, 16, 16]} />
         <meshBasicMaterial 
           color={new THREE.Color(color).multiplyScalar(0.8)} 
           transparent 
-          opacity={0.18} 
+          opacity={0.15} 
           side={THREE.BackSide}
           blending={THREE.AdditiveBlending}
         />
       </mesh>
       
-      {/* Enhanced coma effect - ultra-realistic gaseous envelope */}
-      <mesh ref={cometRef} scale={3.5}>
-        <sphereGeometry args={[0.3, 16, 16]} />
+      {/* Coma effect - realistic gaseous envelope */}
+      <mesh ref={cometRef} scale={2.2}>
+        <sphereGeometry args={[0.15, 12, 12]} />
         <meshBasicMaterial 
           color={new THREE.Color(color).lerp(new THREE.Color('#FFFFFF'), 0.4)} 
           transparent 
-          opacity={0.10} 
-          side={THREE.BackSide}
-          blending={THREE.AdditiveBlending}
-        />
-      </mesh>
-      
-      {/* Ultra-distant atmospheric glow */}
-      <mesh ref={cometRef} scale={4.2}>
-        <sphereGeometry args={[0.3, 12, 12]} />
-        <meshBasicMaterial 
-          color={new THREE.Color(color).lerp(new THREE.Color('#E6F3FF'), 0.6)} 
-          transparent 
-          opacity={0.06} 
+          opacity={0.08} 
           side={THREE.BackSide}
           blending={THREE.AdditiveBlending}
         />
