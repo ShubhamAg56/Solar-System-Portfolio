@@ -329,16 +329,16 @@ const Comet = ({ position, direction, speed = 0.02, color = '#FFFFFF' }) => {
     
     const texture = new THREE.CanvasTexture(canvas);
     
-    // Create material with proper flickering properties
+    // Create material with proper flickering properties - optimized for white comets
     const material = new THREE.PointsMaterial({
       map: texture,
-      size: 0.6,
+      size: 0.8, // Increased size for better visibility
       transparent: true,
       vertexColors: true,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       sizeAttenuation: true,
-      opacity: 0.8 // Initial opacity for flickering
+      opacity: 1.0 // Maximum opacity for white tail visibility
     });
     
     // Make material properties mutable for flickering
