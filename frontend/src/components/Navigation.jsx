@@ -13,6 +13,30 @@ const Navigation = ({ activeSection, onNavigate }) => {
   const border = currentTheme?.border || 'rgba(255, 255, 255, 0.2)';
   const textPrimary = currentTheme?.textPrimary || '#ffffff';
 
+  // Icon mapping for each section
+  const sectionIcons = {
+    resume: "📄",
+    about: "👨‍💻", 
+    skills: "⚡",
+    experience: "🌍",
+    projects: "🚀",
+    education: "🎓",
+    contact: "📧",
+    playground: "🎮"
+  };
+
+  // Cool color gradients for each section
+  const sectionGradients = {
+    resume: "from-yellow-400 to-orange-500",
+    about: "from-gray-400 to-gray-600",
+    skills: "from-purple-400 to-pink-500",
+    experience: "from-blue-400 to-cyan-500",
+    projects: "from-red-400 to-pink-500",
+    education: "from-indigo-400 to-purple-500",
+    contact: "from-green-400 to-emerald-500",
+    playground: "from-cyan-400 to-blue-500"
+  };
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
