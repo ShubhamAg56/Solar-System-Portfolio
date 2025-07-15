@@ -324,45 +324,112 @@ const Navigation = ({ activeSection, onNavigate }) => {
                 animate="open"
                 exit="closed"
                 variants={sidebarVariants}
-                className="fixed left-4 top-20 z-50 rounded-lg px-4 py-6 border shadow-xl w-[220px] flex flex-col"
+                className="fixed left-4 top-20 z-50 rounded-2xl px-6 py-8 border-2 shadow-2xl w-[280px] flex flex-col overflow-hidden"
                 style={{
                   backgroundColor: navigationBg,
-                  backdropFilter: 'blur(16px)',
+                  backdropFilter: 'blur(20px)',
                   borderColor: border,
                   color: textPrimary,
+                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                 }}
               >
+                {/* Animated background gradient */}
+                <motion.div
+                  className="absolute inset-0 opacity-10"
+                  animate={{
+                    background: [
+                      "linear-gradient(45deg, #06b6d4, #3b82f6, #8b5cf6)",
+                      "linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4)",
+                      "linear-gradient(45deg, #8b5cf6, #06b6d4, #3b82f6)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+
                 {/* Header */}
                 <motion.div
                   variants={itemVariants}
-                  className="mb-6 pb-4 border-b border-white border-opacity-20"
+                  className="mb-8 pb-6 border-b border-white border-opacity-30 relative z-10"
                 >
-                  <h3 className="text-lg font-semibold text-white">Navigation</h3>
-                  <p className="text-sm text-gray-300 mt-1">Explore the solar system</p>
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                    className="flex items-center space-x-3 mb-2"
+                  >
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                      className="text-2xl"
+                    >
+                      🌌
+                    </motion.div>
+                    <h3 className="text-xl font-bold text-white">Navigation</h3>
+                  </motion.div>
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                    className="text-sm text-gray-300"
+                  >
+                    Explore the digital cosmos
+                  </motion.p>
                 </motion.div>
 
                 {/* Navigation Items */}
-                <div className="flex flex-col space-y-2">
-                  {navigationData.map((item) => (
+                <div className="flex flex-col space-y-3 relative z-10">
+                  {navigationData.map((item, index) => (
                     <motion.button
                       key={item.section}
                       onClick={() => handleNavigate(item.section)}
                       className={getButtonStyles(activeSection === item.section)}
                       variants={itemVariants}
-                      whileHover={buttonVariants.hover}
-                      whileTap={buttonVariants.tap}
+                      whileHover="hover"
+                      whileTap="tap"
+                      custom={index}
                       style={{
                         color: activeSection === item.section ? '#ffffff' : currentTheme.textSecondary,
                       }}
                     >
-                      {item.name}
+                      {/* Glow effect for active item */}
                       {activeSection === item.section && (
                         <motion.div
-                          layoutId="activeTab"
-                          className="absolute inset-0 bg-white bg-opacity-20 rounded-xl"
+                          layoutId="activeGlow"
+                          className={`absolute inset-0 bg-gradient-to-r ${sectionGradients[item.section]} opacity-20 rounded-xl blur-sm`}
                           transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                         />
                       )}
+                      
+                      {/* Background highlight */}
+                      {activeSection === item.section && (
+                        <motion.div
+                          layoutId="activeTab"
+                          className="absolute inset-0 bg-white bg-opacity-10 rounded-xl border border-white border-opacity-20"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                      )}
+                      
+                      <div className="flex items-center space-x-4 relative z-10">
+                        <motion.span
+                          variants={iconVariants}
+                          className="text-xl"
+                        >
+                          {sectionIcons[item.section]}
+                        </motion.span>
+                        <span className="font-medium">{item.name}</span>
+                      </div>
+                      
+                      {/* Hover line effect */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"
+                        initial={{ width: 0 }}
+                        whileHover={{ width: "100%" }}
+                        transition={{ duration: 0.3 }}
+                      />
                     </motion.button>
                   ))}
                 </div>
@@ -370,11 +437,28 @@ const Navigation = ({ activeSection, onNavigate }) => {
                 {/* Footer */}
                 <motion.div
                   variants={itemVariants}
-                  className="mt-6 pt-4 border-t border-white border-opacity-20"
+                  className="mt-8 pt-6 border-t border-white border-opacity-30 relative z-10"
                 >
-                  <p className="text-xs text-gray-400 text-center">
-                    Click anywhere to close
-                  </p>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="flex items-center justify-center space-x-2 text-xs text-gray-400"
+                  >
+                    <motion.span
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      ✨
+                    </motion.span>
+                    <span>Click anywhere to close</span>
+                    <motion.span
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                    >
+                      ✨
+                    </motion.span>
+                  </motion.div>
                 </motion.div>
               </motion.nav>
             )}
