@@ -545,31 +545,31 @@ const CometSystem = () => {
     {
       position: [-120, 25, -60],
       direction: { x: 0.8, y: -0.1, z: 0.6 },
-      speed: 0.008, // Reduced from 0.022 for slower, more realistic movement
+      speed: 0.002, // Much slower - reduced from 0.008 for very slow, realistic movement
       color: '#87CEEB'
     },
     {
       position: [100, -35, -90],
       direction: { x: -0.6, y: 0.2, z: 0.8 },
-      speed: 0.006, // Reduced from 0.018 for slower movement
+      speed: 0.0015, // Much slower - reduced from 0.006 for very slow movement
       color: '#B0E0E6'
     },
     {
       position: [-70, 60, 120],
       direction: { x: 0.4, y: -0.6, z: -0.5 },
-      speed: 0.009, // Reduced from 0.025 for slower movement
+      speed: 0.0025, // Much slower - reduced from 0.009 for very slow movement
       color: '#E0FFFF'
     },
     {
       position: [90, 80, -30],
       direction: { x: -0.5, y: -0.4, z: 0.7 },
-      speed: 0.007, // Reduced from 0.020 for slower movement
+      speed: 0.0018, // Much slower - reduced from 0.007 for very slow movement
       color: '#F0F8FF'
     },
     {
       position: [-40, -90, 80],
       direction: { x: 0.3, y: 0.7, z: -0.6 },
-      speed: 0.008, // Reduced from 0.024 for slower movement
+      speed: 0.0022, // Much slower - reduced from 0.008 for very slow movement
       color: '#E6F3FF'
     }
   ], []);
