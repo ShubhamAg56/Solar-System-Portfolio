@@ -303,14 +303,14 @@ const Comet = ({ position, direction, speed = 0.02, color = '#FFFFFF' }) => {
     canvas.height = 128;
     const ctx = canvas.getContext('2d');
     
-    // Create enhanced radial gradient for ultra-sparkle effect
+    // Create enhanced radial gradient optimized for white comet tails
     const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    gradient.addColorStop(0.2, 'rgba(240, 240, 255, 0.95)');
-    gradient.addColorStop(0.4, 'rgba(200, 220, 255, 0.8)');
-    gradient.addColorStop(0.6, 'rgba(150, 180, 255, 0.6)');
-    gradient.addColorStop(0.8, 'rgba(100, 150, 255, 0.3)');
-    gradient.addColorStop(1, 'rgba(80, 120, 255, 0)');
+    gradient.addColorStop(0.2, 'rgba(255, 255, 255, 0.95)');
+    gradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.8)');
+    gradient.addColorStop(0.6, 'rgba(240, 240, 255, 0.6)');
+    gradient.addColorStop(0.8, 'rgba(220, 220, 255, 0.3)');
+    gradient.addColorStop(1, 'rgba(200, 200, 255, 0)');
     
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 128, 128);
