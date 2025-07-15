@@ -296,7 +296,7 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     return geometry;
   }, [direction, color]);
   
-  // Ultra-enhanced tail material with better blending and effects
+  // Ultra-enhanced tail material with flickering effect
   const tailMaterial = useMemo(() => {
     // Create ultra-detailed sparkle texture for tail particles
     const canvas = document.createElement('canvas');
@@ -330,7 +330,7 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     
     const texture = new THREE.CanvasTexture(canvas);
     
-    return new THREE.PointsMaterial({
+    const material = new THREE.PointsMaterial({
       map: texture,
       size: 0.6, // Reduced from 1.2 for smaller tail particles
       transparent: true,
@@ -339,6 +339,8 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
       depthWrite: false,
       sizeAttenuation: true
     });
+    
+    return material;
   }, []);
   
   // Physics and collision detection with enhanced gravitational effects
