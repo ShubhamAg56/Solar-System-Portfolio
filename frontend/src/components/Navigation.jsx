@@ -282,7 +282,7 @@ const Navigation = ({ activeSection, onNavigate }) => {
             </motion.div>
           </motion.button>
 
-          {/* Backdrop with animated gradient */}
+          {/* Backdrop with animated colors */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -300,10 +300,10 @@ const Navigation = ({ activeSection, onNavigate }) => {
                 <motion.div
                   className="absolute inset-0"
                   animate={{
-                    background: [
-                      "radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 40% 80%, rgba(120, 200, 255, 0.15), transparent 50%)",
-                      "radial-gradient(circle at 80% 20%, rgba(120, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 40% 80%, rgba(255, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 20% 50%, rgba(120, 200, 255, 0.15), transparent 50%)",
-                      "radial-gradient(circle at 40% 80%, rgba(120, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 20% 50%, rgba(255, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 80% 20%, rgba(120, 200, 255, 0.15), transparent 50%)"
+                    backgroundColor: [
+                      "rgba(120, 119, 198, 0.05)",
+                      "rgba(255, 119, 198, 0.05)",
+                      "rgba(120, 200, 255, 0.05)"
                     ]
                   }}
                   transition={{
