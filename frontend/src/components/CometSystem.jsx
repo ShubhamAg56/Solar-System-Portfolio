@@ -263,9 +263,9 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
         const offsetZ = (Math.random() - 0.5) * spread;
         
         positions.push(
-          -direction.x * t * 15 + offsetX, // Increased tail length multiplier
-          -direction.y * t * 15 + offsetY,
-          -direction.z * t * 15 + offsetZ
+          -direction.x * t * 8 + offsetX, // Reduced tail length from 15 to 8
+          -direction.y * t * 8 + offsetY,
+          -direction.z * t * 8 + offsetZ
         );
         
         // Ultra-enhanced color fade with multi-tone gradient
