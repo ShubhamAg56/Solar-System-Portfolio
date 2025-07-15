@@ -21,6 +21,13 @@ const SkillsSection = () => {
     if (level >= 70) return 'from-amber-400 via-amber-500 to-amber-600';
     return 'from-orange-400 via-orange-500 to-orange-600';
   };
+
+  const getSkillColorSolid = (level) => {
+    if (level >= 90) return '#10b981'; // emerald-500
+    if (level >= 80) return '#3b82f6'; // blue-500
+    if (level >= 70) return '#f59e0b'; // amber-500
+    return '#f97316'; // orange-500
+  };
   
   const getSkillIcon = (skillName) => {
     const icons = {
