@@ -296,11 +296,11 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     return geometry;
   }, [direction, color]);
   
-  // Ultra-enhanced tail material with flickering effect
+  // Ultra-enhanced tail material with proper flickering support
   const tailMaterial = useMemo(() => {
     // Create ultra-detailed sparkle texture for tail particles
     const canvas = document.createElement('canvas');
-    canvas.width = 128; // Doubled resolution
+    canvas.width = 128;
     canvas.height = 128;
     const ctx = canvas.getContext('2d');
     
@@ -330,15 +330,20 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     
     const texture = new THREE.CanvasTexture(canvas);
     
+    // Create material with proper flickering properties
     const material = new THREE.PointsMaterial({
       map: texture,
-      size: 0.6, // Reduced from 1.2 for smaller tail particles
+      size: 0.6,
       transparent: true,
       vertexColors: true,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
-      sizeAttenuation: true
+      sizeAttenuation: true,
+      opacity: 0.8 // Initial opacity for flickering
     });
+    
+    // Make material properties mutable for flickering
+    material.needsUpdate = true;
     
     return material;
   }, []);
