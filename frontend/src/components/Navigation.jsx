@@ -198,6 +198,7 @@ const Navigation = ({ activeSection, onNavigate }) => {
                   <motion.div
                     layoutId="activeTab"
                     className="absolute inset-0 bg-white bg-opacity-20 rounded-xl"
+                    style={{ backgroundColor: `${sectionColors[activeSection]}40` }}
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
