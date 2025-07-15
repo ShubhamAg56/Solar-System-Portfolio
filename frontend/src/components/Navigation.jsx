@@ -24,25 +24,36 @@ const Navigation = ({ activeSection, onNavigate }) => {
 
   // Animation variants for better organization
   const containerVariants = {
-    initial: { opacity: 0, y: -20 },
-    animate: { opacity: 1, y: 0 },
+    initial: { opacity: 0, x: -20 },
+    animate: { opacity: 1, x: 0 },
     transition: { duration: 0.5 }
   };
 
   const buttonVariants = {
-    hover: { scale: 1.05 },
+    hover: { scale: 1.05, x: 5 },
     tap: { scale: 0.95 }
   };
 
-  const getBackgroundStyles = () => {
-    const base = "rounded-lg px-4 py-4 border shadow-lg h-[56px] flex items-center";
-    const mobile = isMobile ? "mx-auto" : "";
-    return `${base} ${mobile}`;
+  const getSidebarStyles = () => {
+    if (isMobile) {
+      // Mobile: Keep as bottom navigation
+      return "fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 rounded-lg px-4 py-4 border shadow-lg h-[56px] flex items-center";
+    } else {
+      // Desktop: Vertical sidebar
+      return "fixed left-4 top-1/2 transform -translate-y-1/2 z-50 rounded-lg px-3 py-6 border shadow-lg w-[200px] flex flex-col items-stretch";
+    }
   };
   
   const getButtonStyles = (isActive) => {
+    const baseStyles = "relative px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-center";
+    const activeStyles = `text-white bg-white bg-opacity-30`;
+    const inactiveStyles = `hover:text-white hover:bg-white hover:bg-opacity-20`;
+    
+    return `${baseStyles} ${isActive ? activeStyles : inactiveStyles}`;
+  };
+
+  const getMobileButtonStyles = (isActive) => {
     const baseStyles = "relative px-2 py-1 md:px-4 md:py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 text-center min-w-[60px] md:min-w-[80px]";
-    const textColor = textPrimary;
     const activeStyles = `text-white bg-white bg-opacity-30`;
     const inactiveStyles = `hover:text-white hover:bg-white hover:bg-opacity-20`;
     
@@ -54,18 +65,42 @@ const Navigation = ({ activeSection, onNavigate }) => {
       initial={containerVariants.initial}
       animate={containerVariants.animate}
       transition={containerVariants.transition}
-      className={`fixed ${isMobile ? 'bottom-4 left-1/2 transform -translate-x-1/2' : 'top-8 left-48'} z-50`}
+      className={getSidebarStyles()}
+      style={{
+        backgroundColor: navigationBg,
+        backdropFilter: 'blur(16px)',
+        borderColor: border,
+        color: textPrimary,
+      }}
     >
-      <div 
-        className={getBackgroundStyles()}
-        style={{
-          backgroundColor: navigationBg,
-          backdropFilter: 'blur(16px)',
-          borderColor: border,
-          color: textPrimary,
-        }}
-      >
-        <div className={`flex ${isMobile ? 'flex-wrap justify-center' : 'flex-row justify-center'} items-center ${isMobile ? 'gap-2' : 'space-x-6'}`}>
+      {isMobile ? (
+        // Mobile layout: horizontal navigation
+        <div className="flex flex-wrap justify-center items-center gap-2">
+          {navigationData.map((item) => (
+            <motion.button
+              key={item.section}
+              onClick={() => onNavigate(item.section)}
+              className={getMobileButtonStyles(activeSection === item.section)}
+              whileHover={buttonVariants.hover}
+              whileTap={buttonVariants.tap}
+              style={{
+                color: activeSection === item.section ? '#ffffff' : currentTheme.textSecondary,
+              }}
+            >
+              {item.name}
+              {activeSection === item.section && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 bg-white bg-opacity-20 rounded-xl"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+            </motion.button>
+          ))}
+        </div>
+      ) : (
+        // Desktop layout: vertical sidebar
+        <div className="flex flex-col space-y-3 w-full">
           {navigationData.map((item) => (
             <motion.button
               key={item.section}
@@ -88,7 +123,7 @@ const Navigation = ({ activeSection, onNavigate }) => {
             </motion.button>
           ))}
         </div>
-      </div>
+      )}
     </motion.nav>
   );
 };
