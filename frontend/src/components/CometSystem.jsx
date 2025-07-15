@@ -138,9 +138,69 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     texture.magFilter = THREE.LinearFilter;
-    texture.minFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearMipMapLinearFilter;
+    texture.anisotropy = 16; // Enhanced anisotropic filtering
     
     return texture;
+  }, []);
+  
+  // Create vaporization particle system
+  const vaporParticleGeometry = useMemo(() => {
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+    const colors = [];
+    const sizes = [];
+    const velocities = [];
+    
+    // Create explosion particles
+    for (let i = 0; i < 100; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.random() * Math.PI;
+      const radius = Math.random() * 3 + 1;
+      
+      positions.push(
+        Math.sin(phi) * Math.cos(theta) * radius,
+        Math.cos(phi) * radius,
+        Math.sin(phi) * Math.sin(theta) * radius
+      );
+      
+      // Hot plasma colors
+      const temp = Math.random();
+      if (temp < 0.3) {
+        colors.push(1, 1, 1, 1); // White hot
+      } else if (temp < 0.6) {
+        colors.push(1, 0.8, 0.2, 1); // Yellow
+      } else {
+        colors.push(1, 0.3, 0, 1); // Orange-red
+      }
+      
+      sizes.push(Math.random() * 0.5 + 0.2);
+      
+      // Random explosion velocities
+      velocities.push(
+        (Math.random() - 0.5) * 0.1,
+        (Math.random() - 0.5) * 0.1,
+        (Math.random() - 0.5) * 0.1
+      );
+    }
+    
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 4));
+    geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+    geometry.setAttribute('velocity', new THREE.Float32BufferAttribute(velocities, 3));
+    
+    return geometry;
+  }, []);
+  
+  const vaporParticleMaterial = useMemo(() => {
+    return new THREE.PointsMaterial({
+      size: 0.3,
+      transparent: true,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      sizeAttenuation: true
+    });
   }, []);
   
   // Create enhanced comet geometry with more detail
