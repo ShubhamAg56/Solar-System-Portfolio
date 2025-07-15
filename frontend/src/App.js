@@ -164,27 +164,7 @@ const AppContent = () => {
             </div>
           </motion.div>
           
-          {/* Performance Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2 }}
-            className={`fixed ${isMobile ? 'top-4 left-4' : 'top-8 left-8'} z-30`}
-          >
-            <div 
-              className="rounded-lg p-4 text-sm backdrop-blur-md h-[56px] flex items-center"
-              style={{
-                backgroundColor: currentTheme.cardBackground,
-                color: currentTheme.textPrimary,
-                border: `1px solid ${currentTheme.border}`,
-              }}
-            >
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                <span className="text-sm font-medium">System Active</span>
-              </div>
-            </div>
-          </motion.div>
+
         </>
       )}
     </div>
