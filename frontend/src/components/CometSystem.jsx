@@ -266,19 +266,20 @@ const Comet = ({ position, direction, speed = 0.02, color = '#FFFFFF' }) => {
           -direction.z * t * 8 + offsetZ
         );
         
-        // Ultra-enhanced color fade with multi-tone gradient
+        // Enhanced color fade with multi-tone gradient - optimized for white comets
         const alpha = Math.pow(1 - t, 1.8); // More dramatic fade
         const brightness = 0.9 + Math.random() * 0.3; // Higher brightness
         
-        // Enhanced color mixing with blue and white tones
+        // For white comets, create bright white tail with subtle blue tint
         const baseR = parseInt(color.slice(1, 3), 16) / 255;
         const baseG = parseInt(color.slice(3, 5), 16) / 255;
         const baseB = parseInt(color.slice(5, 7), 16) / 255;
         
+        // Enhanced white tail with maximum visibility
         colors.push(
-          Math.min(1, baseR * brightness + 0.2), // Add warm tint
-          Math.min(1, baseG * brightness + 0.3), // Add brightness
-          Math.min(1, baseB * brightness + 0.4), // Add blue tint
+          Math.min(1, baseR * brightness * 1.2), // Enhanced white
+          Math.min(1, baseG * brightness * 1.2), // Enhanced white
+          Math.min(1, baseB * brightness * 1.2), // Enhanced white
           alpha
         );
         
