@@ -128,8 +128,8 @@ const SkillsSection = () => {
                       borderColor: currentTheme.border,
                     }}
                   >
-                    {/* Background Gradient */}
-                    <div className={`absolute inset-0 opacity-10 bg-gradient-to-br ${getSkillColor(skill.level)}`}></div>
+                    {/* Background */}
+                    <div className={`absolute inset-0 opacity-10`} style={{ backgroundColor: getSkillColorSolid(skill.level) }}></div>
                     
                     {/* Card Content */}
                     <div className="relative z-10">
