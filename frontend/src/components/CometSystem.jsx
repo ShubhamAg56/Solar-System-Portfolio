@@ -570,31 +570,31 @@ const CometSystem = () => {
       position: [-120, 25, -60],
       direction: { x: 0.8, y: -0.1, z: 0.6 },
       speed: 0.0005,
-      color: '#00FFFF' // Bright Cyan - very vibrant
+      color: '#FFFFFF' // White - clean and elegant
     },
     {
       position: [100, -35, -90],
       direction: { x: -0.6, y: 0.2, z: 0.8 },
       speed: 0.0003,
-      color: '#FF00FF' // Bright Magenta - very vibrant
+      color: '#FFFFFF' // White - clean and elegant
     },
     {
       position: [-70, 60, 120],
       direction: { x: 0.4, y: -0.6, z: -0.5 },
       speed: 0.0007,
-      color: '#00FF00' // Bright Green - very vibrant
+      color: '#FFFFFF' // White - clean and elegant
     },
     {
       position: [90, 80, -30],
       direction: { x: -0.5, y: -0.4, z: 0.7 },
       speed: 0.0004,
-      color: '#FFFF00' // Bright Yellow - very vibrant
+      color: '#FFFFFF' // White - clean and elegant
     },
     {
       position: [-40, -90, 80],
       direction: { x: 0.3, y: 0.7, z: -0.6 },
       speed: 0.0006,
-      color: '#FF4500' // Bright Orange-Red - very vibrant
+      color: '#FFFFFF' // White - clean and elegant
     }
   ], []);
   
