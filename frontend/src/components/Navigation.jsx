@@ -211,10 +211,9 @@ const Navigation = ({ activeSection, onNavigate }) => {
           {/* Toggle Button */}
           <motion.button
             onClick={toggleSidebar}
-            className="fixed left-4 top-4 z-50 p-3 rounded-xl border shadow-lg"
+            className="fixed left-4 top-4 z-50 p-3 rounded-xl border shadow-lg backdrop-blur-md overflow-hidden group"
             style={{
               backgroundColor: navigationBg,
-              backdropFilter: 'blur(16px)',
               borderColor: border,
               color: textPrimary,
             }}
@@ -222,13 +221,31 @@ const Navigation = ({ activeSection, onNavigate }) => {
             whileHover="hover"
             whileTap="tap"
           >
+            {/* Animated background gradient */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-20"
+              animate={{
+                background: [
+                  "linear-gradient(45deg, #06b6d4, #3b82f6)",
+                  "linear-gradient(45deg, #3b82f6, #8b5cf6)",
+                  "linear-gradient(45deg, #8b5cf6, #06b6d4)"
+                ]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+            
             <motion.div
               animate={isOpen ? "open" : "closed"}
               variants={{
-                open: { rotate: 90 },
+                open: { rotate: 180 },
                 closed: { rotate: 0 }
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="relative z-10"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <motion.path
