@@ -539,37 +539,37 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
   );
 };
 
-// Enhanced Comet system component with optimized positioning
+// Enhanced Comet system component with realistic sizing and speed
 const CometSystem = () => {
   const comets = useMemo(() => [
     {
-      position: [-120, 25, -60], // Moved further from sun
-      direction: { x: 0.8, y: -0.1, z: 0.6 }, // Adjusted for better trajectory
-      speed: 0.022,
+      position: [-120, 25, -60],
+      direction: { x: 0.8, y: -0.1, z: 0.6 },
+      speed: 0.008, // Reduced from 0.022 for slower, more realistic movement
       color: '#87CEEB'
     },
     {
-      position: [100, -35, -90], // Moved further from sun
-      direction: { x: -0.6, y: 0.2, z: 0.8 }, // Adjusted for better trajectory
-      speed: 0.018,
+      position: [100, -35, -90],
+      direction: { x: -0.6, y: 0.2, z: 0.8 },
+      speed: 0.006, // Reduced from 0.018 for slower movement
       color: '#B0E0E6'
     },
     {
-      position: [-70, 60, 120], // Moved further from sun
-      direction: { x: 0.4, y: -0.6, z: -0.5 }, // Adjusted for better trajectory
-      speed: 0.025,
+      position: [-70, 60, 120],
+      direction: { x: 0.4, y: -0.6, z: -0.5 },
+      speed: 0.009, // Reduced from 0.025 for slower movement
       color: '#E0FFFF'
     },
     {
-      position: [90, 80, -30], // New comet for more variety
+      position: [90, 80, -30],
       direction: { x: -0.5, y: -0.4, z: 0.7 },
-      speed: 0.020,
+      speed: 0.007, // Reduced from 0.020 for slower movement
       color: '#F0F8FF'
     },
     {
-      position: [-40, -90, 80], // New comet for more variety
+      position: [-40, -90, 80],
       direction: { x: 0.3, y: 0.7, z: -0.6 },
-      speed: 0.024,
+      speed: 0.008, // Reduced from 0.024 for slower movement
       color: '#E6F3FF'
     }
   ], []);
