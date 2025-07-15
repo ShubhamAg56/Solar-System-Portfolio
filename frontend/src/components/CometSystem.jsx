@@ -203,19 +203,23 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     });
   }, []);
   
-  // Create enhanced comet geometry with more detail
+  // Create ultra-enhanced comet geometry with maximum detail
   const cometGeometry = useMemo(() => {
-    const geometry = new THREE.SphereGeometry(0.3, 32, 32); // Increased from 16,16 to 32,32
+    const geometry = new THREE.SphereGeometry(0.3, 64, 64); // Doubled from 32,32 to 64,64
     const positionAttribute = geometry.attributes.position;
     
-    // Add surface irregularities for realistic comet shape
+    // Add enhanced surface irregularities for ultra-realistic comet shape
     for (let i = 0; i < positionAttribute.count; i++) {
       const vertex = new THREE.Vector3();
       vertex.fromBufferAttribute(positionAttribute, i);
       
-      // Add noise for irregular comet surface
-      const noise = (Math.random() - 0.5) * 0.15;
-      vertex.multiplyScalar(1 + noise);
+      // Add multi-layered noise for complex surface
+      const noise1 = (Math.random() - 0.5) * 0.2;
+      const noise2 = (Math.random() - 0.5) * 0.1;
+      const noise3 = (Math.random() - 0.5) * 0.05;
+      const combinedNoise = noise1 + noise2 + noise3;
+      
+      vertex.multiplyScalar(1 + combinedNoise);
       
       positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
     }
@@ -224,17 +228,20 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     return geometry;
   }, []);
   
-  // Create enhanced material with better visual properties
+  // Create ultra-enhanced material with better visual properties
   const cometMaterial = useMemo(() => new THREE.MeshStandardMaterial({ 
     map: cometTexture,
     normalMap: normalMap,
+    normalScale: new THREE.Vector2(0.8, 0.8),
     emissive: new THREE.Color(color),
-    emissiveIntensity: 0.3,
+    emissiveIntensity: 0.4,
     transparent: true,
-    opacity: 0.95,
-    roughness: 0.3,
-    metalness: 0.1,
-    envMapIntensity: 0.8
+    opacity: 0.98,
+    roughness: 0.2,
+    metalness: 0.05,
+    envMapIntensity: 1.0,
+    clearcoat: 0.1,
+    clearcoatRoughness: 0.3
   }), [color, cometTexture, normalMap]);
   
   // Create enhanced tail geometry with more particles and detail
