@@ -203,9 +203,9 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     });
   }, []);
   
-  // Create ultra-enhanced comet geometry with maximum detail
+  // Create ultra-enhanced comet geometry with realistic size
   const cometGeometry = useMemo(() => {
-    const geometry = new THREE.SphereGeometry(0.3, 64, 64); // Doubled from 32,32 to 64,64
+    const geometry = new THREE.SphereGeometry(0.15, 32, 32); // Reduced from 0.3 to 0.15 for smaller size
     const positionAttribute = geometry.attributes.position;
     
     // Add enhanced surface irregularities for ultra-realistic comet shape
