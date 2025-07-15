@@ -296,29 +296,43 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     return geometry;
   }, [direction, color]);
   
-  // Enhanced tail material with better blending
+  // Ultra-enhanced tail material with better blending and effects
   const tailMaterial = useMemo(() => {
-    // Create a sparkle texture for tail particles
+    // Create ultra-detailed sparkle texture for tail particles
     const canvas = document.createElement('canvas');
-    canvas.width = 64;
-    canvas.height = 64;
+    canvas.width = 128; // Doubled resolution
+    canvas.height = 128;
     const ctx = canvas.getContext('2d');
     
-    // Create radial gradient for sparkle effect
-    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    // Create enhanced radial gradient for ultra-sparkle effect
+    const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
     gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    gradient.addColorStop(0.3, 'rgba(200, 220, 255, 0.8)');
-    gradient.addColorStop(0.7, 'rgba(150, 180, 255, 0.4)');
-    gradient.addColorStop(1, 'rgba(100, 150, 255, 0)');
+    gradient.addColorStop(0.2, 'rgba(240, 240, 255, 0.95)');
+    gradient.addColorStop(0.4, 'rgba(200, 220, 255, 0.8)');
+    gradient.addColorStop(0.6, 'rgba(150, 180, 255, 0.6)');
+    gradient.addColorStop(0.8, 'rgba(100, 150, 255, 0.3)');
+    gradient.addColorStop(1, 'rgba(80, 120, 255, 0)');
     
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 64, 64);
+    ctx.fillRect(0, 0, 128, 128);
+    
+    // Add sparkle details
+    for (let i = 0; i < 20; i++) {
+      const x = Math.random() * 128;
+      const y = Math.random() * 128;
+      const size = Math.random() * 4 + 1;
+      
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.fill();
+    }
     
     const texture = new THREE.CanvasTexture(canvas);
     
     return new THREE.PointsMaterial({
       map: texture,
-      size: 0.8, // Increased from 0.1
+      size: 1.2, // Increased from 0.8 for more prominent particles
       transparent: true,
       vertexColors: true,
       blending: THREE.AdditiveBlending,
@@ -327,32 +341,146 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     });
   }, []);
   
+  // Physics and collision detection with enhanced gravitational effects
   useFrame((state) => {
     if (cometRef.current && tailRef.current) {
       const time = state.clock.elapsedTime;
       
-      // Move comet along its trajectory
-      cometRef.current.position.x = position[0] + direction.x * speed * time * 100;
-      cometRef.current.position.y = position[1] + direction.y * speed * time * 100;
-      cometRef.current.position.z = position[2] + direction.z * speed * time * 100;
-      
-      // Move tail with comet
-      tailRef.current.position.copy(cometRef.current.position);
-      
-      // Reset position if comet goes too far
-      const distance = Math.sqrt(
-        Math.pow(cometRef.current.position.x, 2) +
-        Math.pow(cometRef.current.position.y, 2) +
-        Math.pow(cometRef.current.position.z, 2)
+      // Calculate distance from sun at origin [0, 0, 0]
+      const sunPosition = new THREE.Vector3(0, 0, 0);
+      const currentPos = new THREE.Vector3(
+        cometState.currentPosition[0],
+        cometState.currentPosition[1],
+        cometState.currentPosition[2]
       );
       
-      if (distance > 200) {
-        cometRef.current.position.set(position[0], position[1], position[2]);
+      const distanceFromSun = currentPos.distanceTo(sunPosition);
+      
+      // Enhanced physics constants
+      const SUN_RADIUS = 4.5; // Sun's influence radius (scale 3 + buffer)
+      const VAPORIZATION_RADIUS = 6.0; // Critical distance for vaporization
+      const GRAVITATIONAL_STRENGTH = 0.3; // Gravitational pull strength
+      const DEFLECTION_RADIUS = 15.0; // Distance where gravitational deflection starts
+      
+      // Check for vaporization
+      if (distanceFromSun < VAPORIZATION_RADIUS && !cometState.isVaporizing) {
+        setCometState(prev => ({
+          ...prev,
+          isVaporizing: true,
+          vaporTime: 0
+        }));
       }
       
-      // Add subtle glow effect
-      cometRef.current.rotation.x += 0.01;
-      cometRef.current.rotation.y += 0.01;
+      // Handle vaporization effect
+      if (cometState.isVaporizing) {
+        const vaporProgress = cometState.vaporTime / 3.0; // 3 second vaporization
+        
+        if (vaporProgress < 1.0) {
+          // Update vapor particles
+          if (vaporParticlesRef.current) {
+            vaporParticlesRef.current.visible = true;
+            const positions = vaporParticlesRef.current.geometry.attributes.position.array;
+            const velocities = vaporParticlesRef.current.geometry.attributes.velocity.array;
+            
+            for (let i = 0; i < positions.length; i += 3) {
+              positions[i] += velocities[i] * vaporProgress * 2;
+              positions[i + 1] += velocities[i + 1] * vaporProgress * 2;
+              positions[i + 2] += velocities[i + 2] * vaporProgress * 2;
+            }
+            
+            vaporParticlesRef.current.geometry.attributes.position.needsUpdate = true;
+            vaporParticlesRef.current.material.opacity = 1 - vaporProgress;
+          }
+          
+          // Fade out comet and tail
+          cometRef.current.material.opacity = 1 - vaporProgress;
+          tailRef.current.material.opacity = 1 - vaporProgress;
+          
+          setCometState(prev => ({
+            ...prev,
+            vaporTime: prev.vaporTime + 0.016 // ~60fps
+          }));
+        } else {
+          // Reset comet to original position after vaporization
+          setCometState({
+            isVaporizing: false,
+            vaporTime: 0,
+            velocity: { x: direction.x * speed, y: direction.y * speed, z: direction.z * speed },
+            currentPosition: [...position]
+          });
+          
+          if (vaporParticlesRef.current) {
+            vaporParticlesRef.current.visible = false;
+          }
+          
+          cometRef.current.material.opacity = 0.98;
+          tailRef.current.material.opacity = 1.0;
+        }
+      } else {
+        // Normal physics simulation with gravitational deflection
+        if (distanceFromSun < DEFLECTION_RADIUS && distanceFromSun > VAPORIZATION_RADIUS) {
+          // Apply gravitational deflection
+          const directionToSun = sunPosition.clone().sub(currentPos).normalize();
+          const gravityForce = GRAVITATIONAL_STRENGTH / Math.pow(distanceFromSun, 2);
+          
+          // Apply perpendicular deflection force (not straight toward sun)
+          const deflectionVector = new THREE.Vector3(
+            -directionToSun.z, // Perpendicular deflection
+            directionToSun.y * 0.5, // Slight upward curve
+            directionToSun.x
+          ).normalize().multiplyScalar(gravityForce);
+          
+          setCometState(prev => ({
+            ...prev,
+            velocity: {
+              x: prev.velocity.x + deflectionVector.x,
+              y: prev.velocity.y + deflectionVector.y,
+              z: prev.velocity.z + deflectionVector.z
+            }
+          }));
+        }
+        
+        // Update comet position with physics
+        const newPosition = [
+          cometState.currentPosition[0] + cometState.velocity.x * 100,
+          cometState.currentPosition[1] + cometState.velocity.y * 100,
+          cometState.currentPosition[2] + cometState.velocity.z * 100
+        ];
+        
+        setCometState(prev => ({
+          ...prev,
+          currentPosition: newPosition
+        }));
+        
+        // Apply position to mesh
+        cometRef.current.position.set(newPosition[0], newPosition[1], newPosition[2]);
+        tailRef.current.position.copy(cometRef.current.position);
+        
+        if (vaporParticlesRef.current) {
+          vaporParticlesRef.current.position.copy(cometRef.current.position);
+        }
+        
+        // Reset position if comet goes too far
+        const distance = Math.sqrt(
+          Math.pow(newPosition[0], 2) +
+          Math.pow(newPosition[1], 2) +
+          Math.pow(newPosition[2], 2)
+        );
+        
+        if (distance > 200) {
+          setCometState({
+            isVaporizing: false,
+            vaporTime: 0,
+            velocity: { x: direction.x * speed, y: direction.y * speed, z: direction.z * speed },
+            currentPosition: [...position]
+          });
+        }
+        
+        // Add enhanced rotation with realistic physics
+        cometRef.current.rotation.x += 0.008;
+        cometRef.current.rotation.y += 0.012;
+        cometRef.current.rotation.z += 0.005;
+      }
     }
   });
   
