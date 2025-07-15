@@ -2,7 +2,7 @@ import React, { useRef, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
+const Comet = ({ position, direction, speed = 0.02, color = '#FFFFFF' }) => {
   const cometRef = useRef();
   const tailRef = useRef();
   const vaporParticlesRef = useRef();
