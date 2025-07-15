@@ -22,53 +22,78 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     canvas.height = 512;
     const ctx = canvas.getContext('2d');
     
-    // Create radial gradient for comet core
-    const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+    // Create enhanced radial gradient for comet core with more realistic ice colors
+    const gradient = ctx.createRadialGradient(256, 256, 0, 256, 256, 256);
     gradient.addColorStop(0, '#FFFFFF');
-    gradient.addColorStop(0.3, color);
-    gradient.addColorStop(0.7, '#4169E1');
-    gradient.addColorStop(1, '#000080');
+    gradient.addColorStop(0.2, '#E6F3FF');
+    gradient.addColorStop(0.4, color);
+    gradient.addColorStop(0.6, '#4169E1');
+    gradient.addColorStop(0.8, '#1E3A8A');
+    gradient.addColorStop(1, '#0F1419');
     
     ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillRect(0, 0, 512, 512);
     
-    // Add ice crystal patterns
-    for (let i = 0; i < 150; i++) {
-      const x = Math.random() * 256;
-      const y = Math.random() * 256;
-      const size = Math.random() * 8 + 2;
-      const brightness = Math.random() * 0.8 + 0.4;
+    // Add ultra-detailed ice crystal patterns (doubled count)
+    for (let i = 0; i < 300; i++) {
+      const x = Math.random() * 512;
+      const y = Math.random() * 512;
+      const size = Math.random() * 12 + 3;
+      const brightness = Math.random() * 0.9 + 0.5;
       
       ctx.beginPath();
       ctx.arc(x, y, size, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255, 255, 255, ${brightness})`;
       ctx.fill();
+      
+      // Add crystal sparkle effect
+      ctx.beginPath();
+      ctx.arc(x, y, size * 0.3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${brightness * 1.5})`;
+      ctx.fill();
     }
     
-    // Add surface cracks and details
-    for (let i = 0; i < 80; i++) {
-      const x1 = Math.random() * 256;
-      const y1 = Math.random() * 256;
-      const x2 = x1 + (Math.random() - 0.5) * 60;
-      const y2 = y1 + (Math.random() - 0.5) * 60;
+    // Add enhanced surface cracks and fissures
+    for (let i = 0; i < 150; i++) {
+      const x1 = Math.random() * 512;
+      const y1 = Math.random() * 512;
+      const x2 = x1 + (Math.random() - 0.5) * 80;
+      const y2 = y1 + (Math.random() - 0.5) * 80;
       
       ctx.beginPath();
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
-      ctx.strokeStyle = `rgba(200, 200, 255, ${Math.random() * 0.6 + 0.3})`;
-      ctx.lineWidth = Math.random() * 3 + 1;
+      ctx.strokeStyle = `rgba(200, 220, 255, ${Math.random() * 0.8 + 0.4})`;
+      ctx.lineWidth = Math.random() * 4 + 1;
       ctx.stroke();
     }
     
-    // Add sparkle effects
-    for (let i = 0; i < 100; i++) {
-      const x = Math.random() * 256;
-      const y = Math.random() * 256;
-      const size = Math.random() * 3 + 1;
+    // Add ultra-detailed surface imperfections and meteor impact craters
+    for (let i = 0; i < 80; i++) {
+      const x = Math.random() * 512;
+      const y = Math.random() * 512;
+      const size = Math.random() * 25 + 5;
+      
+      const craterGradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+      craterGradient.addColorStop(0, 'rgba(100, 100, 100, 0.8)');
+      craterGradient.addColorStop(0.7, 'rgba(150, 150, 150, 0.4)');
+      craterGradient.addColorStop(1, 'rgba(200, 200, 200, 0.1)');
       
       ctx.beginPath();
       ctx.arc(x, y, size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.9 + 0.1})`;
+      ctx.fillStyle = craterGradient;
+      ctx.fill();
+    }
+    
+    // Add enhanced sparkle effects with varied sizes
+    for (let i = 0; i < 200; i++) {
+      const x = Math.random() * 512;
+      const y = Math.random() * 512;
+      const size = Math.random() * 4 + 1;
+      
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.95 + 0.05})`;
       ctx.fill();
     }
     
