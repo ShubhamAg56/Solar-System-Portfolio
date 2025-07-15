@@ -201,9 +201,6 @@ const Scene3D = ({ activeSection, onPlanetClick, isMobile }) => {
           {/* Cosmic Dust */}
           <CosmicDust />
           
-          {/* Comet System */}
-          <CometSystem />
-          
           {/* Solar System */}
           <group>
             {/* Planets */}
