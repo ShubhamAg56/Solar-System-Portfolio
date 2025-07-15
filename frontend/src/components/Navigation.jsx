@@ -399,7 +399,8 @@ const Navigation = ({ activeSection, onNavigate }) => {
                       {activeSection === item.section && (
                         <motion.div
                           layoutId="activeGlow"
-                          className={`absolute inset-0 bg-gradient-to-r ${sectionGradients[item.section]} opacity-20 rounded-xl blur-sm`}
+                          className={`absolute inset-0 opacity-20 rounded-xl blur-sm`}
+                          style={{ backgroundColor: sectionColors[item.section] }}
                           transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                         />
                       )}
