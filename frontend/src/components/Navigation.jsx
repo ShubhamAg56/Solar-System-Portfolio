@@ -58,27 +58,29 @@ const Navigation = ({ activeSection, onNavigate }) => {
     }
   };
 
-  // Animation variants
+  // Enhanced animation variants
   const sidebarVariants = {
     open: {
       x: 0,
       opacity: 1,
+      scale: 1,
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 40,
-        staggerChildren: 0.07,
+        damping: 30,
+        staggerChildren: 0.05,
         delayChildren: 0.1
       }
     },
     closed: {
-      x: -300,
+      x: -350,
       opacity: 0,
+      scale: 0.95,
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 40,
-        staggerChildren: 0.05,
+        damping: 30,
+        staggerChildren: 0.03,
         staggerDirection: -1
       }
     }
@@ -88,26 +90,62 @@ const Navigation = ({ activeSection, onNavigate }) => {
     open: {
       y: 0,
       opacity: 1,
+      scale: 1,
       transition: {
-        y: { stiffness: 1000, velocity: -100 }
+        type: "spring",
+        stiffness: 500,
+        damping: 25
       }
     },
     closed: {
-      y: 50,
+      y: 20,
       opacity: 0,
+      scale: 0.8,
       transition: {
-        y: { stiffness: 1000 }
+        type: "spring",
+        stiffness: 500,
+        damping: 25
       }
     }
   };
 
   const buttonVariants = {
-    hover: { scale: 1.05, x: 5 },
+    hover: { 
+      scale: 1.05, 
+      x: 8,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10
+      }
+    },
     tap: { scale: 0.95 }
   };
 
+  const iconVariants = {
+    hover: {
+      scale: 1.3,
+      rotate: [0, -10, 10, -10, 0],
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut"
+      }
+    },
+    tap: {
+      scale: 1.1,
+      rotate: 360,
+      transition: {
+        duration: 0.3
+      }
+    }
+  };
+
   const toggleButtonVariants = {
-    hover: { scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.2)" },
+    hover: { 
+      scale: 1.1, 
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)"
+    },
     tap: { scale: 0.9 }
   };
 
