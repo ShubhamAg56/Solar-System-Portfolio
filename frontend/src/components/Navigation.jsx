@@ -150,16 +150,16 @@ const Navigation = ({ activeSection, onNavigate }) => {
   };
 
   const getButtonStyles = (isActive) => {
-    const baseStyles = "relative px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 text-center w-full";
-    const activeStyles = `text-white bg-white bg-opacity-30`;
-    const inactiveStyles = `hover:text-white hover:bg-white hover:bg-opacity-20`;
+    const baseStyles = "relative px-4 py-4 rounded-xl text-sm font-medium transition-all duration-300 text-left w-full overflow-hidden group";
+    const activeStyles = `text-white bg-gradient-to-r ${sectionGradients[activeSection] || 'from-blue-500 to-purple-600'} shadow-lg`;
+    const inactiveStyles = `hover:text-white hover:bg-gradient-to-r hover:from-white hover:to-gray-200 hover:bg-opacity-10 hover:shadow-lg`;
     
     return `${baseStyles} ${isActive ? activeStyles : inactiveStyles}`;
   };
 
   const getMobileButtonStyles = (isActive) => {
     const baseStyles = "relative px-2 py-1 md:px-4 md:py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 text-center min-w-[60px] md:min-w-[80px]";
-    const activeStyles = `text-white bg-white bg-opacity-30`;
+    const activeStyles = `text-white bg-gradient-to-r ${sectionGradients[activeSection] || 'from-blue-500 to-purple-600'} shadow-lg`;
     const inactiveStyles = `hover:text-white hover:bg-white hover:bg-opacity-20`;
     
     return `${baseStyles} ${isActive ? activeStyles : inactiveStyles}`;
