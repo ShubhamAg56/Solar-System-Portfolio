@@ -184,9 +184,9 @@ const SkillsSection = () => {
               borderColor: currentTheme.border,
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 opacity-10"></div>
+            <div className="absolute inset-0 opacity-10" style={{ backgroundColor: '#3b82f6' }}></div>
             <div className="relative z-10">
-              <div className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+              <div className="text-5xl font-bold text-blue-400 mb-2">
                 {skills.length}
               </div>
               <div className="text-sm font-medium mb-2" style={{ color: currentTheme.textSecondary }}>
