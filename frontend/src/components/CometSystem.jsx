@@ -244,43 +244,48 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     clearcoatRoughness: 0.3
   }), [color, cometTexture, normalMap]);
   
-  // Create enhanced tail geometry with more particles and detail
+  // Create ultra-enhanced tail geometry with maximum particles and detail
   const tailGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
     const positions = [];
     const colors = [];
     const sizes = [];
-    const tailLength = 120; // Increased from 50 for longer tail
+    const tailLength = 200; // Increased from 120 for ultra-long tail
     
     for (let i = 0; i < tailLength; i++) {
       const t = i / tailLength;
-      const spread = t * 2; // Tail spreads out as it gets longer
+      const spread = t * 3; // Increased spread for more dramatic tail
       
-      // Create multiple particles per tail segment for denser effect
-      for (let j = 0; j < 3; j++) {
+      // Create multiple particles per tail segment for ultra-dense effect
+      for (let j = 0; j < 5; j++) { // Increased from 3 to 5 particles per segment
         const offsetX = (Math.random() - 0.5) * spread;
         const offsetY = (Math.random() - 0.5) * spread;
         const offsetZ = (Math.random() - 0.5) * spread;
         
         positions.push(
-          -direction.x * t * 12 + offsetX,
-          -direction.y * t * 12 + offsetY,
-          -direction.z * t * 12 + offsetZ
+          -direction.x * t * 15 + offsetX, // Increased tail length multiplier
+          -direction.y * t * 15 + offsetY,
+          -direction.z * t * 15 + offsetZ
         );
         
-        // Enhanced color fade with blue-to-white gradient
-        const alpha = Math.pow(1 - t, 1.5); // More dramatic fade
-        const brightness = 0.8 + Math.random() * 0.4; // Varying brightness
+        // Ultra-enhanced color fade with multi-tone gradient
+        const alpha = Math.pow(1 - t, 1.8); // More dramatic fade
+        const brightness = 0.9 + Math.random() * 0.3; // Higher brightness
+        
+        // Enhanced color mixing with blue and white tones
+        const baseR = parseInt(color.slice(1, 3), 16) / 255;
+        const baseG = parseInt(color.slice(3, 5), 16) / 255;
+        const baseB = parseInt(color.slice(5, 7), 16) / 255;
         
         colors.push(
-          (parseInt(color.slice(1, 3), 16) / 255) * brightness,
-          (parseInt(color.slice(3, 5), 16) / 255) * brightness,
-          Math.min(1, (parseInt(color.slice(5, 7), 16) / 255) * brightness + 0.3), // Add blue tint
+          Math.min(1, baseR * brightness + 0.2), // Add warm tint
+          Math.min(1, baseG * brightness + 0.3), // Add brightness
+          Math.min(1, baseB * brightness + 0.4), // Add blue tint
           alpha
         );
         
-        // Varying particle sizes
-        sizes.push(0.3 + Math.random() * 0.8 - t * 0.5);
+        // Enhanced varying particle sizes
+        sizes.push(0.5 + Math.random() * 1.2 - t * 0.8);
       }
     }
     
