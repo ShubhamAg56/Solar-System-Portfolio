@@ -108,7 +108,7 @@ const SkillsSection = () => {
                 </div>
               </div>
               <div className="flex-1 ml-6">
-                <div className="h-px bg-gradient-to-r from-purple-400 to-transparent opacity-30"></div>
+                <div className="h-px bg-purple-400 opacity-30"></div>
               </div>
             </div>
 
