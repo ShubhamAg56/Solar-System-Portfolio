@@ -221,14 +221,14 @@ const Navigation = ({ activeSection, onNavigate }) => {
             whileHover="hover"
             whileTap="tap"
           >
-            {/* Animated background gradient */}
+            {/* Animated background */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-20"
+              className="absolute inset-0 bg-cyan-500 opacity-0 group-hover:opacity-20"
               animate={{
-                background: [
-                  "linear-gradient(45deg, #06b6d4, #3b82f6)",
-                  "linear-gradient(45deg, #3b82f6, #8b5cf6)",
-                  "linear-gradient(45deg, #8b5cf6, #06b6d4)"
+                backgroundColor: [
+                  "#06b6d4",
+                  "#3b82f6",
+                  "#8b5cf6"
                 ]
               }}
               transition={{
