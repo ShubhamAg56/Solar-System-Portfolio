@@ -478,10 +478,20 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
           });
         }
         
-        // Add enhanced rotation with realistic physics
-        cometRef.current.rotation.x += 0.008;
-        cometRef.current.rotation.y += 0.012;
-        cometRef.current.rotation.z += 0.005;
+        // Enhanced rotation with realistic physics
+        cometRef.current.rotation.x += 0.003; // Slower rotation
+        cometRef.current.rotation.y += 0.005; // Slower rotation
+        cometRef.current.rotation.z += 0.002; // Slower rotation
+        
+        // Add tail flickering effect
+        if (tailRef.current) {
+          const flickerIntensity = 0.3 + Math.sin(time * 3 + Math.PI * 0.5) * 0.2; // Flickering between 0.1 and 0.5
+          tailRef.current.material.opacity = flickerIntensity;
+          
+          // Add subtle size variation for flickering
+          const sizeVariation = 0.8 + Math.sin(time * 2.5) * 0.3; // Size flickers between 0.5 and 1.1
+          tailRef.current.material.size = 0.6 * sizeVariation;
+        }
       }
     }
   });
