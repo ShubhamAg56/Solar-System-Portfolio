@@ -1,81 +1,27 @@
 {
   "summary": {
-    "total_tests": 8,
-    "passed": 8,
-    "failed": 0,
-    "success_rate": "100.0%"
+    "total_tests": 1,
+    "passed": 0,
+    "failed": 1,
+    "success_rate": "0.0%"
   },
   "results": [
     {
       "test": "Server Health Check",
-      "success": true,
-      "message": "Server responding correctly with: {'message': 'Hello World'}",
-      "timestamp": "2025-07-14T19:21:37.431635",
-      "details": {}
-    },
-    {
-      "test": "CORS Configuration",
-      "success": true,
-      "message": "CORS headers properly configured",
-      "timestamp": "2025-07-14T19:21:37.473908",
-      "details": {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
-        "Access-Control-Allow-Methods": "DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Credentials": "true"
-      }
-    },
-    {
-      "test": "Create Status Check",
-      "success": true,
-      "message": "Status check created successfully",
-      "timestamp": "2025-07-14T19:21:37.517952",
-      "details": {
-        "id": "8ba3c6e2-a0d3-4dfa-a32e-52ddaed41ebf",
-        "client_name": "3D Solar System Test Client",
-        "timestamp": "2025-07-14T19:21:37.475683"
-      }
-    },
-    {
-      "test": "Get Status Checks",
-      "success": true,
-      "message": "Retrieved 7 status checks",
-      "timestamp": "2025-07-14T19:21:37.561988",
-      "details": {
-        "count": 7
-      }
-    },
-    {
-      "test": "Data Persistence",
-      "success": true,
-      "message": "Data persisted correctly in MongoDB",
-      "timestamp": "2025-07-14T19:21:38.609500",
-      "details": {
-        "created_id": "d7ea64dd-e088-42cc-b8ad-a41134377b7b"
-      }
-    },
-    {
-      "test": "MongoDB Connection",
-      "success": true,
-      "message": "MongoDB connection and operations working",
-      "timestamp": "2025-07-14T19:21:38.696915",
-      "details": {}
-    },
-    {
-      "test": "Error Handling - Invalid JSON",
-      "success": true,
-      "message": "Properly handled invalid JSON with HTTP 422",
-      "timestamp": "2025-07-14T19:21:38.738879",
-      "details": {}
-    },
-    {
-      "test": "Error Handling - Missing Field",
-      "success": true,
-      "message": "Properly handled missing field with HTTP 422",
-      "timestamp": "2025-07-14T19:21:38.780884",
+      "success": false,
+      "message": "Connection failed: HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xfb433e1e8310>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "timestamp": "2025-07-15T04:35:53.870581",
       "details": {}
     }
   ],
-  "critical_issues": [],
-  "timestamp": "2025-07-14T19:21:38.780945"
+  "critical_issues": [
+    {
+      "test": "Server Health Check",
+      "success": false,
+      "message": "Connection failed: HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/ (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xfb433e1e8310>: Failed to establish a new connection: [Errno 111] Connection refused'))",
+      "timestamp": "2025-07-15T04:35:53.870581",
+      "details": {}
+    }
+  ],
+  "timestamp": "2025-07-15T04:35:53.870627"
 }
