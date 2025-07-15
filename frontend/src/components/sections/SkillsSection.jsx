@@ -64,7 +64,7 @@ const SkillsSection = () => {
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent"
+          className="text-5xl font-bold mb-4 text-purple-400"
         >
           Technical Expertise
         </motion.h2>
