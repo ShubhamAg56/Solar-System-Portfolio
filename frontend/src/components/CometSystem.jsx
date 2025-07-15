@@ -551,26 +551,38 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
   );
 };
 
-// Comet system component
+// Enhanced Comet system component with optimized positioning
 const CometSystem = () => {
   const comets = useMemo(() => [
     {
-      position: [-100, 20, -50],
-      direction: { x: 1, y: -0.2, z: 0.5 },
-      speed: 0.025,
+      position: [-120, 25, -60], // Moved further from sun
+      direction: { x: 0.8, y: -0.1, z: 0.6 }, // Adjusted for better trajectory
+      speed: 0.022,
       color: '#87CEEB'
     },
     {
-      position: [80, -30, -80],
-      direction: { x: -0.8, y: 0.3, z: 1 },
-      speed: 0.02,
+      position: [100, -35, -90], // Moved further from sun
+      direction: { x: -0.6, y: 0.2, z: 0.8 }, // Adjusted for better trajectory
+      speed: 0.018,
       color: '#B0E0E6'
     },
     {
-      position: [-50, 50, 100],
-      direction: { x: 0.6, y: -0.8, z: -0.7 },
-      speed: 0.03,
+      position: [-70, 60, 120], // Moved further from sun
+      direction: { x: 0.4, y: -0.6, z: -0.5 }, // Adjusted for better trajectory
+      speed: 0.025,
       color: '#E0FFFF'
+    },
+    {
+      position: [90, 80, -30], // New comet for more variety
+      direction: { x: -0.5, y: -0.4, z: 0.7 },
+      speed: 0.020,
+      color: '#F0F8FF'
+    },
+    {
+      position: [-40, -90, 80], // New comet for more variety
+      direction: { x: 0.3, y: 0.7, z: -0.6 },
+      speed: 0.024,
+      color: '#E6F3FF'
     }
   ], []);
   
