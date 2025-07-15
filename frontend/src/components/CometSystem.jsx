@@ -563,38 +563,38 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
   );
 };
 
-// Enhanced Comet system component with very slow, realistic speed
+// Enhanced Comet system component with very slow, realistic speed and bright colors
 const CometSystem = () => {
   const comets = useMemo(() => [
     {
       position: [-120, 25, -60],
       direction: { x: 0.8, y: -0.1, z: 0.6 },
-      speed: 0.0005, // Much much slower - reduced from 0.002 for extremely slow movement
-      color: '#87CEEB'
+      speed: 0.0005,
+      color: '#00FFFF' // Bright Cyan - very vibrant
     },
     {
       position: [100, -35, -90],
       direction: { x: -0.6, y: 0.2, z: 0.8 },
-      speed: 0.0003, // Much much slower - reduced from 0.0015 for extremely slow movement
-      color: '#B0E0E6'
+      speed: 0.0003,
+      color: '#FF00FF' // Bright Magenta - very vibrant
     },
     {
       position: [-70, 60, 120],
       direction: { x: 0.4, y: -0.6, z: -0.5 },
-      speed: 0.0007, // Much much slower - reduced from 0.0025 for extremely slow movement
-      color: '#E0FFFF'
+      speed: 0.0007,
+      color: '#00FF00' // Bright Green - very vibrant
     },
     {
       position: [90, 80, -30],
       direction: { x: -0.5, y: -0.4, z: 0.7 },
-      speed: 0.0004, // Much much slower - reduced from 0.0018 for extremely slow movement
-      color: '#F0F8FF'
+      speed: 0.0004,
+      color: '#FFFF00' // Bright Yellow - very vibrant
     },
     {
       position: [-40, -90, 80],
       direction: { x: 0.3, y: 0.7, z: -0.6 },
-      speed: 0.0006, // Much much slower - reduced from 0.0022 for extremely slow movement
-      color: '#E6F3FF'
+      speed: 0.0006,
+      color: '#FF4500' // Bright Orange-Red - very vibrant
     }
   ], []);
   
