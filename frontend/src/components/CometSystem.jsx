@@ -284,8 +284,8 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
           alpha
         );
         
-        // Enhanced varying particle sizes
-        sizes.push(0.5 + Math.random() * 1.2 - t * 0.8);
+        // Varying particle sizes - smaller for realism
+        sizes.push(0.2 + Math.random() * 0.4 - t * 0.3);
       }
     }
     
