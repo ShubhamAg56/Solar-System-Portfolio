@@ -282,7 +282,7 @@ const Navigation = ({ activeSection, onNavigate }) => {
             </motion.div>
           </motion.button>
 
-          {/* Backdrop */}
+          {/* Backdrop with animated gradient */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -290,9 +290,29 @@ const Navigation = ({ activeSection, onNavigate }) => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={toggleSidebar}
-                className="fixed inset-0 bg-black bg-opacity-20 z-40"
-                style={{ backdropFilter: 'blur(2px)' }}
-              />
+                className="fixed inset-0 z-40 overflow-hidden"
+                style={{ 
+                  backdropFilter: 'blur(4px)',
+                  background: 'radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 40% 80%, rgba(120, 200, 255, 0.15), transparent 50%)'
+                }}
+              >
+                {/* Animated particles */}
+                <motion.div
+                  className="absolute inset-0"
+                  animate={{
+                    background: [
+                      "radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 40% 80%, rgba(120, 200, 255, 0.15), transparent 50%)",
+                      "radial-gradient(circle at 80% 20%, rgba(120, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 40% 80%, rgba(255, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 20% 50%, rgba(120, 200, 255, 0.15), transparent 50%)",
+                      "radial-gradient(circle at 40% 80%, rgba(120, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 20% 50%, rgba(255, 119, 198, 0.15), transparent 50%), radial-gradient(circle at 80% 20%, rgba(120, 200, 255, 0.15), transparent 50%)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </motion.div>
             )}
           </AnimatePresence>
 
