@@ -256,8 +256,8 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
       const t = i / tailLength;
       const spread = t * 3; // Increased spread for more dramatic tail
       
-      // Create multiple particles per tail segment for ultra-dense effect
-      for (let j = 0; j < 5; j++) { // Increased from 3 to 5 particles per segment
+      // Create multiple particles per tail segment for realistic density
+      for (let j = 0; j < 2; j++) { // Reduced from 5 to 2 particles per segment
         const offsetX = (Math.random() - 0.5) * spread;
         const offsetY = (Math.random() - 0.5) * spread;
         const offsetZ = (Math.random() - 0.5) * spread;
