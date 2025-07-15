@@ -239,9 +239,7 @@ const Comet = ({ position, direction, speed = 0.02, color = '#FFFFFF' }) => {
     opacity: 0.98,
     roughness: 0.2,
     metalness: 0.05,
-    envMapIntensity: 1.0,
-    clearcoat: 0.1,
-    clearcoatRoughness: 0.3
+    envMapIntensity: 1.0
   }), [color, cometTexture, normalMap]);
   
   // Create ultra-enhanced tail geometry with maximum particles and detail
