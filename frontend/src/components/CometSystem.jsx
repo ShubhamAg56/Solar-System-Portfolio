@@ -332,7 +332,7 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     
     return new THREE.PointsMaterial({
       map: texture,
-      size: 1.2, // Increased from 0.8 for more prominent particles
+      size: 0.6, // Reduced from 1.2 for smaller tail particles
       transparent: true,
       vertexColors: true,
       blending: THREE.AdditiveBlending,
