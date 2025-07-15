@@ -428,7 +428,8 @@ const Navigation = ({ activeSection, onNavigate }) => {
                       
                       {/* Hover line effect */}
                       <motion.div
-                        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"
+                        className="absolute bottom-0 left-0 h-0.5"
+                        style={{ backgroundColor: sectionColors[item.section] }}
                         initial={{ width: 0 }}
                         whileHover={{ width: "100%" }}
                         transition={{ duration: 0.3 }}
