@@ -565,7 +565,7 @@ const Comet = ({ position, direction, speed = 0.02, color = '#FFFFFF' }) => {
 
 // Enhanced Comet system component with very slow, realistic speed and bright colors
 const CometSystem = () => {
-  const comets = useMemo(() => [
+  const comets = [
     {
       position: [-120, 25, -60],
       direction: { x: 0.8, y: -0.1, z: 0.6 },
@@ -596,7 +596,7 @@ const CometSystem = () => {
       speed: 0.0006,
       color: '#FFFFFF' // White - clean and elegant
     }
-  ], []);
+  ];
   
   return (
     <group>
