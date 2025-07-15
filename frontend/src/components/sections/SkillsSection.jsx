@@ -153,7 +153,7 @@ const SkillsSection = () => {
 
                     {/* Hover Effect */}
                     <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${getSkillColor(skill.level)} opacity-20`}></div>
+                      <div className={`absolute inset-0 rounded-2xl opacity-20`} style={{ backgroundColor: getSkillColorSolid(skill.level) }}></div>
                     </div>
                   </motion.div>
                 );
