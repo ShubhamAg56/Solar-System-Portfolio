@@ -1,16 +1,25 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
   const cometRef = useRef();
   const tailRef = useRef();
+  const vaporParticlesRef = useRef();
   
-  // Create enhanced comet texture
+  // Enhanced comet state management
+  const [cometState, setCometState] = useState({
+    isVaporizing: false,
+    vaporTime: 0,
+    velocity: { x: direction.x * speed, y: direction.y * speed, z: direction.z * speed },
+    currentPosition: [...position]
+  });
+  
+  // Create ultra-enhanced comet texture with 512x512 resolution
   const cometTexture = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 256; // Increased texture resolution
-    canvas.height = 256;
+    canvas.width = 512; // Doubled texture resolution for ultra-quality
+    canvas.height = 512;
     const ctx = canvas.getContext('2d');
     
     // Create radial gradient for comet core
