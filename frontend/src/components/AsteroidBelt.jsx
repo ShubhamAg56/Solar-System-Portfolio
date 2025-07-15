@@ -209,12 +209,12 @@ const Asteroid = ({ position, size, rotationSpeed, color }) => {
 const AsteroidBelt = () => {
   const groupRef = useRef();
   
-  // Generate properly positioned asteroid data - between Mars and Jupiter
+  // Generate properly positioned asteroid data - between Mars and Jupiter with realistic spacing
   const asteroids = useMemo(() => {
     const asteroidData = [];
     const count = 250; // Increased from 80 to 250 for much denser asteroid belt
-    const minRadius = 25; // Positioned between Mars (20) and Jupiter (28) - safe distance from sun
-    const maxRadius = 27; // Keeps asteroids well away from sun at origin [0,0,0]
+    const minRadius = 22; // Positioned further from Mars (20) - realistic asteroid belt location
+    const maxRadius = 24.5; // Keeps asteroids well away from Jupiter (28) - proper spacing
     
     const asteroidColors = [
       '#8B7355', // Brown
