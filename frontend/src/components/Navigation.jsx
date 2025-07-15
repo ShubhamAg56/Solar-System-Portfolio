@@ -333,14 +333,14 @@ const Navigation = ({ activeSection, onNavigate }) => {
                   boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                 }}
               >
-                {/* Animated background gradient */}
+                {/* Animated background */}
                 <motion.div
                   className="absolute inset-0 opacity-10"
                   animate={{
                     background: [
-                      "linear-gradient(45deg, #06b6d4, #3b82f6, #8b5cf6)",
-                      "linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4)",
-                      "linear-gradient(45deg, #8b5cf6, #06b6d4, #3b82f6)"
+                      "#06b6d4",
+                      "#3b82f6", 
+                      "#8b5cf6"
                     ]
                   }}
                   transition={{
