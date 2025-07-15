@@ -99,7 +99,7 @@ const SkillsSection = () => {
               <div className="flex items-center space-x-4">
                 <div className="text-4xl">{getCategoryIcon(category)}</div>
                 <div>
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                  <h3 className="text-3xl font-bold text-indigo-400">
                     {category}
                   </h3>
                   <p className="text-sm opacity-60" style={{ color: currentTheme.textSecondary }}>
