@@ -25,16 +25,16 @@ const Navigation = ({ activeSection, onNavigate }) => {
     playground: "🎮"
   };
 
-  // Cool color gradients for each section
-  const sectionGradients = {
-    resume: "from-yellow-400 to-orange-500",
-    about: "from-gray-400 to-gray-600",
-    skills: "from-purple-400 to-pink-500",
-    experience: "from-blue-400 to-cyan-500",
-    projects: "from-red-400 to-pink-500",
-    education: "from-indigo-400 to-purple-500",
-    contact: "from-green-400 to-emerald-500",
-    playground: "from-cyan-400 to-blue-500"
+  // Cool color themes for each section (solid colors instead of gradients)
+  const sectionColors = {
+    resume: "#f59e0b", // amber-500
+    about: "#6b7280", // gray-500
+    skills: "#a855f7", // purple-500
+    experience: "#06b6d4", // cyan-500
+    projects: "#ef4444", // red-500
+    education: "#6366f1", // indigo-500
+    contact: "#10b981", // emerald-500
+    playground: "#0ea5e9" // sky-500
   };
 
   useEffect(() => {
