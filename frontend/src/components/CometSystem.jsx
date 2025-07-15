@@ -106,25 +106,26 @@ const Comet = ({ position, direction, speed = 0.02, color = '#87CEEB' }) => {
     return texture;
   }, [color]);
   
-  // Create enhanced normal map for surface detail
+  // Create enhanced normal map with higher resolution
   const normalMap = useMemo(() => {
     const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 256;
+    canvas.width = 512;
+    canvas.height = 512;
     const ctx = canvas.getContext('2d');
     
     // Base normal (pointing up)
     ctx.fillStyle = '#8080FF';
-    ctx.fillRect(0, 0, 256, 256);
+    ctx.fillRect(0, 0, 512, 512);
     
-    // Add surface normal variations for ice texture
-    for (let i = 0; i < 200; i++) {
-      const x = Math.random() * 256;
-      const y = Math.random() * 256;
-      const radius = Math.random() * 20 + 5;
+    // Add enhanced surface normal variations for ultra-realistic ice texture
+    for (let i = 0; i < 400; i++) {
+      const x = Math.random() * 512;
+      const y = Math.random() * 512;
+      const radius = Math.random() * 30 + 8;
       
       const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
       gradient.addColorStop(0, '#FF8080');
+      gradient.addColorStop(0.5, '#C080C0');
       gradient.addColorStop(1, '#8080FF');
       
       ctx.beginPath();
