@@ -405,11 +405,12 @@ const Navigation = ({ activeSection, onNavigate }) => {
                         />
                       )}
                       
-                      {/* Background highlight */}
+                      {/* Active background */}
                       {activeSection === item.section && (
                         <motion.div
                           layoutId="activeTab"
                           className="absolute inset-0 bg-white bg-opacity-10 rounded-xl border border-white border-opacity-20"
+                          style={{ backgroundColor: `${sectionColors[item.section]}40` }} // 40 is hex for 25% opacity
                           transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                         />
                       )}
