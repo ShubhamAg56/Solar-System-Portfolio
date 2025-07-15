@@ -487,21 +487,18 @@ const Comet = ({ position, direction, speed = 0.02, color = '#FFFFFF' }) => {
         cometRef.current.rotation.y += 0.002; // Much slower rotation
         cometRef.current.rotation.z += 0.0015; // Much slower rotation
         
-        // Add dramatic tail flickering effect
+        // Add subtle tail flickering effect optimized for white comets
         if (tailRef.current && tailRef.current.material) {
-          // Strong flickering between 0.2 and 1.0 opacity
-          const flickerIntensity = 0.6 + Math.sin(time * 4) * 0.4; // More dramatic flickering
+          // Subtle flickering between 0.7 and 1.0 opacity for better visibility
+          const flickerIntensity = 0.85 + Math.sin(time * 4) * 0.15; // Subtle flickering
           tailRef.current.material.opacity = flickerIntensity;
           
-          // Add dramatic size variation for flickering
-          const sizeVariation = 0.7 + Math.sin(time * 3.5 + Math.PI * 0.3) * 0.5; // Size flickers between 0.2 and 1.2
-          tailRef.current.material.size = 0.6 * sizeVariation;
+          // Add subtle size variation for flickering
+          const sizeVariation = 0.9 + Math.sin(time * 3.5 + Math.PI * 0.3) * 0.1; // Size flickers between 0.8 and 1.0
+          tailRef.current.material.size = 0.8 * sizeVariation;
           
-          // Add additional brightness flickering
-          const brightnessFlicker = 0.5 + Math.sin(time * 5 + Math.PI * 0.7) * 0.3;
-          if (tailRef.current.material.color) {
-            tailRef.current.material.color.multiplyScalar(brightnessFlicker);
-          }
+          // Remove brightness flickering to maintain white color visibility
+          // White comets should maintain consistent brightness
         }
       }
     }
